@@ -1,3 +1,5 @@
 *.fosb
 *.fosp
 *.fomapb
+Client/
+Tools/
