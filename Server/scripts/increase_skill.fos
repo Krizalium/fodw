@@ -5,7 +5,7 @@ import bool AddLog(uint type, string[] params) from "logger";
 
 #define STR_SKILL_INCREASED     ( 3446 )    //
 
-void IncreaseCombatSkill (Critter& attacker, Critter& target, uint8 skillNum, int damage )
+void IncreaseCombatSkill (Critter& attacker, Critter& target, uint8 skillNum, int damage, bool isSneak)
 {
 	/* TODO 
 	bool targetIsPlayer = false; // Меньше рост за плеера.
@@ -14,10 +14,15 @@ void IncreaseCombatSkill (Critter& attacker, Critter& target, uint8 skillNum, in
 	{
 		targetIsPlayer = true;
 	}*/
+	if (!valid (target))
+	{
+		Log ("not valid");
+	}
 	if (damage > 0)
 	{
 		GameVar @ increaseSkill = GetLocalVar(skillNum, attacker.Id);
 		increaseSkill+= damage;
+		Log ("Осталось: "+(CalcNeedPointsToIncreseSkill(attacker, skillNum) - increaseSkill.GetValue()));
 		if (uint(increaseSkill.GetValue()) > CalcNeedPointsToIncreseSkill ( attacker, skillNum))
 		{
 			increaseSkill = 0;
@@ -27,6 +32,10 @@ void IncreaseCombatSkill (Critter& attacker, Critter& target, uint8 skillNum, in
 			string[]params = {""+attacker.Id, attacker.Name, ""+skillNum, ""+damage};
 			AddLog(LOG_TYPE_CRITTER_SKILL_INCREADED, params);
 		}
+	}
+	if (isSneak)
+	{
+		IncreaseCombatSkill (attacker, target, SK_SNEAK, damage, false);
 	}
 }
 

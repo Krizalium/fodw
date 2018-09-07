@@ -1,13 +1,29 @@
 #ifndef __VARS__
 #define __VARS__
 /*************************************************************************************
-***  VARS  *****  COUNT: 00000041  ***************************************************
+***  VARS  *****  COUNT: 00000057  ***************************************************
 *************************************************************************************/
 
 
 #define GVAR_trib_raid                               (1)
+#define LVAR_increase_skill_smallguns                (200)
+#define LVAR_increase_skill_bigguns                  (201)
+#define LVAR_increase_skill_energy                   (202)
 #define LVAR_increase_skill_unarmed                  (203)
+#define LVAR_increase_skill_melee                    (204)
+#define LVAR_increase_skill_throwing                 (205)
+#define LVAR_increase_skill_traps                    (206)
+#define LVAR_increase_skill_firstaid                 (207)
+#define LVAR_increase_skill_sneak                    (208)
+#define LVAR_increase_skill_mining                   (209)
 #define LVAR_increase_skill_botany                   (210)
+#define LVAR_increase_skill_pharma                   (211)
+#define LVAR_increase_skill_skinning                 (212)
+#define LVAR_increase_skill_repair                   (213)
+#define LVAR_increase_skill_electronics              (214)
+#define LVAR_increase_skill_gunsmith                 (215)
+#define LVAR_increase_skill_armourer                 (216)
+#define LVAR_increase_skill_barter                   (217)
 #define GVAR_gen_plant_cabbage                       (500)
 #define GVAR_gen_plant_corn                          (501)
 #define GVAR_gen_plant_broc                          (502)
@@ -59,12 +75,92 @@ $	1	0	trib_raid	0	0	10	0
    1 - квест уже взят. 
 **********
 
+$	200	1	increase_skill_smallguns	0	0	0	4
+**********
+Для роста навыка.
+**********
+
+$	201	1	increase_skill_bigguns	0	0	0	4
+**********
+Для роста навыка.
+**********
+
+$	202	1	increase_skill_energy	0	0	0	4
+**********
+Для роста навыка.
+**********
+
 $	203	1	increase_skill_unarmed	0	0	0	4
 **********
 Для роста навыка.
 **********
 
+$	204	1	increase_skill_melee	0	0	0	4
+**********
+Для роста навыка.
+**********
+
+$	205	1	increase_skill_throwing	0	0	0	4
+**********
+Для роста навыка.
+**********
+
+$	206	1	increase_skill_traps	0	0	0	4
+**********
+Для роста навыка.
+**********
+
+$	207	1	increase_skill_firstaid	0	0	0	4
+**********
+Для роста навыка.
+**********
+
+$	208	1	increase_skill_sneak	0	0	0	4
+**********
+Для роста навыка.
+**********
+
+$	209	1	increase_skill_mining	0	0	0	4
+**********
+Для роста навыка.
+**********
+
 $	210	1	increase_skill_botany	0	0	0	4
+**********
+Для роста навыка.
+**********
+
+$	211	1	increase_skill_pharma	0	0	0	4
+**********
+Для роста навыка.
+**********
+
+$	212	1	increase_skill_skinning	0	0	0	4
+**********
+Для роста навыка.
+**********
+
+$	213	1	increase_skill_repair	0	0	0	4
+**********
+Для роста навыка.
+**********
+
+$	214	1	increase_skill_electronics	0	0	0	4
+**********
+Для роста навыка.
+**********
+
+$	215	1	increase_skill_gunsmith	0	0	0	4
+**********
+Для роста навыка.
+**********
+
+$	216	1	increase_skill_armourer	0	0	0	4
+**********
+Для роста навыка.
+**********
+
+$	217	1	increase_skill_barter	0	0	0	4
 **********
 Для роста навыка.
 **********

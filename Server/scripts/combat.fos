@@ -12,8 +12,8 @@ import void DeteriorateItem( Critter& cr, Item& item, int deteriorateCount ) fro
 import void AffectPoison( Critter& cr, int value ) from "poison";
 import void AffectRadiation( Critter& cr, int value ) from "radiation";
 import void QuakeScreen( Map& map ) from "effects";
-
-import void IncreaseCombatSkill (Critter& cr, Critter& target, uint8 skillNum, int damage ) from "increase_skill";
+// Kriz
+import void IncreaseCombatSkill (Critter& attacker, Critter& target, uint8 skillNum, int damage, bool isSneak) from "increase_skill";
 
 class AttackStruct
 {
@@ -1932,7 +1932,17 @@ void ApplyDamage( AttackStruct& attack, Critter& target, uint rounds, bool isCri
     }
 	if (attacker.IsPlayer())
 	{
-		IncreaseCombatSkill (attacker, target, attack.SkillNum, totalDmg);
+		uint16 skNum = 0;
+		bool isSneak = attacker.Mode[MODE_HIDE] == 0 ? false : true; 
+		if (attack.SkillNum == 0 && attack.DmgType == DAMAGE_EXPLODE)
+		{
+			skNum = SK_TRAPS; // Взрывчатка
+		}
+		else
+		{
+			skNum = attack.SkillNum;
+		}
+		IncreaseCombatSkill (attacker, target, skNum, totalDmg, isSneak);
 	}
 	
 	

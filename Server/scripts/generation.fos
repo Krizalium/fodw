@@ -278,7 +278,7 @@ void GenerationInit()
 		// Plants
 		gen.AddResourceInfo(SK_BOTANY, PID_GEN_PLANT_CABBAGE, 	GVAR_gen_plant_cabbage, 5, 	GEN_PLANT_DIFF_CABBAGE, 10, ENTIRE_GEN_PLANT_CABBAGE);		// Капуста
 		gen.AddResourceInfo(SK_BOTANY, PID_GEN_PLANT_CORN, 		GVAR_gen_plant_corn, 	7, 	GEN_PLANT_DIFF_CORN, 	15, ENTIRE_GEN_PLANT_CORN);			// Кукуруза
-		gen.AddResourceInfo(SK_BOTANY, PID_GEN_BROC_FLOWER, 	GVAR_gen_plant_broc, 	2, 	GEN_PLANT_DIFF_BROC, 	20, ENTIRE_GEN_PLANT_BROC);			// Цветок Брока
+		gen.AddResourceInfo(SK_BOTANY, PID_GEN_BROC_FLOWER, 	GVAR_gen_plant_broc, 	15, GEN_PLANT_DIFF_BROC, 	20, ENTIRE_GEN_PLANT_BROC);			// Цветок Брока
 		gen.AddResourceInfo(SK_BOTANY, PID_GEN_XANDER_ROOT, 	GVAR_gen_plant_xander, 	20, GEN_PLANT_DIFF_XANDER, 	25, ENTIRE_GEN_PLANT_XANDER);		// Корень Зандера
 		
 		
@@ -290,7 +290,7 @@ void GenerationInit()
 		// Дерево (свежее)
 		
 		// Ores
-		gen.AddResourceInfo(SK_MINING, PID_GEN_ORE_IRON, 	GVAR_gen_ore_iron, 	5, GEN_ORE_DIFF_IRON, 	0, ENTIRE_GEN_ORE_IRON);		// Руда
+		gen.AddResourceInfo(SK_MINING, PID_GEN_ORE_IRON, 	GVAR_gen_ore_iron, 	5, GEN_ORE_DIFF_IRON, 	50, ENTIRE_GEN_ORE_IRON);		// Руда
 		
 		
 		// МВК

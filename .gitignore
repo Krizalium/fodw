@@ -1,7 +1,8 @@
 *.fosb
 *.fosp
 *.fomapb
+*.csv
+*.fo
+*.client
 Client/
 Tools/
-Server/logs/*
-Server/save/*
