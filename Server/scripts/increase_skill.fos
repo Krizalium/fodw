@@ -29,7 +29,7 @@ void IncreaseCombatSkill (Critter& attacker, Critter& target, uint8 skillNum, in
 			attacker.SkillBase[skillNum]+=1;
 			attacker.SayMsg (SAY_NETMSG, TEXTMSG_GAME, STR_SKILL_INCREASED);
 			
-			string[]params = {""+attacker.Id, attacker.Name, ""+skillNum, ""+damage};
+			string[]params = {""+attacker.Id, attacker.Name, ""+skillNum, ""+damage, ""+attacker.Skill[skillNum]};
 			AddLog(LOG_TYPE_CRITTER_SKILL_INCREADED, params);
 		}
 	}
@@ -54,7 +54,7 @@ void IncreasePeaceSkill (Critter& cr, uint8 skillNum, bool success, uint points)
 			cr.SkillBase[skillNum]+=1;
 			cr.SayMsg (SAY_NETMSG, TEXTMSG_GAME, STR_SKILL_INCREASED);
 			
-			string[]params = {""+cr.Id, cr.Name, ""+skillNum, ""+points};
+			string[]params = {""+cr.Id, cr.Name, ""+skillNum, ""+points, ""+cr.Skill[skillNum]};
 			AddLog(LOG_TYPE_CRITTER_SKILL_INCREADED, params);
 		}
 	}
