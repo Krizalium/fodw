@@ -1,0 +1,84 @@
+
+bool main_critter_use_item( Critter& cr, Item& item, Critter@ targetCr, Item@ targetItem, Scenery@ targetScen, uint param )
+{
+    bool   isPlayer = cr.IsPlayer();
+    uint16 pid = item.GetProtoId();
+    bool   useOnSelf = ( not valid( targetCr ) && not valid( targetItem ) && not valid( targetScen ) );
+
+    // Radio
+    if( FLAG( item.Flags, ITEM_RADIO ) && useOnSelf )
+    {
+        if( isPlayer )
+            EditRadioSettings( cr, item );
+        return true;
+    }
+
+    // Book reading
+    if( useOnSelf && IsReadableBook( pid ) )
+    {
+        TryReadBook( cr, item );
+        return true;
+    }
+
+    // Explosion
+    if( OnUseExplode( cr, item, targetCr, targetItem, targetScen, param ) )
+        return true;
+
+    // Cars
+    if( valid( targetItem ) && targetItem.GetType() == ITEM_TYPE_CAR && UseItemOnCar( cr, targetItem, item ) )
+        return true;
+
+    // Drugs
+    if( item.GetType() == ITEM_TYPE_DRUG )
+    {
+        if( useOnSelf )
+            UseDrug( cr, item );
+        else if( valid( targetCr ) )
+            UseDrugOn( cr, targetCr, item );
+        else
+            cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_USE_NOTHING );
+        return true;
+    }
+
+    // Play dice
+    if( pid == PID_DICE )
+    {
+        cr.SayMsg( SAY_EMOTE_ON_HEAD, TEXTMSG_TEXT, STR_DICE_THROW, "$result" + Random( 1, 6 ) );
+        return true;
+    }
+    if( pid == PID_LOADED_DICE )
+    {
+        cr.SayMsg( SAY_EMOTE_ON_HEAD, TEXTMSG_TEXT, STR_DICE_THROW, "$result" + uint( ( item.Id % 6 ) + 1 ) );
+        return true;
+    }
+
+    // Magic ball
+    if( pid == PID_MAGIC_8_BALL )
+    {
+        // cr.SayMsg(SAY_EMOTE_ON_HEAD,TEXTMSG_TEXT,Random(1,2)==1?STR_MAGIC_BALL_YES:STR_MAGIC_BALL_NO);
+        return true;
+    }
+
+    // Cosmetic
+    if( pid == PID_COSMETIC_CASE && cr.Stat[ ST_GENDER ] == GENDER_FEMALE )
+    {
+        cr.SayMsg( SAY_EMOTE_ON_HEAD, TEXTMSG_TEXT, STR_COSMETIC_USE );
+        return true;
+    }
+
+    // Cigarettes smoking
+    if( pid == PID_CIGARETTES && _CritCountItem( cr, PID_LIGHTER ) > 0 )
+    {
+        cr.SayMsg( SAY_EMOTE_ON_HEAD, TEXTMSG_TEXT, STR_CIGARETTES_SMOKE );
+        return true;
+    }
+
+    // Geiger counter
+    if( pid == PID_GEIGER_COUNTER && useOnSelf && UseGeiger( cr, item ) )
+        return true;
+    if( valid( targetItem ) && targetItem.GetProtoId() == PID_GEIGER_COUNTER && UseItemOnGeiger( cr, targetItem, item ) )
+        return true;
+
+    // Take process to engine
+    return false;
+}

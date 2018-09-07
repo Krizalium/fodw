@@ -1,0 +1,10 @@
+// Author: cvet
+// For test reasons, can be exluded in any time
+
+#include "_macros.fos"
+#include "_colors.fos"
+
+void animate( Critter& cr, int anim1, int anim2, int )
+{
+    cr.Animate( anim1, anim2, null, true, true );
+}

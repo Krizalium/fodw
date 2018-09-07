@@ -1,0 +1,133 @@
+void main_critter_init( Critter& cr, bool firstTime )
+{
+    if( firstTime )
+    {
+        if( cr.IsPlayer() )
+        {
+            // Input: 7 special, 3 tag skills, 2 traits, age, gender
+            uint traits = 0;
+            for( uint i = TRAIT_BEGIN; i <= TRAIT_END; i++ )
+            {
+                if( cr.TraitBase[ i ] != 0 && traits < 2 )
+                {
+                    cr.TraitBase[ i ] = 1;
+                    traits++;
+                }
+                else
+                    cr.TraitBase[ i ] = 0;
+            }
+
+            if( cr.StatBase[ ST_GENDER ] < 0 || cr.StatBase[ ST_GENDER ] > 1 )
+                cr.StatBase[ ST_GENDER ] = 0;
+            if( cr.StatBase[ ST_AGE ] < 14 || cr.StatBase[ ST_AGE ] > 80 )
+                cr.StatBase[ ST_AGE ] = 25;
+            for( uint i = ST_STRENGTH; i <= ST_LUCK; i++ )
+                cr.StatBase[ i ] = CLAMP( cr.StatBase[ i ], 1, 10 );
+
+            if( ( cr.StatBase[ ST_STRENGTH ] + cr.StatBase[ ST_PERCEPTION ] + cr.StatBase[ ST_ENDURANCE ] +
+                  cr.StatBase[ ST_CHARISMA ] + cr.StatBase[ ST_INTELLECT ] + cr.StatBase[ ST_AGILITY ] + cr.StatBase[ ST_LUCK ] ) != __StartSpecialPoints )
+            {
+                for( uint i = ST_STRENGTH; i <= ST_LUCK; i++ )
+                    cr.StatBase[ i ] = 5;
+            }
+
+            cr.StatBase[ ST_EMP_RESIST ] = 500;
+
+            cr.ChangeCrType( cr.Stat[ ST_GENDER ] == GENDER_MALE ? CRTYPE_DEFAULT_M : CRTYPE_DEFAULT_F );
+        }
+
+        if( cr.TagSkill[ TAG_SKILL1 ] < int(SKILL_BEGIN) || cr.TagSkill[ TAG_SKILL1 ] > int(SKILL_END) )
+            cr.TagSkillBase[ TAG_SKILL1 ] = 0;
+        if( cr.TagSkill[ TAG_SKILL2 ] < int(SKILL_BEGIN) || cr.TagSkill[ TAG_SKILL2 ] > int(SKILL_END) )
+            cr.TagSkillBase[ TAG_SKILL2 ] = 0;
+        if( cr.TagSkill[ TAG_SKILL3 ] < int(SKILL_BEGIN) || cr.TagSkill[ TAG_SKILL3 ] > int(SKILL_END) )
+            cr.TagSkillBase[ TAG_SKILL3 ] = 0;
+        if( cr.TagSkill[ TAG_SKILL1 ] == cr.TagSkill[ TAG_SKILL2 ] )
+            cr.TagSkillBase[ TAG_SKILL1 ] = 0;
+        if( cr.TagSkill[ TAG_SKILL2 ] == cr.TagSkill[ TAG_SKILL3 ] )
+            cr.TagSkillBase[ TAG_SKILL2 ] = 0;
+        if( cr.TagSkill[ TAG_SKILL3 ] == cr.TagSkill[ TAG_SKILL1 ] )
+            cr.TagSkillBase[ TAG_SKILL3 ] = 0;
+
+        CritterGenerate( cr );
+        cr.StatBase[ ST_CURRENT_HP ] = cr.Stat[ ST_MAX_LIFE ];
+        cr.StatBase[ ST_CURRENT_AP ] = cr.Stat[ ST_ACTION_POINTS ] * 100;
+
+        // for(int i=REPUTATION_BEGIN;i<=599;i++) cr.ParamBase[i]=int(0x80000000); // 599 is last number processed in client
+
+        if( cr.IsPlayer() )
+        {
+            for( uint i = ST_STRENGTH; i <= ST_LUCK; i++ )
+                cr.StatBase[ i ] = CLAMP( cr.StatBase[ i ], 1, 10 );
+
+            cr.StatBase[ ST_REPLICATION_COST ] = 0;
+            cr.StatBase[ ST_REPLICATION_MONEY ] = 0;
+            cr.StatBase[ ST_REPLICATION_COUNT ] = 0;
+            cr.StatBase[ ST_TEAM_ID ] = 1;
+            cr.StatBase[ ST_DAMAGE_TYPE ] = DAMAGE_NORMAL;
+
+            SetStartLocation( cr );
+        }
+        else
+        {
+            cr.ChangeCrType( cr.StatBase[ ST_BASE_CRTYPE ] );
+            if( cr.Stat[ ST_LEVEL ] != 0 )
+                NpcProcessLevel( cr );
+        }
+    }
+    else
+    {
+
+        // Current skin validation
+        Item@ armor = cr.GetItem( 0, SLOT_ARMOR );
+        if( not valid( armor ) )
+        {
+            uint crType = cr.Stat[ ST_BASE_CRTYPE ];
+            if( crType == 0 )
+                crType = ( cr.Stat[ ST_GENDER ] == GENDER_MALE ? CRTYPE_DEFAULT_M : CRTYPE_DEFAULT_F );
+            if( cr.CrType != crType )
+                cr.ChangeCrType( crType );
+        }
+
+        // Armor perk validation
+        if( not valid( armor ) && cr.Stat[ ST_CURRENT_ARMOR_PERK ] != 0 )
+        {
+            switch( cr.Stat[ ST_CURRENT_ARMOR_PERK ] )
+            {
+            case ARMOR_PERK_POWERED:
+                cr.StatBase[ ST_STRENGTH_EXT ] -= 3;
+                cr.StatBase[ ST_RADIATION_RESISTANCE_EXT ] -= 30;
+                break;
+            case ARMOR_PERK_COMBAT:
+                cr.StatBase[ ST_RADIATION_RESISTANCE_EXT ] -= 20;
+                break;
+            case ARMOR_PERK_ADVANCED_I:
+                cr.StatBase[ ST_STRENGTH_EXT ] -= 4;
+                cr.StatBase[ ST_RADIATION_RESISTANCE_EXT ] -= 60;
+                break;
+            case ARMOR_PERK_ADVANCED_II:
+                cr.StatBase[ ST_STRENGTH_EXT ] -= 4;
+                cr.StatBase[ ST_RADIATION_RESISTANCE_EXT ] -= 75;
+                break;
+            case ARMOR_PERK_CHARISMA:
+                cr.StatBase[ ST_CHARISMA_EXT ] -= 1;
+                break;
+            default:
+                break;
+            }
+            cr.StatBase[ ST_CURRENT_ARMOR_PERK ] = 0;
+        }
+
+        // Clear timeouts if too long (happens when saves got removed)
+        for( uint i = TIMEOUT_BEGIN; i <= TIMEOUT_END; i++ )
+            if( i != TO_BATTLE && cr.Timeout[ i ] > int(MAXIMUM_TIMEOUT) )
+                cr.TimeoutBase[ i ] = __FullSecond;
+
+        // Erase zero time events
+        cr.EraseTimeEvents( 0 );
+
+        // TRAIT_FAST_SHOT migration, delete in future
+        if( cr.Trait[ TRAIT_FAST_SHOT ] != 0 )
+            cr.ModeBase[ MODE_NO_AIM ] = 1;
+    }
+}

@@ -1,0 +1,84 @@
+void main_start()
+{
+
+	GenerationInit();
+
+// Send info about others critters
+    // Remember:
+    // - all this info can be hacked in client;
+    // - more parameters - more traffic.
+    SetSendParameter( ST_GENDER, true );
+    SetSendParameter( ST_AGE, true );
+    SetSendParameter( ST_FOLLOW_CRIT, true );
+    SetSendParameter( ST_PLAYER_KARMA, true );
+    // Armor class, uses Agility
+    SetSendParameter( ST_ARMOR_CLASS, true );
+    SetSendParameter( ST_TURN_BASED_AC, true );
+    // Agility
+    SetSendParameter( ST_AGILITY, true );
+    // Hit points, uses Strenght and Endurance
+    SetSendParameter( ST_MAX_LIFE, true );
+    SetSendParameter( ST_CURRENT_HP, true );
+    // Strenght, uses battle timeout
+    SetSendParameter( ST_STRENGTH, true );
+    SetSendParameter( PE_ADRENALINE_RUSH, true );
+    // Battle timeout
+    SetSendParameter( TO_BATTLE, true );
+    // Endurance
+    SetSendParameter( ST_ENDURANCE, true );
+    // Injures
+    SetSendParameter( DAMAGE_EYE, true );
+    SetSendParameter( DAMAGE_RIGHT_ARM, true );
+    SetSendParameter( DAMAGE_LEFT_ARM, true );
+    SetSendParameter( DAMAGE_RIGHT_LEG, true );
+    SetSendParameter( DAMAGE_LEFT_LEG, true );
+    // Item slots, passed with -
+    SetSendParameter( -SLOT_HAND1, true, "fonline_tla.dll@allowSlot_Hand1" );
+    SetSendParameter( -SLOT_ARMOR, true );
+    // Some flags for correct client working
+    SetSendParameter( MODE_NO_BARTER, true );
+    SetSendParameter( MODE_NO_STEAL, true );
+    SetSendParameter( MODE_NO_LOOT, true );
+    SetSendParameter( MODE_NO_FLATTEN, true );
+    SetSendParameter( MODE_NO_TALK, true );
+    // 3d animation layers
+    #ifdef PLAYERS_3D
+    // Enable sending 3d layers, from Skin to Backpack
+    uint fromLayer = ST_ANIM3D_LAYERS + ANIM3D_LAYER_SKIN;
+    uint toLayer = ST_ANIM3D_LAYERS + ANIM3D_LAYER_BACKPACK;
+    for( uint i = fromLayer; i <= toLayer; i++ )
+        SetSendParameter( i, true );
+    #endif
+    // Npc talk distance
+    SetSendParameter( ST_TALK_DISTANCE, true );
+    // Dialog id
+    SetSendParameter( ST_DIALOG_ID, true );
+    // To see pid of unarmed attack
+    SetSendParameter( ST_HANDS_ITEM_AND_MODE, true );
+    // Scale factor
+    SetSendParameter( ST_SCALE_FACTOR, true );
+    // Walk / Run speed
+    SetSendParameter( ST_WALK_TIME, true );
+    SetSendParameter( ST_RUN_TIME, true );
+	
+    SetSendParameter( SK_BOTANY, true );
+
+    // Send item data masks
+    // Look fields in fonline.h 'struct Item::ItemData'
+    //               SortValue  Info Indicator    PicMapHash       PicInvHash   AnimWaitBase AStay[2] AShow[2] AHide[2]      Flags      Rate LightDist Inten Flags  LightColor    ScriptId TrapValue       Count             Cost                ScriptValues[10]                                                                                                   Other 36 bytes
+    // ITEM_DATA_MASK_CHOSEN                                                                                           ITEM_DATA_MASK_CHOSEN                                                                                                ITEM_DATA_MASK_CHOSEN
+    int8[] mask0 = {  -1, -1,     -1,   -1,     -1, -1, -1, -1,  -1, -1, -1, -1,    0,  0,   0,  0,   0,  0,   0,  0,   -1, -1, -1, -1,  -1,    -1,    -1,    -1,  -1, -1, -1, -1,   0, 0,     0, 0,    -1, -1, -1, -1,  -1, -1, -1, -1,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0 };
+    // ITEM_DATA_MASK_CRITTER                                                                                          ITEM_DATA_MASK_CRITTER                                                                                               ITEM_DATA_MASK_CRITTER
+    int8[] mask1 = {   0,  0,     -1,    0,      0,  0,  0,  0,   0,  0,  0,  0,    0,  0,   0,  0,   0,  0,   0,  0,   -1, -1, -1, -1,  -1,    -1,    -1,    -1,  -1, -1, -1, -1,   0, 0,     0, 0,     0,  0,  0,  0,   0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0 };
+    // ITEM_DATA_MASK_CRITTER_EXT                                                                                      ITEM_DATA_MASK_CRITTER_EXT                                                                                           ITEM_DATA_MASK_CRITTER_EXT
+    int8[] mask2 = {   0,  0,     -1,   -1,      0,  0,  0,  0,   0,  0,  0,  0,    0,  0,   0,  0,   0,  0,   0,  0,   -1, -1, -1, -1,  -1,    -1,    -1,    -1,  -1, -1, -1, -1,   0, 0,     0, 0,    -1, -1, -1, -1,   0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0 };
+    // ITEM_DATA_MASK_CONTAINER                                                                                        ITEM_DATA_MASK_CONTAINER                                                                                             ITEM_DATA_MASK_CONTAINER
+    int8[] mask3 = {  -1, -1,     -1,   -1,      0,  0,  0,  0,  -1, -1, -1, -1,    0,  0,   0,  0,   0,  0,   0,  0,   -1, -1, -1, -1,  -1,    -1,    -1,    -1,  -1, -1, -1, -1,   0, 0,     0, 0,    -1, -1, -1, -1,  -1, -1, -1, -1,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0 };
+    // ITEM_DATA_MASK_MAP                                                                                              ITEM_DATA_MASK_MAP                                                                                                   ITEM_DATA_MASK_MAP
+    int8[] mask4 = {  -1, -1,     -1,   -1,     -1, -1, -1, -1,   0,  0,  0,  0,   -1, -1,  -1, -1,  -1, -1,  -1, -1,   -1, -1, -1, -1,  -1,    -1,    -1,    -1,  -1, -1, -1, -1,   0, 0,     0, 0,     0,  0,  0,  0,   0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0 };
+    SetItemDataMask( ITEM_DATA_MASK_CHOSEN, mask0 );
+    SetItemDataMask( ITEM_DATA_MASK_CRITTER, mask1 );
+    SetItemDataMask( ITEM_DATA_MASK_CRITTER_EXT, mask2 );
+    SetItemDataMask( ITEM_DATA_MASK_CONTAINER, mask3 );
+    SetItemDataMask( ITEM_DATA_MASK_MAP, mask4 );
+}

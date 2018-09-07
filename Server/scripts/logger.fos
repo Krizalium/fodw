@@ -1,0 +1,42 @@
+#include "_time.fos"
+#include "logger_h.fos"
+
+bool AddLog(uint type, string[] params)
+{
+	string strParams = "";
+	uint8 paramSize = params.length();
+	
+	if (paramSize > 0)
+	{
+		for (uint i = 0; i < paramSize; i++)
+		{
+			strParams += params[i]+";";
+		}
+	}
+	switch(type)
+	{
+		case LOG_TYPE_CRITTER_INIT: 			AddLogToFile("critter/critter_init.csv", ""+strParams); break;
+		case LOG_TYPE_CRITTER_DEAD: 			AddLogToFile("critter/critter_dead.csv", ""+strParams); break;
+		case LOG_TYPE_CRITTER_SKILL_INCREADED: 	AddLogToFile("critter/critter_skill_increased.csv", ""+strParams); break;
+		case LOG_TYPE_LOGIN: 					AddLogToFile("main/login.csv", ""+strParams); break;
+		case LOG_TYPE_TRIAL: 					AddLogToFile("lvar/arroyo_trial.csv", ""+strParams); break;
+		case LOG_TYPE_GEN_RES: 					AddLogToFile("gen/gen_resources.csv", ""+strParams); break;
+			default: break;
+	}
+	return true;
+}
+
+bool AddLogToFile(string way, string log)
+{
+	file f;
+	if (f.open("logs/"+way, "a") == 0)
+	{
+		string realTime = GetRealTime();
+		string realDate = GetRealDate();
+		
+		f.writeString("\r\n"+realDate+";"+realTime+";"+log);
+		f.close();
+		return true;
+	}
+	return false;
+}

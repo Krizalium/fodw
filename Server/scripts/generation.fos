@@ -1,0 +1,409 @@
+#include "_macros.fos"
+#include "_msgstr.fos"
+#include "entire.fos"
+#include "serializator.fos"
+#include "generation_h.fos"
+// by Krizalis
+
+#define KEY	("GENRES")
+import bool AddLog(uint type, string[] params) from "logger";
+import void IncreasePeaceSkill (Critter& cr, uint8 skillNum, bool success, uint points) from "increase_skill";
+
+Generation gen;
+Serializator load;
+
+// EXPORT
+void SaveGenerationResources(){gen.Save();}
+
+class Generation
+{
+	ResourceInfo@[] ResourcesInfo;
+	
+	ResourceInfo @ GetResourceInfo (uint idResourceInfo)
+	{
+		if (!valid (ResourcesInfo)) return null;
+		if (ResourcesInfo.length() == 0) return null;
+		
+		for (uint i = 0, len = ResourcesInfo.length(); i < len; i++)
+		{
+			if (ResourcesInfo[i].Id == idResourceInfo)
+			{
+				return ResourcesInfo[i];
+			}
+		}
+		return null;
+	}
+	
+	bool HaveResourceInfoByGVar(uint16 gVar)
+	{
+		for (uint i = 0, len = ResourcesInfo.length(); i < len; i++)
+		{
+			if (ResourcesInfo[i].GVar == gVar)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	void AddResourceInfo(uint16 skNeed, uint16 pid, uint16 gVar, uint16 timeGen, uint16 skDiff, uint16 skPoints, uint16 ent)
+	{
+		if (HaveResourceInfoByGVar(gVar))
+		{
+			Log ("Попытка добавить генерированный ресурс с уже существующим GVar ("+gVar+")");
+		}
+		else
+		{
+			ResourceInfo@ r = ResourceInfo(skNeed, pid, gVar, timeGen, skDiff, skPoints, ent);
+			ResourcesInfo.insertLast(r);
+			r.Id = ResourcesInfo.length();
+		}
+	}
+	
+	void Start()
+	{
+		for (uint16 i = 0, len = ResourcesInfo.length(); i < len; i++)
+		{
+			ResourceInfo @r = ResourcesInfo[i];
+			if (r.EventNum == 0)
+			{
+				r.EventNum = r.TryGenerate();
+			}
+		}
+	}
+	
+	void Save()
+	{
+		uint16[] skNeeds;
+		uint16[] pids;
+		uint16[] gVars;
+		uint16[] timeGens;
+		uint16[] skDiffs;
+		uint16[] skPoints;
+		uint16[] entires;
+		
+		if(IsAnyData(KEY)) EraseAnyData( KEY );
+		uint genSize = this.ResourcesInfo.length();
+		
+		for (uint i = 0; i < genSize; i++)
+		{
+			skNeeds.insertLast( this.ResourcesInfo[i].SkillNeed);
+			pids.insertLast( this.ResourcesInfo[i].ProtoId);
+			gVars.insertLast( this.ResourcesInfo[i].GVar);
+			timeGens.insertLast( this.ResourcesInfo[i].TimeGen);
+			skDiffs.insertLast( this.ResourcesInfo[i].SkillDifficult);
+			skPoints.insertLast( this.ResourcesInfo[i].SkillPointsGive);
+			entires.insertLast( this.ResourcesInfo[i].Entire);
+		}
+        Serializator save;
+		save.Set (genSize);
+        save.Set( skNeeds );
+        save.Set( pids );
+        save.Set( gVars );
+        save.Set( timeGens );
+        save.Set( skDiffs );
+        save.Set( skPoints );
+        save.Set( entires );
+        save.Save( KEY );
+	}
+	
+	void Load()
+	{
+		if (!load.Load(KEY)) return;
+		uint16[] skNeeds;
+		uint16[] pids;
+		uint16[] gVars;
+		uint16[] timeGens;
+		uint16[] skDiffs;
+		uint16[] skPoints;
+		uint16[] entires;
+		uint genSize = 0;
+        load.Get( genSize );
+        load.Get( skNeeds );
+        load.Get( pids );
+        load.Get( gVars );
+        load.Get( timeGens );
+        load.Get( skDiffs );
+        load.Get( skPoints );
+        load.Get( entires );
+        this.ResourcesInfo.resize( 0 );
+		
+        for( uint i = 0; i < genSize; i++ )
+        {
+			AddResourceInfo(skNeeds[i], pids[i], gVars[i], timeGens[i], skDiffs[i], skPoints[i], entires[i]);
+        }
+	}
+}
+
+class ResourceInfo
+{
+	uint	Id;
+	uint16[]MapPidsHaveEntire;
+	uint16	SkillNeed;
+	uint16 	ProtoId;
+	uint16 	GVar;
+	uint16 	MaxCount;
+	uint16 	TimeGen; // minutes
+	uint16 	SkillDifficult;
+	uint16 	SkillPointsGive;
+	uint16 	Entire;
+	uint 	EventNum;
+	
+	ResourceInfo(uint16 skNeed, uint16 pid, uint16 gVar, uint16 timeGen, uint16 skDiff, uint16 skPoints, uint16 ent)
+	{
+		this.SkillNeed = skNeed;
+		this.ProtoId = pid;
+		this.GVar = gVar;
+		this.TimeGen = timeGen;
+		this.SkillDifficult = skDiff;
+		this.SkillPointsGive = skPoints;
+		this.Entire = ent;
+		this.EventNum = 0;
+		this.MaxCount = this.GetLimit();
+		this.MapPidsHaveEntire = this.GetAllMapPidsHaveEntire();
+	}
+	
+	string ToString()
+	{
+		return this.Id
+		+": ProtoId = "+this.ProtoId
+		+", Count = "+this.GetCurrentCount()+"/"+this.GetLimit();
+	}
+	
+	uint16 GetLimit()
+	{
+		GameVar@ gvar = GetGlobalVar (this.GVar);
+		if (valid (gvar)) return gvar.GetMax();
+		return 0;
+	}
+	
+	uint16 GetCurrentCount()
+	{
+		GameVar@ gvar = GetGlobalVar (this.GVar);
+		if (valid (gvar)) return gvar.GetValue();
+		return 0;
+	}
+	
+	bool IsLimit()
+	{
+		return this.GetCurrentCount() < this.MaxCount ? false : true;
+	}
+	
+	uint16[] GetAllMapPidsHaveEntire()
+	{
+		uint16[] allMapPids = GetAllMapPids();
+		uint16[] mapPidsHaveEntire;
+		for (uint16 i = 0, l = allMapPids.length(); i < l; i++)
+		{
+			if (HaveEntireOnMap(allMapPids[i], this.Entire))
+			{
+				mapPidsHaveEntire.insertLast(allMapPids[i]);
+			}
+		}
+		return mapPidsHaveEntire;
+	}
+	uint TryGenerate()
+	{
+		uint[] values = {this.Id};
+		return CreateTimeEvent( __FullSecond + REAL_SECOND(1), "e_TimeEventGenerate", values, false );
+	}
+}
+
+uint e_TimeEventGenerate(uint[] @ values)
+{
+	ResourceInfo@ r = gen.GetResourceInfo(values[0]);
+	//Log (r.ToString());
+	
+	if (r.IsLimit())
+	{
+		return REAL_SECOND( r.TimeGen ) * 5;
+	}
+	
+	uint16 mapPid = GetRandomMapPidForGeneration(r.MapPidsHaveEntire);
+	Map@ map = GetMap(mapPid);
+	if (valid(map))
+	{
+		uint16 hx = 0, hy = 0;
+		uint16 countEntires = map.CountEntire(r.Entire);
+		
+		if (map.GetEntireCoords (r.Entire, Random (0, countEntires - 1), hx, hy))
+		{
+			if (valid(map.GetItem(hx, hy, r.ProtoId)))
+			{
+				return REAL_SECOND( r.TimeGen );
+			}
+			else
+			{
+				//Log (r.Id+" valid");
+				Item@ item = map.AddItem(hx, hy, r.ProtoId, 1);
+				item.Val1 = r.Id;
+				item.Val2 = r.SkillNeed;
+				IncCount(r.GVar);
+				
+				string[]paramsForLog = {""+r.ProtoId, ""+map.Id, ""+map.GetProtoId(), ""+hx, ""+hy, ""+r.GetCurrentCount(), ""+r.MaxCount, ""+r.EventNum};
+				AddLog(LOG_TYPE_GEN_RES, paramsForLog);
+			}
+		}
+	}
+	else
+	{
+		Log ("Произошла ошибка в e_TimeEventGenerate, mapPid ("+mapPid+") не валидна");
+	}
+	
+	//Log ("values[0] = "+r.EventNum);
+    return REAL_SECOND( r.TimeGen );
+}
+
+uint16 GetRandomMapPidForGeneration(uint16[] mapPids)
+{
+	return Random (mapPids[0], mapPids[mapPids.length-1]);
+}
+
+void GenerationInit()
+{
+    if (load.Load(KEY))
+	{
+		gen.Load();
+	}
+	else
+	{
+		// Plants
+		gen.AddResourceInfo(SK_BOTANY, PID_GEN_PLANT_CABBAGE, 	GVAR_gen_plant_cabbage, 5, 	GEN_PLANT_DIFF_CABBAGE, 10, ENTIRE_GEN_PLANT_CABBAGE);		// Капуста
+		gen.AddResourceInfo(SK_BOTANY, PID_GEN_PLANT_CORN, 		GVAR_gen_plant_corn, 	7, 	GEN_PLANT_DIFF_CORN, 	15, ENTIRE_GEN_PLANT_CORN);			// Кукуруза
+		gen.AddResourceInfo(SK_BOTANY, PID_GEN_BROC_FLOWER, 	GVAR_gen_plant_broc, 	2, 	GEN_PLANT_DIFF_BROC, 	20, ENTIRE_GEN_PLANT_BROC);			// Цветок Брока
+		gen.AddResourceInfo(SK_BOTANY, PID_GEN_XANDER_ROOT, 	GVAR_gen_plant_xander, 	20, GEN_PLANT_DIFF_XANDER, 	25, ENTIRE_GEN_PLANT_XANDER);		// Корень Зандера
+		// Кактус 1
+		// Кактус 2
+		// Растения (различный дроп)
+		// Перекати-поле
+		// Кустарник (сухая трава)?
+		// Дерево (свежее)
+		
+		// Ores
+		
+		// Камень
+		// Руда
+		// МВК
+		// Сера
+		
+		
+	}
+	gen.Start();
+}
+
+void IncCount(int varId)
+{
+	GameVar@ gvar = GetGlobalVar (varId);
+	if (valid (gvar)) gvar+=1;
+}
+void DecCount(int varId)
+{
+	GameVar@ gvar = GetGlobalVar (varId);
+	if (valid (gvar)) gvar-=1;
+}
+
+bool HaveEntireOnMap(uint16 mapPid, uint16 entire)
+{
+	Map@ map = GetMapByPid(mapPid, 0);
+	if (valid(map))
+	{
+		if (map.CountEntire (entire) > 0)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+uint16[] GetAllMapPids()
+{
+	uint16[] mapPids;
+		// Kriz: Поменять 189
+	for (uint16 i = MAP_03_02_arroyo_village, end = 189; i < end; i++)
+	{
+		Map@ map = GetMapByPid(i, 0);
+		if (valid (map))
+		{
+			mapPids.insertLast(map.GetProtoId());
+			//Log ("карта "+map.GetProtoId()+" добавлена");
+		}
+	}
+	return mapPids;
+}
+
+void _GenResInit ( Item& plant, bool firstTime )
+{
+	plant.SetEvent( ITEM_EVENT_SKILL, "_UseSkillOnGenRes" );
+}
+
+bool _UseSkillOnGenRes( Item& item, Critter& cr, int skill )
+{
+	if (skill < 0) return false;
+	
+	ResourceInfo @ r = gen.GetResourceInfo(item.Val1);
+	if (valid (r))
+	{
+		if (uint16(skill) != r.SkillNeed)
+		{
+			cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_USE_NOTHING_TRY_ANOTHER_SKILL );
+			//return false;
+		}
+		else
+		{
+			uint16 diff = r.SkillDifficult;
+			uint16 points = r.SkillPointsGive;
+			uint8 skillVal = cr.Skill[skill];
+			uint8 chance = skillVal - diff;
+			uint16 resultPoints = 0;
+			bool success = false;
+			
+			if (uint8(Random(0, 100)) <= chance)
+			{
+				Item@ newItem = cr.AddItem (r.ProtoId, 1);
+				newItem.SetScript(null);
+				SETFLAG (newItem.Flags, ITEM_CAN_PICKUP);
+				SETFLAG (newItem.Flags, ITEM_NO_BLOCK);
+				UNSETFLAG (newItem.Flags, ITEM_ALWAYS_VIEW);
+				UNSETFLAG (newItem.Flags, ITEM_NO_HIGHLIGHT);
+				newItem.Val1 = 0;
+				newItem.Val2 = 0;
+				
+				// Дополнительный дроп todo Kriz
+				success = true;
+				
+				
+			}
+			DecCount(r.GVar);
+			SayTextForCollect(cr, skill, success);
+			IncreasePeaceSkill (cr, skill, success, points);
+			DeleteItem(item);
+		}
+	}
+	else 
+	{
+		return false;
+	}
+	return true;
+}
+
+void SayTextForCollect (Critter& cr, uint16 skill, bool success)
+{
+	if (valid (cr))
+	{
+		uint strNum = 0;
+		
+		switch (skill)
+		{
+			case SK_BOTANY: strNum = success ? STR_GEN_RES_COLLECT_PLANT_SUCCESS : STR_GEN_RES_COLLECT_PLANT_FAIL; break;
+				default: break;
+		}
+		if (strNum > 0)
+		{
+			cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, strNum );
+		}
+	}
+	return;
+}
+
+// Client
+

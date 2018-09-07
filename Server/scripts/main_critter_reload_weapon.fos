@@ -1,0 +1,45 @@
+void main_critter_reload_weapon( Critter& cr, Item& weapon, Item@ ammo )
+{
+    // Special weapons
+    if( weapon.Proto.Weapon_Caliber == 0 )
+    {
+        if( weapon.GetProtoId() == PID_SOLAR_SCORCHER )
+        {
+            if( IS_NIGHT( __Hour ) )
+                cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_SOLAR_SCORCHER_NO_LIGHT );
+            else
+            {
+                weapon.AmmoCount = weapon.Proto.Weapon_MaxAmmoCount;
+                weapon.Update();
+            }
+        }
+
+        return;
+    }
+
+    // Other weapons
+    // Unload
+    if( not valid( ammo ) || ( weapon.AmmoCount > 0 && weapon.AmmoPid != ammo.GetProtoId() ) )
+    {
+        if( weapon.AmmoPid != 0 )
+        {
+            Item@ existAmmo = cr.GetItem( weapon.AmmoPid, -1 );
+            if( not valid( existAmmo ) )
+                cr.AddItem( weapon.AmmoPid, weapon.AmmoCount );
+            else
+                _IncItem( existAmmo, weapon.AmmoCount );
+        }
+        weapon.AmmoCount = 0;
+    }
+
+    // Load
+    if( valid( ammo ) )
+    {
+        uint count = MIN( ammo.GetCount(), weapon.Proto.Weapon_MaxAmmoCount - weapon.AmmoCount );
+        weapon.AmmoCount += count;
+        weapon.AmmoPid = ammo.GetProtoId();
+        _SubItem( ammo, count );
+    }
+
+    weapon.Update();
+}

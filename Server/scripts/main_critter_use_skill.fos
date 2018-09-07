@@ -1,0 +1,234 @@
+bool main_critter_use_skill( Critter& cr, int skill, Critter@ targetCr, Item@ targetItem, Scenery@ targetScen )
+{
+    bool isPlayer = cr.IsPlayer();
+
+    // Cars
+    if( valid( targetItem ) && targetItem.GetType() == ITEM_TYPE_CAR && UseSkillOnCar( cr, targetItem, skill ) )
+        return true;
+
+    // Geiger counter
+    if( valid( targetItem ) && targetItem.GetProtoId() == PID_GEIGER_COUNTER && UseSkillOnGeiger( cr, targetItem, skill ) )
+        return true;
+
+    // Doors or containers
+    if( valid( targetItem ) && ( targetItem.GetType() == ITEM_TYPE_DOOR || targetItem.GetType() == ITEM_TYPE_CONTAINER ) && UseSkillOnLocker( cr, targetItem, skill ) )
+        return true;
+
+    switch( skill )
+    {
+    case SKILL_PICK_ON_GROUND:     // Pick item or scenery on ground
+    {
+        // Scenery
+        if( valid( targetScen ) )
+        {
+            cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_USE_NOTHING );
+            return true;
+        }
+
+        // Explosion
+        if( valid( targetItem ) && targetItem.GetProtoId() == PID_ACTIVE_MINE && OnUseExplode( cr, targetItem, null, null, null, 0 ) )
+            return true;
+
+        // Pick some item
+        if( valid( targetItem ) )
+        {
+            Item@ item = targetItem;
+            if( not FLAG( item.Flags, ITEM_CAN_PICKUP ) )
+            {
+                cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_USE_NOTHING );
+                break;
+            }
+
+            int freeWeight = cr.Stat[ ST_CARRY_WEIGHT ] - cr.ItemsWeight();
+            if( freeWeight >= int( item.Proto.Weight * item.GetCount() ) )
+            {
+                // Pick full
+                MoveItem( item, 0, cr );
+            }
+            else
+            {
+                // Pick half
+                if( item.IsStackable() && freeWeight >= int(item.Proto.Weight) )
+                    MoveItem( item, freeWeight / item.Proto.Weight, cr );
+                // Overweight
+                else
+                    cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_OVERWEIGHT );
+            }
+        }
+    }
+    break;
+    case SKILL_PUT_CONT:      // Put item in container, only targetItem is valid
+    case SKILL_TAKE_CONT:     // Take item from container, only targetItem is valid
+    case SKILL_TAKE_ALL_CONT: // Take all items from critter or item container
+        return false;         // Allow transactions
+    case SKILL_LOOT_CRITTER:  // Loot critter, only targetCr is valid
+        cr.Action( ACTION_PICK_CRITTER, 0, null );
+        cr.ShowContainer( targetCr, null, TRANSFER_CRIT_LOOT );
+        return true;
+    case SKILL_PUSH_CRITTER:     // Push critter, only targetCr is valid
+        cr.Action( ACTION_PICK_CRITTER, 2, null );
+        if( ( cr.Timeout[ TO_BATTLE ] == 0 && targetCr.Timeout[ TO_BATTLE ] == 0 ) &&
+            ( targetCr.IsPlayer() || ( targetCr.IsNoPlanes() && targetCr.GetTalkedPlayers( null ) == 0 ) ) )
+            targetCr.MoveRandom();
+        return true;
+    case SK_SCIENCE:
+    {
+	/*
+        // Radio
+        if( valid( targetItem ) && FLAG( targetItem.Flags, ITEM_RADIO ) && targetItem.Accessory == ACCESSORY_CRITTER && targetItem.CritId == cr.Id )
+        {
+            if( isPlayer )
+                EditRadioSettings( cr, targetItem );
+            return true;
+        }
+*/
+        cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_USE_NOTHING );             // Todo: "You fail to learn anything."
+    }
+    break;
+    case SK_REPAIR:
+    {
+        // Generic repair
+        if( valid( targetItem ) && targetItem.Accessory == ACCESSORY_CRITTER && targetItem.IsDeteriorable() && TryRepairItem( cr, targetItem ) )
+            return true;
+
+        cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_USE_NOTHING );
+    }
+    break;
+    case SK_SNEAK:
+    {
+        if( cr.Mode[ MODE_HIDE ] != 0 )
+            cr.ModeBase[ MODE_HIDE ] = 0;
+        else if( not isPlayer )
+            cr.ModeBase[ MODE_HIDE ] = 1;
+        else
+        {
+            if( cr.Timeout[ TO_SNEAK ] > 0 )
+                cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_TIMEOUT_SNEAK_WAIT );
+            else if( IS_TURN_BASED_TIMEOUT( cr ) )
+                cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_TIMEOUT_BATTLE_WAIT );
+            //	else if(cr.GetCritters(true,FIND_LIFE,null)>0)
+            //	{
+            //		cr.TimeoutBase[TO_SNEAK]=SNEAK_TIMEOUT(cr);
+            //		cr.SayMsg(SAY_NETMSG,TEXTMSG_GAME,STR_SKILL_SNEAK_VISIBLE);
+            //	}
+            else
+                cr.ModeBase[ MODE_HIDE ] = 1;
+        }
+    }
+    break;
+    case SK_STEAL:
+    {
+        cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_USE_NOTHING );
+    }
+    break;
+    case SK_FIRST_AID:
+    {
+        if( valid( targetItem ) || valid( targetScen ) )
+        {
+            cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_USE_NOTHING );
+            break;
+        }
+
+        if( not valid( targetCr ) )
+            @targetCr = cr;
+        bool is_self = ( targetCr.Id == cr.Id );
+
+        if( targetCr.IsDead() )
+        {
+            cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_SKILL_NORESSURECT );
+            break;
+        }
+
+        if( targetCr.Stat[ ST_CURRENT_HP ] >= targetCr.Stat[ ST_MAX_LIFE ] )
+        {
+			/* Kriz: todo передалать
+            if( _CritIsInjured( targetCr ) )
+                cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_SKILL_NOFIRSTAID_NEEDDOCTOR );
+            if( is_self )
+                cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_SKILL_NONEED_FIRSTAID );*/
+            break;
+        }
+
+        if( isPlayer && cr.Timeout[ TO_SK_FIRST_AID ] > 0 )
+        {
+            cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_SKILL_WEARINESS );
+            break;
+        }
+
+        int    sk = cr.Skill[ SK_FIRST_AID ];
+        uint8  mode = 0;
+        uint16 activePid = cr.GetSlotProto( SLOT_HAND1, mode ).ProtoId;
+        if( activePid == PID_FIRST_AID_KIT )
+        {
+            sk += 25;
+            if( Random( 0, 30 ) == 0 )
+                cr.DeleteItem( PID_FIRST_AID_KIT, 1 );
+        }
+        else if( activePid == PID_FIELD_MEDIC_KIT )
+        {
+            sk += 50;
+            if( Random( 0, 30 ) == 0 )
+                cr.DeleteItem( PID_FIELD_MEDIC_KIT, 1 );
+        }
+        int mod = 11 - cr.Stat[ ST_LUCK ];
+        mod = CLAMP( mod, 1, 10 );
+        int heal = Random( sk / mod, sk );
+        if( heal < 1 )
+            heal = 1;
+        if( cr.Perk[ PE_VAMPIRE_REGENERATION ] > 0 )
+            heal += 5;
+        int curHp = targetCr.Stat[ ST_CURRENT_HP ];
+        int maxHp = targetCr.Stat[ ST_MAX_LIFE ];
+        if( curHp + heal > maxHp )
+            heal = maxHp - curHp;
+        targetCr.StatBase[ ST_CURRENT_HP ] += heal;
+
+        cr.Say( SAY_NETMSG, "+" + heal );
+        if( not is_self )
+            targetCr.Say( SAY_NETMSG, "+" + heal );
+
+        if( isPlayer )
+        {
+            GameVar@ firstAidCount = ::GetUnicumVar( UVAR_first_aid_count, cr.Id, targetCr.Id );
+            if( firstAidCount < 10 )
+                cr.StatBase[ ST_EXPERIENCE ] += heal * 3;
+            firstAidCount += 1;
+
+            cr.TimeoutBase[ TO_SK_FIRST_AID ] = FIRST_AID_TIMEOUT( cr );
+            cr.AddScore( SCORE_DOCTOR, 1 );
+        }
+    }
+    break;
+    case SK_DOCTOR:
+    {
+        break;
+    }
+    break;
+    case SK_LOCKPICK:
+    {
+        // Lockers processed in lockers.fos
+    }
+    break;
+    case SK_TRAPS:
+    {
+        // Explosion
+        if( valid( targetItem ) )
+        {
+            uint16 pid = targetItem.GetProtoId();
+            if( ( pid == PID_ACTIVE_DYNAMITE || pid == PID_ACTIVE_PLASTIC_EXPLOSIVE || pid == PID_ACTIVE_MINE ) &&
+                OnUseExplode( cr, targetItem, null, null, null, 0 ) )
+                return true;
+        }
+
+        cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_USE_NOTHING );
+    }
+    break;
+    default:
+    {
+        cr.SayMsg( SAY_NETMSG, TEXTMSG_GAME, STR_USE_NOTHING );
+    }
+    break;
+    }
+
+    return true;
+}

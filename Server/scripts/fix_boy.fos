@@ -1,0 +1,136 @@
+// Author: cvet, rifleman17
+#include "_macros.fos"
+
+#define FIX_SUCCESS                ( FIXBOY_DEFAULT )
+#define FIX_FAIL                   ( FIXBOY_DEFAULT ^ FIXBOY_ALLOW_CRAFT )
+#define GAME_DAY_MINUTES           # (days)   ( days * 60 * 24 )
+
+
+// Усложненный крафт
+// - для отображения в пипбое требуется знание рецепта
+// - для производства необходимо находиться рядом со специальным станком
+// - у станка может задаваться таймаут на последующее использование. Таймаут сохраняется в AnyData. Создается также тайм эвент на очистку AnyData
+// - если на карте несколько одинаковых станков и у них указан таймаут - у него будет общее значение.
+
+/* У прессов для производства аммуниции и токарных станков есть по несколько изображений, но используется один прототип,
+   чтобы не добавлять лишние проверки в скрипт - просто переключайтесь между изображениями через параметр PicMap
+   в маппере, название кадра будет то же самое, меняется только цифра в конце.
+   Сейчас доступно по два варианта для станков:
+   art\scenery\manufact_ammo1.fofrm
+   art\scenery\manufact_ammo2.fofrm
+   art\scenery\manufact_lathe1.fofrm
+   art\scenery\manufact_lathe2.fofrm
+ */
+
+#define _WorkBenchTimeoutKey       # ( pid, map )( "WorkbenchTO_pid_" + pid + "_map_id" + map.Id )               // Таймаут на крафт для станка. Если равен = 0, значит истек.
+#define _WorkBenchChargesKey       # ( pid, map )( "WorkbenchCH_pid_" + pid + "_map_id" + map.Id )               // Число зарядов станка, если =0, запускается таймаут на обновление.
+#define DEFAULT_RADIUS             ( 5 )                                                                         // Радиус поиска станка в гексах, по умолчанию.
+#define DEFAULT_CHARGES            ( 2 )                                                                         // Число зарядов в станке по умолчанию.
+#define DEFAULT_TIMEOUT_MINUTES    # (cr)    ( ( 60 * 24 * 7 * 1 ) + ( 24 * 60 * ( 10 - cr.Stat[ ST_LUCK ] ) ) ) // Таймаут станка по умолчанию. Одна игровая неделя + влияние удачи.
+#define SCENERY_HUB_WORKBENCH      ( 4277 )                                                                      // Код прототипа сценери для крафта плазменных гранат (Хабологи)
+#define SCENERY_SHOE_WORKBENCH     ( 4278 )                                                                      // Код прототипа сценери для крафта Ши
+#define SCENERY_AMMO_PRESS         ( 4279 )                                                                      // Пресс для производства аммуниции (2 вида, различаются изображением терминала)
+#define SCENERY_LATHE              ( 4281 )                                                                      // Токарный станок (второй вариант - станок на не-ржавом столе)
+#define SCENERY_WORKBENCH          ( 4282 )                                                                      // Верстак по-умолчанию.
+#define SCENERY_STOVE              ( 3200 )                                                                      // Печь для плавки хитина
+#define STR_NO_WORKBENCH           ( 300 )                                                                       // Для производства требуется находиться рядом со cпециальным станком или верстаком.
+#define STR_TIMEOUT                ( 301 )                                                                       // Станок или верстак в неработоспособном состоянии. Производство невозможно. Попробуйте позже.
+#define STR_NO_CHARGES             ( 302 )                                                                       // Станок или верстак в неработоспособном состоянии. Произведен максимум возможных предметов. Производство невозможно.
+
+/*                РЕЦЕПТЫ                 */
+
+int fix_AnyStuff( Critter& player, int state, CraftItem& craft )
+{
+    return fix_Something( player, SCENERY_WORKBENCH, DEFAULT_RADIUS, LVAR_fixboy_default, state, 120, 100 );
+}
+
+/* В результате крафта может появиться более продвинутый экземпляр предмета */
+/*
+   basePid = код предмета, который производит игрок
+   advancedPid = код предмета, который получится при проке
+   signed = признак, подписывать предмет или нет.
+   info - инфо предмета, на которое нужно переключиться
+   Подписываются только предметы ARMOR, WEAPON
+ */
+bool fix_AdvancedCraft( Critter& player, int basePid, int advancedPid, int chance, bool signed, int info, int state )
+{
+    if( state == FIXBOY_CRAFT && Random( 0, 100 ) < chance )
+    {
+        uint[] values = { player.Id, basePid, advancedPid };
+        if( signed )
+        {
+            ProtoItem@ proto = GetProtoItem( advancedPid );
+            if( valid( proto ) )
+            {
+                uint type = proto.Type;
+                if( type == ITEM_TYPE_WEAPON || type == ITEM_TYPE_ARMOR )
+                {
+                    values.insertLast( info );
+                }
+            }
+        }
+        CreateTimeEvent( __FullSecond, "e_AdvancedCraft", values, false );
+        return true;
+    }
+    return false;
+}
+
+// Временное событие, убираем скрафченый базовый предмет, заменяем усовершенствованным
+uint e_AdvancedCraft( uint[] @ values )
+{
+    if( values.length() < 3 )
+        return 0;
+    Critter@ cr = GetCritter( values[ 0 ] );
+    if( valid( cr ) )
+    {
+        Item@ baseItem = _CritGetItem( cr, values[ 1 ] );
+        if( valid( baseItem ) )
+        {
+            _SubItem( baseItem, 1 );
+            Item@ advItem = _CritAddItem( cr, values[ 2 ], 1 );
+            if( valid( advItem ) and values.length() > 3 )
+            {
+                advItem.Info = values[ 3 ];
+                advItem.SetLexems( "$craftername" + GetPlayerName( cr.Id ) );
+                advItem.Update();
+            }
+        }
+    }
+    return 0;
+}
+uint fix_Something( Critter& player, int pidWorkbench, int radius, int varNum, int state, int timeOut, int charges )
+{
+/*
+    if( state == FIXBOY_LIST )
+    {
+        if( !CheckRecipeKnown( player, varNum ) )
+            return FIX_FAIL;
+    }
+    if( state == FIXBOY_BUTTON )
+    {
+        if( !CheckWorkbenchNearPlayer( player, pidWorkbench, state ) )
+        {
+            player.SayMsg( SAY_NETMSG, TEXTMSG_TEXT, STR_NO_WORKBENCH );
+            return FIX_FAIL;
+        }
+        if( !CheckWorkbenchTimeOut( player, pidWorkbench, charges ) )
+        {
+            player.SayMsg( SAY_NETMSG, TEXTMSG_TEXT, STR_TIMEOUT );
+            return FIX_FAIL;
+        }
+        if( !CheckWorkbenchCharges( player, pidWorkbench ) )
+        {
+            player.SayMsg( SAY_NETMSG, TEXTMSG_TEXT, STR_NO_CHARGES );
+            return FIX_FAIL;
+        }
+    }
+    if( state == FIXBOY_CRAFT )
+    {
+        SetWorkbenchCharges( player, pidWorkbench, charges );
+        if( !CheckWorkbenchCharges( player, pidWorkbench ) )
+        {
+            SetWorkbenchTimeout( player, pidWorkbench, timeOut );
+        }
+    }*/
+    return FIX_SUCCESS;
+}

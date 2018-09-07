@@ -1,0 +1,69 @@
+#include "_macros.fos"
+#include "logger_h.fos"
+
+import bool AddLog(uint type, string[] params) from "logger";
+
+#define ROLE_TEMPLE_MOB (1)
+#define TEMPLE_MOBS_COUNT (4)
+#define TRIAL_VAR_END_VALUE (2)
+
+
+void _KlintInit (Critter& cr, bool firstTime)
+{
+	cr.StatBase[ST_ARMOR_CLASS] = 15;
+	cr.StatBase[ST_CRITICAL_CHANCE] = 50;
+	cr.StatBase[ST_NORMAL_RESIST] = 50;
+	cr.SkillBase[SK_MELEE_WEAPONS] = 100;
+	cr.ModeBase[ MODE_NO_ENEMY_STACK ] = 1;
+	cr.ModeBase[ MODE_NO_WALK ] = 1;
+}
+void _CameronInit (Critter& cr, bool firstTime)
+{
+	cr.StatBase[ST_ARMOR_CLASS] = 20;
+	cr.StatBase[ST_CRITICAL_CHANCE] = 50;
+	cr.SkillBase[SK_UNARMED] = 100;
+	cr.StatBase[ST_NORMAL_RESIST] = 40;
+	cr.ModeBase[ MODE_NO_ENEMY_STACK ] = 1;
+}
+
+bool d_TempleMobsAreDead( Critter& player, Critter@ npc )
+{
+	Map @ map = player.GetMap();
+	if (valid (map))
+	{
+		uint8 deadMobsCount = map.GetNpcCount (ROLE_TEMPLE_MOB, FIND_DEAD | FIND_ONLY_NPC);
+		if (deadMobsCount >= TEMPLE_MOBS_COUNT)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void t_EndTrial( Critter& cr, Scenery& trigger, bool entered, uint8 dir )
+{
+	if (cr.IsPlayer() && entered)
+	{
+		GameVar@ arroyoTrialState = GetLocalVar( LVAR_arroyo_trial_state, cr.Id );
+		if (valid (arroyoTrialState))
+		{
+			if (arroyoTrialState.GetValue() == TRIAL_VAR_END_VALUE)
+			{
+				Map @ map = GetMapByPid (MAP_03_02_arroyo_village, 0);
+				if (valid (map))
+				{
+					if (cr.TransitToMap(map.Id, 0))
+					{
+						int crType = ( cr.Stat[ ST_GENDER ] == GENDER_MALE ? CRTYPE_VAULT_M : CRTYPE_VAULT_F );
+						cr.ChangeCrType( crType );
+						cr.StatBase[ ST_BASE_CRTYPE ] = crType;
+						
+						// Logger:
+						string[] params = {""+cr.Id};
+						AddLog(LOG_TYPE_TRIAL, params);
+					}				
+				}
+			}
+		}
+	}
+}

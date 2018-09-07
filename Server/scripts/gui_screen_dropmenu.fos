@@ -1,0 +1,392 @@
+const uint DoubleClickTime = 250;
+const uint RingRadius = 35;
+const uint ShowTime = 120;
+const uint StartScrollDist = 12;
+
+funcdef bool DropMenuNeedShowButton( CritterCl cr, ItemCl item );
+funcdef void DropMenuButtonAction( CritterCl cr, ItemCl item );
+
+class DropButton
+{
+    int                    SortIndex;
+    Sprite::Sprite         PicNormal;
+    Sprite::Sprite         PicActive;
+    DropMenuNeedShowButton NeedShow;
+    DropMenuButtonAction   Action;
+    int                    PosX;
+    int                    PosY;
+}
+
+class SmartDropMenu
+{
+    string ArtDir;
+    string OpenSound;
+    DropButton[] Buttons;
+    DropButton[] ShowButtons;
+    bool        IsPressed;
+    uint        FirstPressTick;
+    bool        IsMapScrollAvailable;
+    bool        IsScrollActive;
+    Entity      SelectedEntity;
+    GUIObject 	HoveredObj;
+    GUIPanel  	HoveredScrollPanel;
+    GUIObject 	HoveredDraggedObj;
+    uint        ShowTick;
+    int         PosX;
+    int         PosY;
+
+    SmartDropMenu( string artDir, string openSound )
+    {
+        ArtDir = artDir;
+        OpenSound = openSound;
+        Buttons = array< DropButton >();
+        ShowButtons = array< DropButton >();
+    }
+
+    void AddButton( int sortIndex, DropMenuNeedShowButton needShow, DropMenuButtonAction action, string picNormal, string picActive )
+    {
+        DropButton button = DropButton();
+        button.SortIndex = sortIndex;
+        button.PicNormal = Sprite::Sprite( ArtDir + picNormal );
+        button.PicActive = Sprite::Sprite( ArtDir + picActive );
+        @button.NeedShow = needShow;
+        @button.Action = action;
+        Buttons.insertLast( button );
+        // Todo: sort
+    }
+
+    void Draw()
+    {
+        if( ShowButtons.length() > 0 )
+        {
+            DropButton activeButton = GetActiveButton();
+
+            float      t = ( GetTick() - ShowTick ) / float(ShowTime);
+            t = CLAMP( t, 0.0, 1.0 );
+
+            for( int i = ShowButtons.length() - 1; i >= 0; i-- )
+            {
+                DropButton     button = ShowButtons[ i ];
+                Sprite::Sprite pic = ( button is activeButton ? button.PicActive : button.PicNormal );
+
+                int            x = PosX;
+                int            y = PosY;
+                if( i > 0 )
+                {
+                    float step = 360.0 / ( ShowButtons.length() - 1 );
+                    float angle = step * ( i + 1 - ShowButtons.length() ) + -90.0 * t;
+                    float s = sin( angle * 3.14 / 180.0 );
+                    float c = cos( angle * 3.14 / 180.0 );
+                    float r = RingRadius;
+                    float ox = r * c - r * s;
+                    float oy = r * s + r * c;
+                    x += int(ox * t);
+                    y -= int(oy * t);
+                }
+
+                button.PosX = x - 30;
+                button.PosY = y - 30;
+                pic.Draw( button.PosX, button.PosY );
+            }
+        }
+    }
+
+    void MouseDown( int button )
+    {
+        if( button == MOUSE_BUTTON_LEFT )
+        {
+            IsPressed = true;
+
+            if( ShowButtons.length() == 0 )
+            {
+                // Click without menu
+                if( CurMap !is null )
+                {
+                    GUIScreen screen = GUI_GetActiveScreen();
+                    if( screen !is null && !screen.IsModal && !Gui::CheckHit( __MouseX, __MouseY ) )
+                        IsMapScrollAvailable = true;
+                }
+
+                if( FirstPressTick == 0 )
+                {
+                    FirstPressTick = GetTick();
+                    PosX = __MouseX;
+                    PosY = __MouseY;
+                    SelectedEntity = GetEntityUnderCursor();
+                    HoveredObj = GUI_GetHoveredObject();
+                }
+                else
+                {
+                    // Double click
+                    MoveChosen();
+                }
+            }
+            else
+            {
+                // Menu activated
+                if( SelectedEntity !is null && SelectedEntity.IsDestroyed )
+                    SelectedEntity = null;
+
+                DropButton activeButton = GetActiveButton();
+                if( activeButton !is null )
+                {
+                    Critter cr = cast< Critter >( SelectedEntity );
+                    Item    item = cast< Item >( SelectedEntity );
+                    if( activeButton.NeedShow( cr, item ) )
+                        activeButton.Action( cr, item );
+                }
+
+                InputLost();
+            }
+        }
+    }
+
+    void MouseUp( int button )
+    {
+        if( button == MOUSE_BUTTON_LEFT )
+            IsPressed = false;
+    }
+
+    bool PreMouseMove( int offsetX, int offsetY )
+    {
+        return ShowButtons.length() > 0;
+    }
+
+    void PostMouseMove( int offsetX, int offsetY )
+    {
+        if( ( offsetX != 0 || offsetY != 0 ) && IsPressed && ( IsMapScrollAvailable || HoveredObj !is null ) )
+        {
+            if( !IsScrollActive )
+            {
+                if( DISTANCE( __MouseX, __MouseY, PosX, PosY ) >= StartScrollDist )
+                {
+                    IsScrollActive = true;
+
+                    // Gui scroll
+                    if( !IsMapScrollAvailable )
+                    {
+                        if( HoveredObj.IsDraggable )
+                            HoveredDraggedObj = HoveredObj;
+
+                        // Todo: think about scroll
+                        // HoveredScrollPanel = CheckScrollPanel( HoveredObj );
+                    }
+                }
+            }
+
+            if( IsScrollActive )
+            {
+                if( IsMapScrollAvailable )
+                    MoveScreenOffset( -offsetX, -offsetY, 130, true );
+                else if( HoveredScrollPanel !is null )
+                    HoveredScrollPanel.ModifyScroll( -offsetY, -offsetX );
+                else if( HoveredDraggedObj !is null )
+                    StartDragging();
+            }
+        }
+    }
+/*
+    private Gui::Panel CheckScrollPanel( Gui::Object obj )
+    {
+        auto panel = cast< Gui::Panel >( obj );
+        if( panel !is null && ( panel.IsVerticalScroll || panel.IsHorizontalScroll ) )
+            return panel;
+        panel = cast< Gui::Panel >( obj.Parent );
+        if( panel !is null && ( panel.IsVerticalScroll || panel.IsHorizontalScroll ) )
+            return panel;
+        return null;
+    }*/
+
+    void InputLost()
+    {
+        IsPressed = false;
+        FirstPressTick = 0;
+        IsMapScrollAvailable = false;
+        IsScrollActive = false;
+        SelectedEntity = null;
+        HoveredObj = null;
+        HoveredScrollPanel = null;
+        HoveredDraggedObj = null;
+        ShowButtons.clear();
+    }
+
+    void Loop()
+    {
+        if( ShowButtons.length() > 0 && DISTANCE( __MouseX, __MouseY, PosX, PosY ) > RingRadius + 70 )
+        {
+            InputLost();
+        }
+        else if( FirstPressTick != 0 && GetTick() - FirstPressTick > DoubleClickTime )
+        {
+            if( !IsPressed )
+                SingleClick();
+            else if( HoveredDraggedObj !is null )
+                StartDragging();
+        }
+    }
+
+    private void SingleClick()
+    {
+        Critter chosen = GetChosen();
+        if( chosen is null || DISTANCE( __MouseX, __MouseY, PosX, PosY ) >= StartScrollDist )
+        {
+            InputLost();
+            return;
+        }
+
+        // Draggable item callback
+        if( HoveredObj !is null && HoveredObj.Parent !is null && HoveredObj.Parent.Parent !is null )
+        {
+            auto cont = cast< GuiScreens::ItemsContainer::ItemsContainer >( HoveredObj.Parent.Parent );
+            if( cont !is null && cont.SelectCallback !is null )
+            {
+                Gui::ItemView itemView = cast< Gui::ItemView >( HoveredObj.Parent );
+                Item          item = itemView.GetItem( HoveredObj.CellIndex );
+                if( item !is null )
+                    cont.SelectCallback( item );
+                InputLost();
+                return;
+            }
+        }
+
+        if( __Cursor == CursorType::Default && ( HoveredObj is null || HoveredObj.Screen.Index != CLIENT_MAIN_SCREEN_GAME ) )
+        {
+            if( SelectedEntity !is null && SelectedEntity.IsDestroyed )
+                SelectedEntity = null;
+
+            if( SelectedEntity !is null || Gui::GetActiveScreen().Index == CLIENT_MAIN_SCREEN_GAME )
+            {
+                ShowButtons.clear();
+                Critter cr = cast< Critter >( SelectedEntity );
+                Item    item = cast< Item >( SelectedEntity );
+                for( uint i = 0; i < Buttons.length(); i++ )
+                    if( Buttons[ i ].NeedShow( cr, item ) )
+                        ShowButtons.insertLast( Buttons[ i ] );
+
+                FirstPressTick = 0;
+                ShowTick = GetTick();
+
+                if( ShowButtons.length() > 0 )
+                    return;
+            }
+        }
+        else if( ( __Cursor == CursorType::UseItem || __Cursor == CursorType::UseWeapon ) && !Gui::CheckHit( PosX, PosY ) )
+        {
+            bool       isAttack = ( __Cursor == CursorType::UseWeapon );
+            const Item useItem = ( !isAttack && __CursorData != 0 ? chosen.GetItem( __CursorData ) : CritterItem::GetActive( chosen ) );
+            if( useItem !is null )
+            {
+                Entity entity = null;
+                if( isAttack )
+                    entity = GetMonitorCritter( PosX, PosY );
+                else
+                    entity = GetMonitorEntity( PosX, PosY );
+
+                Critter cr = cast< Critter >( entity );
+                Item    item = cast< Item >( entity );
+                if( cr !is null || useItem.Weapon_IsHexShoot )
+                {
+                    if( isAttack )
+                    {
+                        if( __MainAim == LF::HitLocation::Uncalled && !chosen.IsNoAim )
+                        {
+                            dictionary dict = {};
+                            dict[ "CritterId" ] = cr.Id;
+                            ShowScreen( CLIENT_SCREEN_AIM, dict );
+                        }
+                        else
+                        {
+                            uint16 targetHexX = 0, targetHexY = 0;
+
+                            if( cr !is null )
+                            {
+                                targetHexX = cr.HexX;
+                                targetHexY = cr.HexY;
+                            }
+                            else
+                            {
+                                GetMonitorHex( PosX, PosY, targetHexX, targetHexY );
+                            }
+                            ChosenActions::Attack( cr, LF::HitLocation::None, targetHexX, targetHexY );
+                        }
+                    }
+                    else
+                    {
+                        ChosenActions::ChosenUseItem( useItem, cr, null );
+                    }
+                }
+                else if( item !is null )
+                {
+                    ChosenActions::ChosenUseItem( useItem, null, item, 0 );
+                }
+            }
+        }
+
+        InputLost();
+    }
+
+    private void MoveChosen()
+    {
+        Critter chosen = GetChosen();
+        if( chosen is null || Gui::CheckHit( PosX, PosY ) ||
+            DISTANCE( __MouseX, __MouseY, PosX, PosY ) >= StartScrollDist ||
+            ( __Cursor == CursorType::UseWeapon && cast< Critter >( SelectedEntity ) !is null ) )
+        {
+            InputLost();
+            return;
+        }
+
+        uint16 hx = 0, hy = 0;
+        if( GetMonitorHex( PosX, PosY, hx, hy ) )
+        {
+            uint dist = GetDistantion( chosen.HexX, chosen.HexY, hx, hy );
+            bool isRun = ( Input::IsShiftDown() ? !__AlwaysRun : __AlwaysRun && dist >= __AlwaysRunMoveDist );
+            ChosenActions::MoveToHex( hx, hy, isRun, 0, true );
+        }
+
+        InputLost();
+    }
+
+    private void StartDragging()
+    {
+        HoveredDraggedObj.StartDragging();
+        InputLost();
+    }
+
+    Entity GetEntityUnderCursor()
+    {
+        Gui::Object hoveredObj = Gui::GetHoveredObject();
+        Gui::Screen screen = Gui::GetActiveScreen();
+        if( hoveredObj !is null )
+        {
+            if( hoveredObj.Grid !is null && cast< Gui::ItemView >( hoveredObj.Grid ) !is null )
+                return cast< Gui::ItemView >( hoveredObj.Grid ).GetItem( hoveredObj.CellIndex );
+        }
+        else if( screen is null || !screen.IsModal )
+        {
+            Entity entity = GetMonitorEntity( __MouseX, __MouseY );
+            if( entity !is null )
+            {
+                Critter cr = cast< Critter >( entity );
+                if( cr !is null )
+                    return cr;
+                Item item = cast< Item >( entity );
+                if( item !is null && item.Type != ItemType::Wall )
+                    return item;
+            }
+        }
+        return null;
+    }
+
+    private DropButton GetActiveButton()
+    {
+        for( uint i = 0; i < ShowButtons.length(); i++ )
+        {
+            DropButton     button = ShowButtons[ i ];
+            Sprite::Sprite pic = button.PicNormal;
+            if( IS_COLLISION( __MouseX, __MouseY, button.PosX, button.PosY, pic.Width, pic.Height ) )
+                return button;
+        }
+        return null;
+    }
+}

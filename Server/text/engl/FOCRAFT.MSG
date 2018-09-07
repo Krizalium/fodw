@@ -1,0 +1,3 @@
+#Броня
+
+{1}{}{PID_PURPLE_ROBE@Сшейте из старых кусков ткани один большой мешок, а потом добавьте к нему капюшон и рукава. Покрасить это дело соком из лепестков цветов - и вы уже похожи на хаболога!@@SK_OUTDOORSMAN 40@PID_RAGS 6&PID_POCKET_LINT 2&PID_BROC_FLOWER 3&PID_BOOZE 1@PID_SHIV 1|PID_KNIFE 1|PID_THROWING_KNIFE 1@PID_PURPLE_ROBE 1@exp 150 }
