@@ -756,6 +756,7 @@ void InitializeTabs()
     pids.insertLast( PID_HEXOGEN );
     pids.insertLast( PID_PLASTIC_EXPLOSIVES_DULL );
     pids.insertLast( PID_SANDBAG_EMPTY );
+    pids.insertLast( 750 );
     TabSetItemPids( TAB_CUSTOM4, "001 - Misc", pids );
 
     pids.resize( 0 );

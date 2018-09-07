@@ -1,0 +1,7 @@
+*.fosb
+*.fosp
+*.fomapb
+Client/
+Tools/
+Server/logs
+Server/save
