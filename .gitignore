@@ -6,3 +6,4 @@
 *.client
 Client/
 Tools/
+Server/logs/
