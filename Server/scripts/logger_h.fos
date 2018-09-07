@@ -2,5 +2,6 @@
 #define LOG_TYPE_CRITTER_INIT 				( 200 )
 #define LOG_TYPE_CRITTER_DEAD 				( 201 )
 #define LOG_TYPE_CRITTER_SKILL_INCREADED 	( 202 )
+#define LOG_TYPE_CRITTER_REGISTERED			( 203 )
 #define LOG_TYPE_TRIAL 						( 300 )
 #define LOG_TYPE_GEN_RES					( 500 )

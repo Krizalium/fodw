@@ -4,6 +4,7 @@ void main_critter_init( Critter& cr, bool firstTime )
     {
         if( cr.IsPlayer() )
         {
+			
             // Input: 7 special, 3 tag skills, 2 traits, age, gender
             uint traits = 0;
             for( uint i = TRAIT_BEGIN; i <= TRAIT_END; i++ )
@@ -55,6 +56,8 @@ void main_critter_init( Critter& cr, bool firstTime )
 
         // for(int i=REPUTATION_BEGIN;i<=599;i++) cr.ParamBase[i]=int(0x80000000); // 599 is last number processed in client
 
+		
+		
         if( cr.IsPlayer() )
         {
             for( uint i = ST_STRENGTH; i <= ST_LUCK; i++ )
@@ -67,6 +70,17 @@ void main_critter_init( Critter& cr, bool firstTime )
             cr.StatBase[ ST_DAMAGE_TYPE ] = DAMAGE_NORMAL;
 
             SetStartLocation( cr );
+			
+			// Kriz Logger
+			if (valid(cr))
+			{
+				string[] params = {
+					""+cr.Id, cr.Name,
+					""+cr.Stat[ST_STRENGTH], ""+cr.Stat[ST_PERCEPTION], ""+cr.Stat[ST_ENDURANCE], ""+cr.Stat[ST_CHARISMA], ""+cr.Stat[ST_INTELLECT], ""+cr.Stat[ST_AGILITY], ""+cr.Stat[ST_LUCK],
+					""+cr.TagSkill[TAG_SKILL1], ""+cr.TagSkill[TAG_SKILL2], ""+cr.TagSkill[TAG_SKILL3]
+				};
+				AddLog(LOG_TYPE_CRITTER_REGISTERED, params);
+			}
         }
         else
         {

@@ -16,6 +16,7 @@ bool AddLog(uint type, string[] params)
 	switch(type)
 	{
 		case LOG_TYPE_CRITTER_INIT: 			AddLogToFile("critter/critter_init.csv", ""+strParams); break;
+		case LOG_TYPE_CRITTER_REGISTERED: 		AddLogToFile("critter/critter_registered.csv", ""+strParams); break;
 		case LOG_TYPE_CRITTER_DEAD: 			AddLogToFile("critter/critter_dead.csv", ""+strParams); break;
 		case LOG_TYPE_CRITTER_SKILL_INCREADED: 	AddLogToFile("critter/critter_skill_increased.csv", ""+strParams); break;
 		case LOG_TYPE_LOGIN: 					AddLogToFile("main/login.csv", ""+strParams); break;
