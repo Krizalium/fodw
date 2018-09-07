@@ -4217,7 +4217,7 @@ namespace Cursor
 					uint16 pid = item.GetProtoId();
 					uint16 skillDiff = 0;
 					// Kriz TODO
-					if (pid >= 710 && pid <= 750)
+					if (pid >= 710 && pid < 750)
 					{
 						switch(pid)
 						{
@@ -4227,7 +4227,15 @@ namespace Cursor
 							case PID_GEN_XANDER_ROOT: 	skillDiff = GEN_PLANT_DIFF_XANDER; break;
 								default: break;
 						}
-						DrawText(CLAMP(chosen.Skill[SK_BOTANY] - skillDiff, 5, 95) + "%", __MouseX + 6, __MouseY + 6, 100, 100, COLOR_GREEN, FONT_DEFAULT, 0 );
+						DrawText(CLAMP(chosen.Skill[SK_BOTANY] - skillDiff, 5, 95) + "%", __MouseX + 6, __MouseY + 6, 100, 100, COLOR_SAND, FONT_DEFAULT, 0 );
+					}
+					else if (pid >= 750 && pid < 775)
+					{
+						switch (pid)
+						{
+							case PID_GEN_ORE_IRON: skillDiff = GEN_ORE_DIFF_IRON; break;
+						}
+						DrawText(CLAMP(chosen.Skill[SK_MINING] - skillDiff, 5, 95) + "%", __MouseX + 6, __MouseY + 6, 100, 100, COLOR_SAND, FONT_DEFAULT, 0 );
 					}
 				}
 				else return;
