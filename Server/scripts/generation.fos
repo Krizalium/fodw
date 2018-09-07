@@ -234,14 +234,22 @@ uint e_TimeEventGenerate(uint[] @ values)
 			}
 			else
 			{
-				//Log (r.Id+" valid");
 				Item@ item = map.AddItem(hx, hy, r.ProtoId, 1);
-				item.Val1 = r.Id;
-				item.Val2 = r.SkillNeed;
-				IncCount(r.GVar);
 				
-				string[]paramsForLog = {""+r.ProtoId, ""+map.Id, ""+map.GetProtoId(), ""+hx, ""+hy, ""+r.GetCurrentCount(), ""+r.MaxCount, ""+r.EventNum};
-				AddLog(LOG_TYPE_GEN_RES, paramsForLog);
+				if (valid (item))
+				{
+					item.Val1 = r.Id;
+					item.Val2 = r.SkillNeed;
+					IncCount(r.GVar);
+					
+					string[]paramsForLog = {""+r.ProtoId, ""+map.Id, ""+map.GetProtoId(), ""+hx, ""+hy, ""+r.GetCurrentCount(), ""+r.MaxCount, ""+r.EventNum};
+					AddLog(LOG_TYPE_GEN_RES, paramsForLog);
+				}
+				else
+				{
+					Log ("В координатах "+hx+":"+hy+" на карте "+map.GetProtoId()+" не получается заспаунить "+r.ProtoId);
+					return REAL_SECOND( r.TimeGen );
+				}
 			}
 		}
 	}

@@ -3,5 +3,5 @@
 *.fomapb
 Client/
 Tools/
-Server/logs/
-Server/save/
+Server/logs/*
+Server/save/*
