@@ -8,8 +8,8 @@
 ////////////////////// Arroyo: 100-200 ///////////////
 #define DIALOG_arroyo_klint					(100)	// Начало храма
 #define DIALOG_arroyo_cameron				(101) 	// Конец храма
+#define DIALOG_arroyo_elder					(102)	// Старейшая, (мэр).
 
-// #define DIALOG_arroyo_elder				(102)	// Старейшая, (мэр).
 // #define DIALOG_arroyo_jordan				(103)	// Учитель (холодное оружие) < 50%
 // #define DIALOG_arroyo_villager			(104)	// Буфферные
 // #define DIALOG_arroyo_kaga				(105)	// Квестодатель (?)

@@ -2,8 +2,8 @@
 Version              5
 MaxHexX              400
 MaxHexY              400
-WorkHexX             116
-WorkHexY             135
+WorkHexX             113
+WorkHexY             105
 ScriptModule         -
 ScriptFunc           -
 NoLogOut             0
@@ -7057,6 +7057,8 @@ Critter_Dir          2
 Critter_Cond         1
 Critter_Anim1        0
 Critter_Anim2        0
+Critter_ParamIndex   ST_DIALOG_ID
+Critter_ParamValue   102
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
 
