@@ -4100,6 +4100,21 @@ Cost=2
 Material=1
 
 [Proto]
+ProtoId=750
+Type=5
+ScriptModule=generation
+ScriptFunc=_GenResInit
+PicMap=art\misc\ore.png
+PicInv=art\inven\rock4.frm
+Flags=16781848
+DisableEgg=1
+Stackable=1
+Weight=1000
+Cost=50
+Material=6
+BlockLines=115151412131
+
+[Proto]
 ProtoId=810
 Type=5
 PicMap=art\items\still.fofrm

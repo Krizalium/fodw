@@ -17,6 +17,8 @@
 #define ENTIRE_GEN_PLANT_BROC		(102)
 #define ENTIRE_GEN_PLANT_XANDER		(103)
 
+#define ENTIRE_GEN_ORE_IRON			(150)
+
 class Entire
 {
     int    Number;

@@ -1,4 +1,8 @@
+// Plants
 #define GEN_PLANT_DIFF_CABBAGE	(0)
 #define GEN_PLANT_DIFF_CORN		(5)
 #define GEN_PLANT_DIFF_BROC		(10)
 #define GEN_PLANT_DIFF_XANDER	(15)
+
+// Ores
+#define GEN_ORE_DIFF_IRON		(0)
