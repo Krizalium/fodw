@@ -21,6 +21,8 @@ void InitializeScreens()
 	// Added
     SkillBox::Init( CLIENT_SCREEN_SKILLBOX );
 	Character::Init( CLIENT_SCREEN_CHARACTER );
+	
+	UpSkill::Init (CLIENT_SCREEN_UPSKILL);
 }
 
 namespace Login
@@ -4431,7 +4433,7 @@ namespace SkillBox
                     if( cr !is null )
 					{
                         SetChosenActions( array< uint > = { CHOSEN_USE_SKL_ON_CRITTER, Prop, TargetCritterId, 0, 0, 0, 0 } );
-						Message (""+Prop);
+						//Message (""+Prop);
 					}
                 }
                 else
@@ -5805,4 +5807,273 @@ namespace Character
         _CurText.Init( _Switcher );
         GUI_RegisterScreen( screenIndex, _Character );
     }
+}
+
+
+namespace UpSkill
+{
+	uint16 currentSkill;
+	uint16 maxTeacherSkill;
+	uint16 learnerSkill;
+	uint16 newSkillVal;
+	uint price;
+	uint npcId;
+	
+	uint GetPriceForSkillUp(/*uint8 skillUpPoints*/)
+	{
+		CritterCl @ cr = GetChosen();
+		if (valid(cr))
+		{
+			// ((11-charisma)*skill)*(101-barter)/25
+			uint8 skillUpPoints = newSkillVal - learnerSkill;
+			uint resultPrice = 0;
+			
+			for (uint8 i = 1; i < skillUpPoints+1; i++)
+			{
+				resultPrice+= ((11-cr.Stat[ST_CHARISMA])*(learnerSkill+i))*(101-cr.Skill[SK_BARTER])/25;
+				//Message ("((11-"+cr.Stat[ST_CHARISMA]+")*("+uint(learnerSkill+i)+"))*(101-"+cr.Skill[SK_BARTER]+")/25");
+			}
+			return resultPrice;
+		}
+		return 0;
+	}
+	
+    class UpSkill : GUIScreen
+    {
+        void OnConstruct() override
+        {
+            SetModal( true );
+            SetCanMove( true, false );
+            SetSize( 280, 179 );
+            SetBackgroundImage( "art/intrface/upskillbg.png" );
+        }
+        void OnShow( dictionary@ params ) override
+        {
+            if(params !is null)
+            {
+                currentSkill 		= uint( params[ "currSkill" ] );
+                maxTeacherSkill  	= uint( params[ "maxTeacherSkill" ] );
+                learnerSkill  		= uint( params[ "learnerSkill" ] );
+				npcId				= uint( params[ "npcId" ]);
+            }
+			else return;
+        }
+    }
+	
+    class TextCurrSkill : GUIText
+    {
+        void OnConstruct() override
+        {
+            SetPosition( 15, 15 );
+        }
+		
+		void OnShow() override
+		{
+			Text = "Текущий навык: ("+MSG_GAME( STR_PARAM_NAME( currentSkill ) )+")";
+		}
+    }
+    class TextTeacherSkill : GUIText
+    {
+        void OnConstruct() override
+        {
+            SetPosition( 15, 28 );
+        }
+		
+		void OnShow() override
+		{
+			Text = "Навык учителя: "+maxTeacherSkill;
+		}
+    }
+	
+    class TextSkillUp : GUIText
+    {
+        void OnConstruct() override
+        {
+            SetPosition( 15, 50 );
+            SetTextFont( FONT_BIG );
+            SetTextColor( COLOR_SAND );
+            SetText( "Повысить до: " );
+        }
+    }
+	
+	class TextSkillUpValue : GUIText
+	{
+        void OnConstruct() override
+        {
+			SetPosition( 200, 50 );
+			SetTextFont( FONT_BIG_NUM );
+			SetTextColor( COLOR_IFACE );
+			//SetText( "Повысить до: " );
+		}
+		void OnShow() override
+		{
+			newSkillVal = learnerSkill+1;
+			Text = newSkillVal;
+		}
+        string@ get_Text() override
+        {
+            return ""+newSkillVal;
+        }
+	}
+	
+    class SkillInc : GUIButton
+    {
+        void OnConstruct() override
+        {
+            SetPosition( 228, 50 );
+            SetSize( 16, 12 );
+            SetBackgroundImage( "art/intrface/SPLSOFF.FRM" );
+            SetPressedImage( "art/intrface/SPLSON.FRM" );
+        }
+
+        void OnLMouseClick() override
+        {
+			if (newSkillVal < maxTeacherSkill)
+			{
+				newSkillVal+=1;
+			}
+        }
+    }
+    class SkillDec : GUIButton
+    {
+        void OnConstruct() override
+        {
+            SetPosition( 228, 62 );
+            SetSize( 16, 12 );
+            SetBackgroundImage( "art/intrface/SNEGOFF.FRM" );
+            SetPressedImage( "art/intrface/SNEGON.FRM" );
+        }
+
+        void OnLMouseClick() override
+        {
+			if (newSkillVal > learnerSkill+1)
+			{
+				newSkillVal-=1;
+			}
+			//Message ("newSkillVal = "+newSkillVal);
+        }
+    }
+	
+    class TextCost : GUIText
+    {
+        void OnConstruct() override
+        {
+            SetTextFont( FONT_BIG );
+            SetTextColor( COLOR_SAND );
+            SetPosition( 15, 90 );
+			SetText("Стоимость: ");
+        }
+    }
+	
+    class CoinsIcon : GUIPanel
+    {
+        void OnConstruct() override
+        {
+            SetPosition( 158, 95 );
+            SetBackgroundImage( "art/intrface/smallcaps.png" );
+        }
+    }
+	
+	class CostText : GUIText
+    {
+        void OnConstruct() override
+        {
+            SetTextFont( FONT_BIG );
+            SetTextColor( COLOR_SAND );
+            SetPosition( 200, 90 );
+        }
+        string@ get_Text() override
+        {
+			price = GetPriceForSkillUp();
+			return ""+GetPriceForSkillUp();
+            //return ""+;
+        }
+    } 
+	
+	class ButtonCancel : GUIButton
+    {
+        void OnConstruct() override
+        {
+            SetPosition( 25, 150 );
+            SetSize( 15, 16 );
+            SetPressedImage( "art/intrface/red_button_dn.png" );
+        }
+        void OnLMouseClick() override
+        {
+            HideScreen();
+        }
+    }
+	
+	class ButtonOk : GUIButton
+    {
+        void OnConstruct() override
+        {
+            SetPosition( 238, 151 );
+            SetSize( 15, 16 );
+            SetPressedImage( "art/intrface/red_button_dn.png" );
+        }
+        void OnLMouseClick() override
+        {
+			CritterCl @ cr = GetChosen();
+			if (valid(cr))
+			{
+				uint16 coins = cr.CountItem(PID_BOTTLE_CAPS);
+				//Message ("coins = "+coins+", price = "+price);
+				if (coins >= price)
+				{
+					// resultPrice+= ((11-cr.Stat[ST_CHARISMA])*(learnerSkill+i))*(101-cr.Skill[SK_BARTER])/25;
+					RunServerScriptUnsafe("interlayer@unsafe_TransferMoney", npcId, currentSkill, newSkillVal-learnerSkill, null, null);
+					
+					//TransferMoney(cr.Id, 0, coins);
+					HideScreen();
+				}
+				else
+				{
+					Message ("Недостаточно денег."); 
+				}
+			}
+			
+            //
+        }
+    }
+	
+    void Init( int screenIndex )
+    {
+        UpSkill _UpSkill();
+        _UpSkill.Init( null );
+		
+		TextCurrSkill _TextCurrSkill();
+		_TextCurrSkill.Init(_UpSkill);
+		
+		TextTeacherSkill _TextTeacherSkill();
+		_TextTeacherSkill.Init(_UpSkill);
+		
+		TextSkillUp _TextSkillUp();
+		_TextSkillUp.Init(_UpSkill);
+		
+		TextSkillUpValue _TextSkillUpValue();
+		_TextSkillUpValue.Init(_UpSkill);
+		
+		SkillInc _SkillInc();
+		_SkillInc.Init(_UpSkill);
+		SkillDec _SkillDec();
+		_SkillDec.Init(_UpSkill);
+		
+		TextCost _TextCost();
+		_TextCost.Init(_UpSkill);
+		
+		CoinsIcon _CoinsIcon();
+		_CoinsIcon.Init(_UpSkill);
+		
+		CostText _CostText();
+		_CostText.Init(_UpSkill);
+		
+		ButtonCancel _ButtonCancel();
+		_ButtonCancel.Init(_UpSkill);
+		
+		ButtonOk _ButtonOk();
+		_ButtonOk.Init(_UpSkill);
+		
+		GUI_RegisterScreen( screenIndex, _UpSkill );
+	}
 }

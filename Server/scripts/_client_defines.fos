@@ -98,6 +98,7 @@
 #define CLIENT_SCREEN_TEST                 ( 40 ) // client_screen_test.fos
 #define CLIENT_SCREEN_RADIO                ( 41 ) // radio.fos
 #define CLIENT_SCREEN_SKILLBOX             ( 30 )
+#define CLIENT_SCREEN_UPSKILL              ( 42 )
 
 // Cursors
 #define CURSOR_DEFAULT                     ( 0 )

@@ -2,8 +2,8 @@
 Version              5
 MaxHexX              400
 MaxHexY              400
-WorkHexX             113
-WorkHexY             105
+WorkHexX             104
+WorkHexY             103
 ScriptModule         -
 ScriptFunc           -
 NoLogOut             0
@@ -8582,10 +8582,15 @@ MapObjType           0
 ProtoId              3
 MapX                 86
 MapY                 112
+UID                  3
+ScriptName           arroyo_npc
+FuncName             _JordanInit
 Critter_Dir          2
 Critter_Cond         1
 Critter_Anim1        0
 Critter_Anim2        0
+Critter_ParamIndex   ST_DIALOG_ID
+Critter_ParamValue   103
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
 
@@ -13312,5 +13317,12 @@ ProtoId              3853
 MapX                 121
 MapY                 149
 Scenery_ToEntire     150
+
+MapObjType           1
+ProtoId              7
+MapX                 86
+MapY                 112
+ContainerUID         3
+Item_ItemSlot        1
 
 

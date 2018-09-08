@@ -426,7 +426,8 @@
 // Kriz
 #define	ST_LAST_MAP_ID							(180)
 #define	ST_CRIT_RESIST							(181)
-
+#define	ST_TEACHER_SKILLID						(182)
+#define ST_TEACHER_MAXSKILL						(183)
 
 // / Skills
 #define SKILL_BEGIN                              ( __SkillBegin )

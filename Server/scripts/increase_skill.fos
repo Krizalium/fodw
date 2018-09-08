@@ -1,6 +1,9 @@
 #include "_macros.fos"
 #include "logger_h.fos"
 
+
+// / Server
+#ifndef __CLIENT
 import bool AddLog(uint type, string[] params) from "logger";
 
 #define STR_SKILL_INCREASED     ( 3446 )    //
@@ -79,3 +82,33 @@ uint CalcNeedPointsToIncreseSkill(Critter& cr, uint8 skillNum)
 	}
 	return currentSkill * modBase * modSkill + currentSkill*(11 - intellect);
 }
+
+void r_TeachInit(Critter& cr, Critter@ npc)
+{
+	if (npc.Stat[ST_TEACHER_SKILLID] >= SK_SMALL_GUNS && npc.Stat[ST_TEACHER_SKILLID] <= SK_BARTER)
+	{
+		if (npc.Stat[ST_TEACHER_MAXSKILL] > 0 && !npc.IsDead())
+		{
+			cr.RunClientScript("increase_skill@ShowTeachScreen", npc.Stat[ST_TEACHER_SKILLID], npc.Stat[ST_TEACHER_MAXSKILL], npc.Id, null, null);
+			//ShowScreen (CLIENT_SCREEN_UPSKILL, ( dictionary = { { "currSkill", SK_MELEE_WEAPONS }, { "maxTeacherSkill", 50 }, {"learnerSkill", cr.Skill[SK_MELEE_WEAPONS]} } ));
+		}
+	}
+}
+
+#endif // !__CLIENT
+
+// / Client
+#ifdef __CLIENT
+# include "_client_defines.fos"
+void ShowTeachScreen( int skillNum, int teacherMaxSkill, int npcId, string@, int[] @ )
+{
+    CritterCl@ chosen = GetChosen();
+    if( not valid( chosen ) )
+        return;
+	uint playerSkillVal = chosen.Skill[skillNum];
+	//Message ("skillNum = "+skillNum+", teacherMaxSkill = "+teacherMaxSkill+", playerSkillVal = "+playerSkillVal);
+	ShowScreen (CLIENT_SCREEN_UPSKILL, ( dictionary = { { "currSkill", skillNum }, { "maxTeacherSkill", teacherMaxSkill }, {"learnerSkill", playerSkillVal}, {"npcId", npcId } }));
+	
+}
+
+#endif // __CLIENT

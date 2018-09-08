@@ -281,6 +281,15 @@ bool HandleHotkeys( uint8 key )
                 case DIK_W:
                     CustomCall( "SwitchShootBorders" );
                     break;
+					
+					// Kriz temporary
+                case DIK_Z: 
+				{
+				/*
+                    CritterCl@ cr = GetChosen();
+                    ShowScreen (CLIENT_SCREEN_UPSKILL, ( dictionary = { { "currSkill", SK_MELEE_WEAPONS }, { "maxTeacherSkill", 50 }, {"learnerSkill", cr.Skill[SK_MELEE_WEAPONS]} } ));*/
+                }
+				break;
 
                 case DIK_A:
                 {

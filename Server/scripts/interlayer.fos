@@ -1,0 +1,54 @@
+#include "_macros.fos"
+#define STR_SKILL_INCREASED     ( 3446 )    //
+
+import void FlushScreen( Critter& cr, bool fadeOut, uint timeMs ) from "effects";
+
+void unsafe_TransferMoney (Critter& cr, int targetId, int skillNum, int skillPoints, string@ param3, int[] @ param4 )
+{
+	if (!valid (cr)) return;
+	
+	Critter @ npc = GetCritter(targetId);
+	if (!valid(npc)) return;
+	
+	if (!valid(cr.GetMap()) || !valid(npc.GetMap())) return;
+	
+	if (npc.IsDead() || cr.IsDead()) return;
+	
+	if (skillNum < SK_SMALL_GUNS && skillNum > SK_BARTER) return;
+	
+	if (skillPoints < 1) return;
+	
+	if (valid(param3) || valid(param4)) return;
+	
+	Map @ map = cr.GetMap();
+	
+	// ((11-charisma)*skill)*(101-barter)/25
+	uint resultPrice = 0;
+	
+	for (uint8 i = 1; i < uint(skillPoints+1); i++)
+	{
+		resultPrice+= ((11-cr.Stat[ST_CHARISMA])*(cr.Skill[skillNum]+i))*(101-cr.Skill[SK_BARTER])/25;
+		//Message ("((11-"+cr.Stat[ST_CHARISMA]+")*("+uint(learnerSkill+i)+"))*(101-"+cr.Skill[SK_BARTER]+")/25");
+	}
+	
+	cr.DeleteItem	(PID_BOTTLE_CAPS, resultPrice);
+	npc.AddItem		(PID_BOTTLE_CAPS, resultPrice);
+	FlushScreen( cr, false, 2000 );
+	cr.SkillBase[skillNum] += skillPoints;
+	cr.SayMsg (SAY_NETMSG, TEXTMSG_GAME, STR_SKILL_INCREASED);
+	
+	// TODO Logging
+}
+
+/*
+void TransferMoney(uint playerId, uint npcId, uint moneyCount)
+{
+	Critter @ player = GetCritter(playerId);
+	if (!valid(player)) return;
+	
+	Critter @ npc = GetCritter (npcId);
+	if (!valid(npc)) return;
+	if (npc.IsDead()) return;
+	
+	
+} */
