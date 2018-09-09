@@ -75,8 +75,7 @@
 #define MAP_03_01_arroyo_temple_entrance		(1)
 #define MAP_03_00_arroyo_temple_common			(2)
 #define MAP_03_02_arroyo_village				(3)
-
-#define MAP_arroyo_garden                      ( 4 )
+#define MAP_02_02_arroyo_garden                	(4)
 #define MAP_arroyo_bridge                      ( 5 )
 
 
