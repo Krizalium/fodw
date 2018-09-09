@@ -17,3 +17,8 @@ void _VillagerInit( Critter& npc, bool firstTime )
     npc.SkillBase[ SK_THROWING ] = 80;
     npc.ModeBase[ MODE_NO_ENEMY_STACK ] = 1;
 }*/
+
+void _SmokeInit ( Critter& npc, bool firstTime )
+{
+	
+}
