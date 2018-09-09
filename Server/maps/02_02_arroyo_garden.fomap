@@ -2,8 +2,8 @@
 Version              5
 MaxHexX              400
 MaxHexY              400
-WorkHexX             41
-WorkHexY             95
+WorkHexX             83
+WorkHexY             83
 ScriptModule         -
 ScriptFunc           -
 NoLogOut             0
@@ -10294,11 +10294,6 @@ MapX                 119
 MapY                 72
 
 MapObjType           2
-ProtoId              2965
-MapX                 122
-MapY                 88
-
-MapObjType           2
 ProtoId              2947
 MapX                 123
 MapY                 88
@@ -10676,11 +10671,6 @@ MapY                 91
 MapObjType           2
 ProtoId              2074
 MapX                 112
-MapY                 91
-
-MapObjType           2
-ProtoId              2965
-MapX                 114
 MapY                 91
 
 MapObjType           2
@@ -11161,11 +11151,6 @@ MapY                 94
 MapObjType           2
 ProtoId              2344
 MapX                 126
-MapY                 94
-
-MapObjType           2
-ProtoId              2965
-MapX                 129
 MapY                 94
 
 MapObjType           2
@@ -12116,16 +12101,6 @@ MapX                 134
 MapY                 101
 
 MapObjType           2
-ProtoId              2965
-MapX                 135
-MapY                 101
-
-MapObjType           2
-ProtoId              2947
-MapX                 136
-MapY                 101
-
-MapObjType           2
 ProtoId              2344
 MapX                 44
 MapY                 102
@@ -12761,11 +12736,6 @@ MapX                 113
 MapY                 108
 
 MapObjType           2
-ProtoId              2965
-MapX                 113
-MapY                 108
-
-MapObjType           2
 ProtoId              2946
 MapX                 114
 MapY                 108
@@ -12888,11 +12858,6 @@ MapY                 109
 MapObjType           2
 ProtoId              2944
 MapX                 119
-MapY                 109
-
-MapObjType           2
-ProtoId              2965
-MapX                 121
 MapY                 109
 
 MapObjType           2
@@ -13306,11 +13271,6 @@ MapX                 147
 MapY                 113
 
 MapObjType           2
-ProtoId              2965
-MapX                 141
-MapY                 114
-
-MapObjType           2
 ProtoId              2947
 MapX                 145
 MapY                 114
@@ -13403,11 +13363,6 @@ MapY                 116
 MapObjType           2
 ProtoId              2947
 MapX                 111
-MapY                 116
-
-MapObjType           2
-ProtoId              2965
-MapX                 113
 MapY                 116
 
 MapObjType           2
@@ -13606,11 +13561,6 @@ MapX                 146
 MapY                 118
 
 MapObjType           2
-ProtoId              2965
-MapX                 147
-MapY                 118
-
-MapObjType           2
 ProtoId              2344
 MapX                 147
 MapY                 118
@@ -13686,11 +13636,6 @@ MapX                 126
 MapY                 119
 
 MapObjType           2
-ProtoId              2965
-MapX                 128
-MapY                 119
-
-MapObjType           2
 ProtoId              4012
 MapX                 150
 MapY                 117
@@ -13728,11 +13673,6 @@ MapY                 120
 MapObjType           2
 ProtoId              2944
 MapX                 113
-MapY                 120
-
-MapObjType           2
-ProtoId              2965
-MapX                 122
 MapY                 120
 
 MapObjType           2
@@ -14184,11 +14124,6 @@ MapObjType           2
 ProtoId              4012
 MapX                 160
 MapY                 132
-
-MapObjType           2
-ProtoId              2965
-MapX                 145
-MapY                 125
 
 MapObjType           2
 ProtoId              2945
@@ -14741,11 +14676,6 @@ MapX                 104
 MapY                 132
 
 MapObjType           2
-ProtoId              2965
-MapX                 110
-MapY                 132
-
-MapObjType           2
 ProtoId              4012
 MapX                 123
 MapY                 153
@@ -15156,11 +15086,6 @@ MapX                 111
 MapY                 136
 
 MapObjType           2
-ProtoId              2965
-MapX                 113
-MapY                 136
-
-MapObjType           2
 ProtoId              2945
 MapX                 115
 MapY                 136
@@ -15333,11 +15258,6 @@ MapY                 138
 MapObjType           2
 ProtoId              2067
 MapX                 107
-MapY                 138
-
-MapObjType           2
-ProtoId              2965
-MapX                 111
 MapY                 138
 
 MapObjType           2
@@ -15571,11 +15491,6 @@ MapX                 110
 MapY                 160
 
 MapObjType           2
-ProtoId              2965
-MapX                 118
-MapY                 140
-
-MapObjType           2
 ProtoId              2344
 MapX                 118
 MapY                 140
@@ -15588,11 +15503,6 @@ MapY                 140
 MapObjType           2
 ProtoId              2946
 MapX                 135
-MapY                 140
-
-MapObjType           2
-ProtoId              2965
-MapX                 141
 MapY                 140
 
 MapObjType           2
@@ -15688,11 +15598,6 @@ MapY                 141
 MapObjType           2
 ProtoId              2947
 MapX                 133
-MapY                 141
-
-MapObjType           2
-ProtoId              2965
-MapX                 135
 MapY                 141
 
 MapObjType           2
@@ -15891,11 +15796,6 @@ MapX                 123
 MapY                 143
 
 MapObjType           2
-ProtoId              2965
-MapX                 129
-MapY                 143
-
-MapObjType           2
 ProtoId              2945
 MapX                 134
 MapY                 143
@@ -16066,11 +15966,6 @@ MapX                 114
 MapY                 145
 
 MapObjType           2
-ProtoId              2965
-MapX                 115
-MapY                 145
-
-MapObjType           2
 ProtoId              2946
 MapX                 120
 MapY                 145
@@ -16178,11 +16073,6 @@ MapY                 146
 MapObjType           2
 ProtoId              2945
 MapX                 134
-MapY                 146
-
-MapObjType           2
-ProtoId              2965
-MapX                 135
 MapY                 146
 
 MapObjType           2
@@ -16456,11 +16346,6 @@ MapX                 86
 MapY                 151
 
 MapObjType           2
-ProtoId              2965
-MapX                 88
-MapY                 151
-
-MapObjType           2
 ProtoId              2945
 MapX                 90
 MapY                 151
@@ -16473,11 +16358,6 @@ MapY                 151
 MapObjType           2
 ProtoId              2344
 MapX                 111
-MapY                 151
-
-MapObjType           2
-ProtoId              2965
-MapX                 112
 MapY                 151
 
 MapObjType           2
@@ -16533,11 +16413,6 @@ MapY                 152
 MapObjType           2
 ProtoId              2344
 MapX                 108
-MapY                 152
-
-MapObjType           2
-ProtoId              2965
-MapX                 109
 MapY                 152
 
 MapObjType           2
@@ -16676,11 +16551,6 @@ MapX                 94
 MapY                 155
 
 MapObjType           2
-ProtoId              2965
-MapX                 96
-MapY                 155
-
-MapObjType           2
 ProtoId              2344
 MapX                 96
 MapY                 155
@@ -16703,11 +16573,6 @@ MapY                 155
 MapObjType           2
 ProtoId              2946
 MapX                 101
-MapY                 155
-
-MapObjType           2
-ProtoId              2965
-MapX                 102
 MapY                 155
 
 MapObjType           2
@@ -18126,888 +17991,1116 @@ MapX                 63
 MapY                 131
 
 MapObjType           2
-ProtoId              0
-
-MapObjType           2
 ProtoId              4023
 MapX                 47
 MapY                 108
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4023
 MapX                 47
 MapY                 104
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4023
 MapX                 47
 MapY                 100
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4018
 MapX                 44
 MapY                 91
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4018
 MapX                 40
 MapY                 85
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 39
 MapY                 86
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 35
 MapY                 86
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 35
 MapY                 88
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 39
 MapY                 88
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 35
 MapY                 90
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 39
 MapY                 90
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 35
 MapY                 92
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 39
 MapY                 92
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 39
 MapY                 94
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 39
 MapY                 96
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 43
 MapY                 96
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 39
 MapY                 98
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 43
 MapY                 98
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 43
 MapY                 100
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4021
 MapX                 43
 MapY                 102
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4023
 MapX                 41
 MapY                 94
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4023
 MapX                 45
 MapY                 108
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4023
 MapX                 45
 MapY                 104
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4023
 MapX                 45
 MapY                 100
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4023
 MapX                 43
 MapY                 94
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4018
 MapX                 39
 MapY                 86
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4018
 MapX                 43
 MapY                 92
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4018
 MapX                 38
 MapY                 86
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              4018
 MapX                 42
 MapY                 92
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 45
 MapY                 101
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 45
 MapY                 102
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 46
 MapY                 102
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 46
 MapY                 103
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 47
 MapY                 104
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 47
 MapY                 105
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 42
 MapY                 96
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 42
 MapY                 97
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 43
 MapY                 98
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 43
 MapY                 99
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 44
 MapY                 99
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 44
 MapY                 100
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 39
 MapY                 92
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 39
 MapY                 93
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 40
 MapY                 93
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 40
 MapY                 94
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 41
 MapY                 95
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 41
 MapY                 96
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 36
 MapY                 87
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 36
 MapY                 88
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 37
 MapY                 89
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 37
 MapY                 90
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 38
 MapY                 90
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 38
 MapY                 91
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 34
 MapY                 86
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 34
 MapY                 87
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 35
 MapY                 88
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 35
 MapY                 89
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 36
 MapY                 89
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 36
 MapY                 90
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 37
 MapY                 87
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 37
 MapY                 88
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 38
 MapY                 88
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 38
 MapY                 89
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 39
 MapY                 90
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 39
 MapY                 91
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 40
 MapY                 91
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 40
 MapY                 92
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 41
 MapY                 93
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 41
 MapY                 94
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 42
 MapY                 94
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 42
 MapY                 95
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 43
 MapY                 96
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 43
 MapY                 97
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 44
 MapY                 97
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 44
 MapY                 98
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 45
 MapY                 99
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 45
 MapY                 100
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 45
 MapY                 97
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 45
 MapY                 98
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 46
 MapY                 98
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 46
 MapY                 99
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 47
 MapY                 100
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 47
 MapY                 101
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 45
 MapY                 95
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 45
 MapY                 96
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 46
 MapY                 96
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 46
 MapY                 97
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 47
 MapY                 98
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 47
 MapY                 99
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 45
 MapY                 93
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 45
 MapY                 94
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 46
 MapY                 94
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 46
 MapY                 95
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 47
 MapY                 96
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 47
 MapY                 97
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 42
 MapY                 88
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 42
 MapY                 89
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 43
 MapY                 90
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 43
 MapY                 91
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 44
 MapY                 91
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 44
 MapY                 92
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 42
 MapY                 90
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 42
 MapY                 91
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 43
 MapY                 92
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 43
 MapY                 93
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 44
 MapY                 93
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 44
 MapY                 94
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 42
 MapY                 92
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 42
 MapY                 93
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 43
 MapY                 94
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 43
 MapY                 95
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 44
 MapY                 95
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 44
 MapY                 96
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 39
 MapY                 88
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 39
 MapY                 89
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 40
 MapY                 89
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 40
 MapY                 90
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 41
 MapY                 91
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 41
 MapY                 92
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 39
 MapY                 86
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 39
 MapY                 87
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 40
 MapY                 87
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 40
 MapY                 88
 Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 41
-MapY                 89
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 41
-MapY                 90
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 41
-MapY                 88
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 41
-MapY                 87
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 40
-MapY                 86
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 40
-MapY                 85
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 39
-MapY                 85
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 38
-MapY                 85
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 37
-MapY                 85
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 38
-MapY                 86
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 38
-MapY                 87
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 33
-MapY                 86
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 33
-MapY                 85
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 34
-MapY                 85
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 35
-MapY                 85
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 35
-MapY                 86
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 35
-MapY                 87
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 36
-MapY                 86
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 36
-MapY                 85
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 37
-MapY                 86
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 46
-MapY                 100
-Scenery_ToMapPid     3
-
-MapObjType           2
-ProtoId              2049
-MapX                 46
-MapY                 101
-Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 47
 MapY                 102
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 46
+MapY                 101
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 46
+MapY                 100
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
 
 MapObjType           2
 ProtoId              2049
 MapX                 47
 MapY                 103
 Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 41
+MapY                 90
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 41
+MapY                 89
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 41
+MapY                 88
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 41
+MapY                 87
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 40
+MapY                 86
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 40
+MapY                 85
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 39
+MapY                 85
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 38
+MapY                 87
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 38
+MapY                 86
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 38
+MapY                 85
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 35
+MapY                 87
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 33
+MapY                 86
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 33
+MapY                 85
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 34
+MapY                 85
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 35
+MapY                 86
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 36
+MapY                 86
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 36
+MapY                 85
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 37
+MapY                 86
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 37
+MapY                 85
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              2049
+MapX                 35
+MapY                 85
+Scenery_ToMapPid     3
+Scenery_ToEntire     4
+
+MapObjType           2
+ProtoId              3853
+MapX                 106
+MapY                 106
+Scenery_ToEntire     101
+
+MapObjType           2
+ProtoId              3853
+MapX                 84
+MapY                 132
+Scenery_ToEntire     101
+
+MapObjType           2
+ProtoId              3853
+MapX                 121
+MapY                 100
+Scenery_ToEntire     101
+
+MapObjType           2
+ProtoId              3853
+MapX                 101
+MapY                 70
+Scenery_ToEntire     101
+
+MapObjType           2
+ProtoId              3853
+MapX                 96
+MapY                 89
+Scenery_ToEntire     101
+
+MapObjType           2
+ProtoId              3853
+MapX                 108
+MapY                 85
+Scenery_ToEntire     102
+
+MapObjType           2
+ProtoId              3853
+MapX                 69
+MapY                 88
+Scenery_ToEntire     102
+
+MapObjType           2
+ProtoId              3853
+MapX                 83
+MapY                 111
+Scenery_ToEntire     102
+
+MapObjType           2
+ProtoId              3853
+MapX                 89
+MapY                 136
+Scenery_ToEntire     103
+
+MapObjType           2
+ProtoId              3853
+MapX                 104
+MapY                 133
+Scenery_ToEntire     103
+
+MapObjType           2
+ProtoId              3853
+MapX                 132
+MapY                 117
+Scenery_ToEntire     103
+
+MapObjType           2
+ProtoId              3853
+MapX                 116
+MapY                 121
+Scenery_ToEntire     150
+
+MapObjType           2
+ProtoId              3853
+MapX                 62
+MapY                 101
+Scenery_ToEntire     150
+
+MapObjType           2
+ProtoId              3853
+MapX                 139
+MapY                 123
+Scenery_ToEntire     150
 
 
