@@ -1,7 +1,7 @@
 #include "_macros.fos"
 #include "logger_h.fos"
 
-
+// By Krizalis
 // / Server
 #ifndef __CLIENT
 import bool AddLog(uint type, string[] params) from "logger";
@@ -25,7 +25,7 @@ void IncreaseCombatSkill (Critter& attacker, Critter& target, uint8 skillNum, in
 	{
 		GameVar @ increaseSkill = GetLocalVar(skillNum, attacker.Id);
 		increaseSkill+= damage;
-		Log ("Осталось: "+(CalcNeedPointsToIncreseSkill(attacker, skillNum) - increaseSkill.GetValue()));
+		//Log ("Осталось: "+(CalcNeedPointsToIncreseSkill(attacker, skillNum) - increaseSkill.GetValue()));
 		if (uint(increaseSkill.GetValue()) > CalcNeedPointsToIncreseSkill ( attacker, skillNum))
 		{
 			increaseSkill = 0;
