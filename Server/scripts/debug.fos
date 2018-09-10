@@ -127,6 +127,14 @@ void team( Critter& player, int param0, int param1, int param2 )
         critters[ i ].Say( SAY_NORM_ON_HEAD, "" + ( critters[ i ].Stat[ ST_TEAM_ID ] ) );
 }
 
+void ai( Critter& player, int param0, int param1, int param2 )
+{
+    Critter@[] critters;
+    uint count = player.GetMap().GetCrittersHex( player.HexX, player.HexY, FIND_DIST, FIND_LIFE | FIND_ALL, critters );
+    for( uint i = 0; i < count; i++ )
+        critters[ i ].Say( SAY_NORM_ON_HEAD, "" + ( critters[ i ].Stat[ ST_AI_ID ] ) );
+}
+
 void role( Critter& player, int param0, int param1, int param2 )
 {
     Critter@[] critters;
@@ -142,6 +150,14 @@ void info( Critter& player, int param0, int param1, int param2 )
     for( uint i = 0; i < count; i++ )
         critters[ i ].Say( SAY_NORM_ON_HEAD, "" + ( critters[ i ].Stat[ param0 ] ) );
 }
+// Kriz:
+void skill( Critter& player, int param0, int param1, int param2 )
+{
+    Critter@[] critters;
+    uint count = player.GetMap().GetCrittersHex( player.HexX, player.HexY, FIND_DIST, FIND_LIFE | FIND_ALL, critters );
+    for( uint i = 0; i < count; i++ )
+        critters[ i ].Say( SAY_NORM_ON_HEAD, "" + ( critters[ i ].Skill[ param0 ] ) );
+}
 
 void hp( Critter& player, int param0, int param1, int param2 )
 {
@@ -149,6 +165,19 @@ void hp( Critter& player, int param0, int param1, int param2 )
     uint count = player.GetMap().GetCrittersHex( player.HexX, player.HexY, FIND_DIST, FIND_LIFE | FIND_ALL, critters );
     for( uint i = 0; i < count; i++ )
         critters[ i ].Say( SAY_NORM_ON_HEAD, "" + ( critters[ i ].Stat[ ST_CURRENT_HP ] ) + "/" + "" + ( critters[ i ].Stat[ ST_MAX_LIFE ] ) );
+}
+
+void poly( Critter& player, int param0, int param1, int param2 )
+{
+	Map@ map = GetMapByPid (MAP_polygon, 0);
+	player.TransitToMap(map.Id, 0 );
+	Log ("map = "+map.Id);
+	if (param0 != 0)
+	{
+		uint16 x = 0, y = 0;
+		map.GetEntireCoords(666, 0, x, y);
+		map.AddNpc (uint16(param0), x, y, Random(0,5), null, null, null);
+	}
 }
 
 // plan count
@@ -545,5 +574,8 @@ void AddNpc( Critter& cr, int pid, int dialog, int )
         return;
     cr.GetMap().AddNpc( pid, cr.HexX - 3, cr.HexY - 2, 0, null, null, null ).StatBase[ ST_DIALOG_ID ] = dialog;
 }
+
+// Kriz Polygon
+
 
 

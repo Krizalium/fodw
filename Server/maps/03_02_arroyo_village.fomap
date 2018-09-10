@@ -2,8 +2,8 @@
 Version              5
 MaxHexX              400
 MaxHexY              400
-WorkHexX             100
-WorkHexY             102
+WorkHexX             98
+WorkHexY             87
 ScriptModule         -
 ScriptFunc           -
 NoLogOut             0
@@ -5133,7 +5133,7 @@ MapX                 58
 MapY                 54
 
 MapObjType           0
-ProtoId              10
+ProtoId              6
 MapX                 57
 MapY                 69
 Critter_Dir          4
@@ -5211,7 +5211,7 @@ MapX                 57
 MapY                 55
 
 MapObjType           0
-ProtoId              10
+ProtoId              6
 MapX                 64
 MapY                 70
 Critter_Dir          2
@@ -5244,7 +5244,7 @@ MapX                 107
 MapY                 70
 
 MapObjType           0
-ProtoId              14
+ProtoId              5
 MapX                 109
 MapY                 70
 Critter_Dir          2
@@ -5469,7 +5469,7 @@ MapX                 46
 MapY                 73
 
 MapObjType           0
-ProtoId              10
+ProtoId              6
 MapX                 52
 MapY                 73
 Critter_Dir          3
@@ -5597,7 +5597,7 @@ MapX                 34
 MapY                 69
 
 MapObjType           0
-ProtoId              10
+ProtoId              6
 MapX                 60
 MapY                 74
 Critter_Dir          0
@@ -6735,7 +6735,7 @@ MapX                 114
 MapY                 94
 
 MapObjType           0
-ProtoId              13
+ProtoId              5
 MapX                 115
 MapY                 94
 Critter_Dir          2
@@ -16013,5 +16013,18 @@ ProtoId              3853
 MapX                 99
 MapY                 64
 Scenery_ToEntire     500
+
+MapObjType           0
+ProtoId              207
+MapX                 101
+MapY                 81
+Critter_Dir          3
+Critter_Cond         1
+Critter_Anim1        0
+Critter_Anim2        0
+Critter_ParamIndex   ST_AI_ID
+Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 

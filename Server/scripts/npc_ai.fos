@@ -26,12 +26,14 @@
 #define AI_CHEM_PRIM_DESIRE_1    # (ai) AIData_[ ( ( ( ai ) < AIPACKET_COUNT ? ( ai ) : 0 ) * 22 + 20 ) ]
 #define AI_CHEM_PRIM_DESIRE_2    # (ai) AIData_[ ( ( ( ai ) < AIPACKET_COUNT ? ( ai ) : 0 ) * 22 + 21 ) ]
 
+#define	MESSAGE_RANDOM		(100)
+
 void AI_TrySayCombatText( Critter& npc, int textType )
 {
     if( not npc.IsLife() )
         return;
     uint ai = npc.Stat[ ST_AI_ID ];
-    if( AI_MESS_CHANCE( ai ) < Random( 1, 500 ) )
+    if( AI_MESS_CHANCE( ai ) < Random( 1, MESSAGE_RANDOM ) )
         return;
 
     uint start = 0, end = 0;

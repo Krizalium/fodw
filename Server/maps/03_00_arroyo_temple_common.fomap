@@ -2,8 +2,8 @@
 Version              5
 MaxHexX              400
 MaxHexY              400
-WorkHexX             117
-WorkHexY             89
+WorkHexX             108
+WorkHexY             109
 ScriptModule         -
 ScriptFunc           -
 NoLogOut             0
@@ -5361,7 +5361,7 @@ MapX                 125
 MapY                 68
 
 MapObjType           0
-ProtoId              274
+ProtoId              3
 MapX                 128
 MapY                 68
 ScriptName           arroyo_trial
@@ -7333,23 +7333,6 @@ ProtoId              6426
 MapX                 62
 MapY                 99
 
-MapObjType           0
-ProtoId              5
-MapX                 76
-MapY                 99
-ScriptName           mob
-FuncName             _MobInit
-Critter_Dir          3
-Critter_Cond         1
-Critter_Anim1        0
-Critter_Anim2        0
-Critter_ParamIndex   ST_NPC_ROLE
-Critter_ParamValue   1
-Critter_ParamIndex   ST_AI_ID
-Critter_ParamValue   14
-Critter_ParamIndex   ST_TEAM_ID
-Critter_ParamValue   24
-
 MapObjType           2
 ProtoId              6426
 MapX                 82
@@ -7494,23 +7477,6 @@ MapObjType           2
 ProtoId              4012
 MapX                 47
 MapY                 104
-
-MapObjType           0
-ProtoId              5
-MapX                 59
-MapY                 100
-ScriptName           mob
-FuncName             _MobInit
-Critter_Dir          2
-Critter_Cond         1
-Critter_Anim1        0
-Critter_Anim2        0
-Critter_ParamIndex   ST_NPC_ROLE
-Critter_ParamValue   1
-Critter_ParamIndex   ST_AI_ID
-Critter_ParamValue   8
-Critter_ParamIndex   ST_TEAM_ID
-Critter_ParamValue   24
 
 MapObjType           2
 ProtoId              6399
@@ -7893,7 +7859,7 @@ MapX                 118
 MapY                 104
 
 MapObjType           0
-ProtoId              382
+ProtoId              7
 MapX                 125
 MapY                 104
 ScriptName           mob
@@ -8225,7 +8191,7 @@ MapX                 124
 MapY                 105
 
 MapObjType           0
-ProtoId              382
+ProtoId              7
 MapX                 130
 MapY                 105
 ScriptName           mob
@@ -11615,5 +11581,39 @@ ProtoId              3853
 MapX                 112
 MapY                 136
 Scenery_ToEntire     242
+
+MapObjType           0
+ProtoId              12
+MapX                 75
+MapY                 100
+ScriptName           mob
+FuncName             _MobInit
+Critter_Dir          3
+Critter_Cond         1
+Critter_Anim1        0
+Critter_Anim2        0
+Critter_ParamIndex   ST_NPC_ROLE
+Critter_ParamValue   1
+Critter_ParamIndex   ST_AI_ID
+Critter_ParamValue   14
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   24
+
+MapObjType           0
+ProtoId              12
+MapX                 59
+MapY                 100
+ScriptName           mob
+FuncName             _MobInit
+Critter_Dir          2
+Critter_Cond         1
+Critter_Anim1        0
+Critter_Anim2        0
+Critter_ParamIndex   ST_NPC_ROLE
+Critter_ParamValue   1
+Critter_ParamIndex   ST_AI_ID
+Critter_ParamValue   14
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   24
 
 

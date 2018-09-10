@@ -414,6 +414,3 @@ void SayTextForCollect (Critter& cr, uint16 skill, bool success)
 	}
 	return;
 }
-
-// Client
-

@@ -68,6 +68,8 @@
 #define LOCATION_StartLocation					(500)
 #define LOCATION_StartLocation2					(501)
 
+#define LOCATION_Polygon						(1000)
+
 // ************************************************************************/
 // * Maps                                                                 */
 // ************************************************************************/
@@ -142,6 +144,8 @@
 #define MAP_e_coast10                          ( 390 )
 #define MAP_e_coast11                          ( 391 )
 #define MAP_e_coast5_cave                      ( 392 )
+
+#define MAP_polygon								( 1000)
 
 
 // ************************************************************************/

@@ -20,7 +20,17 @@ import int  RawToHit( Critter& cr, Critter& target, ProtoItem@ weapon, uint8 wea
 // REASON_RUN_AWAY
 bool npc_plane_begin( Critter& npc, NpcPlane& plane, int reason, Critter@ someCr, Item@ someItem )
 {
-    // Log("npc_plane_begin "+reason);
+	// Kriz
+	if (npc.GetProtoId() == 13)
+	{
+		Log ("plane.Identifier = "+plane.Identifier
+		+", plane.IdentifierExt = "+plane.IdentifierExt
+		+", plane.Type = "+plane.Type
+		+", plane.Priority = "+plane.Priority
+		+", plane.Run = "+plane.Run
+		+", reason = "+reason);
+	}
+    //Log("npc_plane_begin "+reason);
     return true;
 }
 
@@ -43,7 +53,11 @@ bool npc_plane_begin( Critter& npc, NpcPlane& plane, int reason, Critter@ someCr
 // REASON_NO_UNARMED
 bool npc_plane_end( Critter& npc, NpcPlane& plane, int reason, Critter@ someCr, Item@ someItem )
 {
-    // Log("npc_plane_end "+reason + "npcId" + npc.Id);
+	if (npc.GetProtoId() == 13)
+	{
+		Log("npc_plane_end "+reason + "npcId" + npc.Id);
+	}
+    //
     if( reason == REASON_CANT_WALK && npc.IsNoPlanes() )
         npc.Wait( Random( 1000, 2000 ) );
     else if( reason == REASON_HEX_BUSY || reason == REASON_HEX_BUSY_RING || reason == REASON_POSITION_NOT_FOUND )
@@ -170,7 +184,7 @@ bool npc_plane_end( Critter& npc, NpcPlane& plane, int reason, Critter@ someCr, 
 //  Out: r0 use, r1 aim, r2 disable attack and wait this time (in ms)
 bool npc_plane_run( Critter& npc, NpcPlane& plane, int reason, uint& r0, uint& r1, uint& r2 )
 {
-    // Log("npc_plane_run "+reason);
+    //Log("npc_plane_run "+reason);
     if( reason == REASON_ATTACK_WEAPON )
     {
         // Special weapons
