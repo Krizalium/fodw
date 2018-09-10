@@ -2,8 +2,8 @@
 Version              5
 MaxHexX              400
 MaxHexY              400
-WorkHexX             91
-WorkHexY             79
+WorkHexX             100
+WorkHexY             102
 ScriptModule         -
 ScriptFunc           -
 NoLogOut             0
@@ -3744,6 +3744,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              2092
@@ -5140,6 +5142,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   3
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              4012
@@ -5216,6 +5220,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   3
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              5144
@@ -5247,6 +5253,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              2377
@@ -5470,6 +5478,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   3
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              4012
@@ -5596,6 +5606,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   3
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              5144
@@ -5887,6 +5899,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              2942
@@ -6182,6 +6196,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              4012
@@ -6730,6 +6746,8 @@ Critter_ParamIndex   ST_DIALOG_ID
 Critter_ParamValue   102
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              2141
@@ -7125,6 +7143,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              6191
@@ -7438,6 +7458,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              5930
@@ -7733,6 +7755,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              4012
@@ -8094,6 +8118,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           0
 ProtoId              3
@@ -8106,6 +8132,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   25
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              2067
@@ -8262,6 +8290,8 @@ Critter_ParamIndex   ST_DIALOG_ID
 Critter_ParamValue   103
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              6177
@@ -8385,6 +8415,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              2067
@@ -8496,6 +8528,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              6179
@@ -8949,6 +8983,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              5622
@@ -9847,6 +9883,8 @@ Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           2
 ProtoId              4012
@@ -12107,6 +12145,8 @@ Critter_Dir          3
 Critter_Cond         1
 Critter_Anim1        0
 Critter_Anim2        0
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           0
 ProtoId              3
@@ -12117,6 +12157,8 @@ Critter_Dir          3
 Critter_Cond         1
 Critter_Anim1        0
 Critter_Anim2        0
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
 
 MapObjType           1
 ProtoId              4

@@ -89,6 +89,7 @@ void main_critter_dead( Critter& cr, Critter@ killer )
         int  karmaBefore = killer.StatBase[ ST_KARMA ];
         uint team = cr.Stat[ ST_TEAM_ID ];
         // if(team==TEAM_Player) killer.StatBase[ST_KARMA]-=10;
+		/*
         if( team == TEAM_Poorman )
             killer.StatBase[ ST_KARMA ] -= 10;
         else if( team == TEAM_Narcoman )
@@ -116,12 +117,11 @@ void main_critter_dead( Critter& cr, Critter@ killer )
         else if( team == TEAM_Slave )
             killer.StatBase[ ST_KARMA ] -= 10;
         else if( team == TEAM_Trapper )
-            killer.StatBase[ ST_KARMA ] -= 10;
+            killer.StatBase[ ST_KARMA ] -= 10;*/
 
         if( cr.Stat[ ST_BODY_TYPE ] == BT_CHILDREN )
             killer.KarmaBase[ KARMA_CHILDKILLER ]++;
 
-        CallTownSupply( cr, killer );      // Town supply call
     }
 
     SetReplicationTime( cr );

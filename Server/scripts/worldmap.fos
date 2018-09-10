@@ -4,7 +4,6 @@
 
 import bool AddAttackPlane( Critter& npc, uint priority, Critter& target ) from "npc_planes";
 import void GenerateItems( Map& map, Critter@[] @  grp ) from "encounter_items";
-import void GenerateCavernEncounter( Map@ map, Critter@[] @ critters ) from "cave_mobs";
 
 #define ZONE_COUNT_X                       ( 28 )
 #define ZONE_COUNT_Y                       ( 30 )
@@ -1082,7 +1081,7 @@ Map@ GenerateEncounter( CFoundedEncounter@ fe, Critter@[] @ critters )
             GenerateItems( m, critters );
             if( i > 0 )
             {
-                GenerateCavernEncounter( m, critters );
+                //GenerateCavernEncounter( m, critters );
             }
         }
     }
@@ -1139,8 +1138,8 @@ Map@ GenerateEncounter( CFoundedEncounter@ fe, Critter@[] @ critters )
             distance = 7 + leader.Stat[ ST_PERCEPTION ] + leader.Perk[ PE_CAUTIOUS_NATURE ] * 3;
 
         uint teamId = group.TeamNum;
-        if( teamId == 0 )
-            teamId = TEAM_Mob0 + i;
+        /*if( teamId == 0 )
+            teamId = TEAM_Mob0 + i;*/
 
         uint position = group.Position;
         uint spacing = group.Spacing;

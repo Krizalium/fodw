@@ -1,0 +1,49 @@
+// By Krizalis
+
+/* Пятибальная шкала отношений: 
+1 - ненависить
+2 - плохо
+3 - нейтрально
+4 - хорошо
+5 - обожание */
+
+uint[][] Relations = {
+/*TEAM_Default*/	{3, 3, 3},
+/*TEAM_Player*/		{3, 3, 3},
+/*TEAM_Arroyo*/		{3, 3, 5}
+};
+	
+#include "_reputation.fos"
+
+uint8 GetRelationshipForNearbyCritter(Critter@ nearbyCr, Critter@ toWhom)
+{
+	uint16 teamNearbyCr = nearbyCr.Stat[ST_TEAM_ID]; 
+	uint16 teamToWhom = toWhom.Stat[ST_TEAM_ID]; 
+	
+	if (toWhom.IsPlayer())
+	{
+		return GetRelationshipForPlayer(nearbyCr, toWhom);
+	}
+	return Relations[teamNearbyCr][teamToWhom];
+}
+
+uint8 GetRelationshipForPlayer (Critter@ nearbyCr, Critter@ player)
+{
+	int8 rel = 0;
+	
+	switch (nearbyCr.Stat[ST_TEAM_ID])
+	{
+		case TEAM_Arroyo: rel = GetRelationForRep (player.Reputation[REPUTATION_ARROYO]);
+			default: rel = 3; break;
+	}
+	return rel;
+}
+
+int8 GetRelationForRep (int16 rep)
+{
+	if (REPUTATION_VILIFIED (rep) || REPUTATION_HATED (rep)) return 1; 
+	if (REPUTATION_ANTIPATY (rep)) return 2; 
+	if (REPUTATION_ACCEPTED (rep) || REPUTATION_LIKED(rep)) return 4; 
+	if (REPUTATION_IDOLIZED (rep)) return 5; 
+	return 3; 
+}

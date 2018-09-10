@@ -1,5 +1,214 @@
-void main_critter_attacked(Critter& cr, Critter& attacker)
+#define	REL_HATE	(1)
+#define	REL_DISLIKE	(2)
+#define	REL_NEUTRAL	(3)
+#define	REL_LIKE	(4)
+#define	REL_IDOL	(5)
+
+void main_critter_attacked(Critter& victim, Critter& attacker)
 {
+	Critter@[] nearbyCritters;
+		victim.GetCritters (true, FIND_LIFE_AND_KO | FIND_ONLY_NPC, nearbyCritters);
+		
+    uint victimTeamId = victim.Stat[ST_TEAM_ID];
+    uint attackerTeamId = attacker.Stat[ST_TEAM_ID];
+
+	if (victim.IsPlayer())
+	{
+		// В зависимости от локации, пытаемся защитить, если репа не отрицательна. 
+	}
+	else
+	{
+		// Всегда пытаемся дать сдачи: // или может сначала просим прекратить при хорошем отношении? 
+		AddAttackPlane (victim, 0, attacker);
+		// Бьют NPC, если в городе, то защищаем ВСЕГДА. 
+		
+		// Если просто бьют, зовем ближних, если убийство, то зовем всех. 
+		// Исключение для мобов. 
+		
+		if (victimTeamId == attackerTeamId) // friendly fire
+		{
+			// todo: Сказать что-то вроде "Какого хера ты по мне лупишь?".
+			Log ("friendly fire");
+			return;
+		}
+	}
+	
+	for (uint i = 0, j = nearbyCritters.length(); i < j; i++)
+	{
+		Critter@ nearbyCr = nearbyCritters[i];
+		if (!valid(nearbyCr)) continue;
+		
+		uint8 relToVictim = GetRelationshipForNearbyCritter (nearbyCr, victim); // Как относится к жертве?
+		uint8 relToAttacker = GetRelationshipForNearbyCritter (nearbyCr, attacker);
+		
+		
+		if (attackerTeamId == TEAM_Player /* Или мобы */)
+		{
+			
+			/* hate victim */
+			if (relToVictim == REL_HATE && relToAttacker == REL_HATE)
+			{
+				AddAttackPlane (nearbyCr, 0, attacker);
+				AddAttackPlane (nearbyCr, 0, victim);
+			}
+			if (relToVictim == REL_HATE && relToAttacker == REL_DISLIKE)
+			{
+				if (attacker.Stat[ST_CURRENT_HP] <= attacker.Stat[ST_MAX_LIFE] / 2)
+				{
+					AddAttackPlane (nearbyCr, 0, attacker);
+				}
+			}
+			if (relToVictim == REL_HATE && relToAttacker == REL_NEUTRAL)
+			{
+				// Ну и хер с ним.
+			}
+			if (relToVictim == REL_HATE && relToAttacker == REL_LIKE)
+			{
+				if (attacker.Stat[ST_CURRENT_HP] <= attacker.Stat[ST_MAX_LIFE] / 2)
+				{
+					AddAttackPlane (nearbyCr, 0, victim);
+				}
+			}
+			if (relToVictim == REL_HATE && relToAttacker == REL_IDOL)
+			{
+				AddAttackPlane (nearbyCr, 0, victim);
+			}
+			////////////////////////////////////////////////////////////////////2
+			/* dislike victim */
+
+			if (relToVictim == REL_DISLIKE && relToAttacker == REL_HATE)
+			{
+				if (victim.Stat[ST_CURRENT_HP] <= victim.Stat[ST_MAX_LIFE] / 2)
+				{
+					AddAttackPlane (nearbyCr, 0, attacker);
+				}
+			}
+			if (relToVictim == REL_DISLIKE && relToAttacker == REL_DISLIKE)
+			{
+				if (victim.Stat[ST_CURRENT_HP] <= victim.Stat[ST_MAX_LIFE] / 4)
+				{
+					AddAttackPlane (nearbyCr, 0, attacker);
+				}
+			}
+			if (relToVictim == REL_DISLIKE && relToAttacker == REL_NEUTRAL)
+			{
+				if (victim.Stat[ST_CURRENT_HP] <= victim.Stat[ST_MAX_LIFE] / 10)
+				{
+					AddAttackPlane (nearbyCr, 0, attacker);
+				}
+			}
+			if (relToVictim == REL_DISLIKE && relToAttacker == REL_LIKE)
+			{
+				if (attacker.Stat[ST_CURRENT_HP] <= attacker.Stat[ST_MAX_LIFE] / 4)
+				{
+					AddAttackPlane (nearbyCr, 0, victim);
+				}
+			}
+			if (relToVictim == REL_DISLIKE && relToAttacker == REL_IDOL)
+			{
+				if (attacker.Stat[ST_CURRENT_HP] <= attacker.Stat[ST_MAX_LIFE] / 2)
+				{
+					AddAttackPlane (nearbyCr, 0, victim);
+				}
+			}
+			
+			////////////////////////////////////////////////////////////////////2
+			/* neutral victim */
+			
+			if (relToVictim == REL_NEUTRAL)
+			{
+				if (relToAttacker == REL_HATE || relToAttacker == REL_DISLIKE)
+				{
+					AddAttackPlane (nearbyCr, 0, attacker);
+				}
+			}
+			if (relToVictim == REL_NEUTRAL && relToAttacker == REL_NEUTRAL)
+			{
+				if (victim.Stat[ST_CURRENT_HP] != victim.Stat[ST_MAX_LIFE])
+				{
+					AddAttackPlane (nearbyCr, 0, attacker);
+				}
+			}
+			if (relToVictim == REL_NEUTRAL && relToAttacker == REL_LIKE)
+			{
+				if (victim.Stat[ST_CURRENT_HP] <= victim.Stat[ST_MAX_LIFE] / 2)
+				{
+					AddAttackPlane (nearbyCr, 0, attacker);
+				}
+			}
+			if (relToVictim == REL_NEUTRAL && relToAttacker == REL_IDOL)
+			{
+				if (victim.Stat[ST_CURRENT_HP] <= victim.Stat[ST_MAX_LIFE] / 10)
+				{
+					AddAttackPlane (nearbyCr, 0, attacker);
+				}
+			}
+			
+			////////////////////////////////////////////////////////////////////2
+			/* like victim */
+			
+			if (relToVictim == REL_LIKE)
+			{
+				if (relToAttacker == REL_HATE || relToAttacker == REL_DISLIKE || relToAttacker == REL_NEUTRAL)
+				{
+					AddAttackPlane (nearbyCr, 0, attacker);
+				}
+			}
+			if (relToVictim == REL_LIKE && relToAttacker == REL_LIKE)
+			{
+				if (victim.Stat[ST_CURRENT_HP] != victim.Stat[ST_MAX_LIFE])
+				{
+					AddAttackPlane (nearbyCr, 0, attacker);
+				}
+			}
+			if (relToVictim == REL_LIKE && relToAttacker == REL_IDOL)
+			{
+				if (victim.Stat[ST_CURRENT_HP] <= victim.Stat[ST_MAX_LIFE] / 4)
+				{
+					AddAttackPlane (nearbyCr, 0, attacker);
+				}
+			}
+			 
+			////////////////////////////////////////////////////////////////////2
+			/* idol victim */
+			
+			if (relToVictim == REL_IDOL)
+			{
+				if (relToAttacker == REL_HATE || relToAttacker == REL_DISLIKE || relToAttacker == REL_NEUTRAL)
+				{
+					AddAttackPlane (nearbyCr, 0, attacker);
+				}
+			}
+			if (relToVictim == REL_IDOL && relToAttacker == REL_LIKE)
+			{
+				if (victim.Stat[ST_CURRENT_HP] != victim.Stat[ST_MAX_LIFE])
+				{
+					AddAttackPlane (nearbyCr, 0, attacker);
+				}
+			}
+			if (relToVictim == REL_IDOL && relToAttacker == REL_LIKE)
+			{
+				if (victim.Stat[ST_CURRENT_HP] <= victim.Stat[ST_MAX_LIFE] / 2)
+				{
+					AddAttackPlane (nearbyCr, 0, attacker);
+				}
+			}
+		
+		}
+		
+		
+		//Log ("relToVictim = "+relToVictim+", relToAttacker = "+relToAttacker);
+		// Проверяем, в каком отношении относится одна группа к другой. 
+	}
+	
+	/* У групп есть следующие отношения: 
+	-- Ненависть
+	-- Плохое отношение
+	-- Нейтрально
+	-- Хорошее отношение
+	-- Обожание
+	
+	/*
 	if( cr.IsPlayer() )
         return;                             // Diable player helping
     else
@@ -15,6 +224,7 @@ void main_critter_attacked(Critter& cr, Critter& attacker)
     for( uint i = 0, j = critters.length(); i < j; i++ )
     {
         NpcPlane@ plane = critters[ i ].GetCurPlane();
+		
         if( valid( plane ) && plane.Type == AI_PLANE_ATTACK && plane.Attack_TargId == attacker.Id )
         {
             helpers++;
@@ -37,7 +247,10 @@ void main_critter_attacked(Critter& cr, Critter& attacker)
         if( attackerTeamId == someCrTeamId )
             continue;                                         // No attack temmate
 
+		/*
         int teamParity = TEAM_PARITY( someCrTeamId, teamId ); // From -> To
+		
+		Log ("teamParity = "+teamParity);
         switch( teamParity )
         {
         case Ignore:
@@ -76,5 +289,5 @@ void main_critter_attacked(Critter& cr, Critter& attacker)
         helpers++;
         if( helpers >= maxHelpers )
             break;                             // Enough
-    }
+    }*/
 }
