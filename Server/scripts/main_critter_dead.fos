@@ -47,6 +47,7 @@ void main_critter_dead( Critter& cr, Critter@ killer )
     // Mob drops
     uint16 npcPid = cr.GetProtoId();
     uint16 dropPid = 0;
+	/*
     switch( npcPid )
     {
     case NPC_PID_GoldenGecko:
@@ -79,7 +80,7 @@ void main_critter_dead( Critter& cr, Critter@ killer )
         if( Random( 1, 3 ) == 3 )
             dropPid = PID_RADSCORPION_PARTS;
         break;
-    }
+    }*/
     if( dropPid != 0 && _CritCountItem( cr, dropPid ) == 0 )
         _CritAddItem( cr, dropPid, 1 );
 

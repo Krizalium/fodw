@@ -90,9 +90,9 @@ void SetReplicationTime( Critter& cr ) // Export
         if( cr.IsPlayer() )
             replTime = 3;                  // 3 minutes
         else
-            replTime = Random( 90, 120 );  // 90-120 minutes
+            replTime = Random( 90, 120 ) * REAL_MINUTE( 1 );  // 90-120 minutes
     }
-    replTime *= REAL_MINUTE( 1 );
+    //replTime *= REAL_MINUTE( 1 );
     cr.TimeoutBase[ TO_REPLICATION ] = __FullSecond + replTime;
 }
 
@@ -120,17 +120,17 @@ void ReplicatePlayer (Critter& cr)
 		{
 			@map = GetMap(cr.Stat[ST_LAST_MAP_ID]);
 		}
+		else
+		{
+			// if () // Если где-то заселился
+			
+			// Выбрасываем где-то в пустоши. 
+			
+			// Ну а пока что просто возвращаем туда же, где и был. 
+			@map = GetMap(cr.Stat[ST_LAST_MAP_ID]);
+		}
 	}
-	// Если прошел испытание
-	else
-	{
-		// if () // Если где-то заселился
-		
-		// Выбрасываем где-то в пустоши. 
-		
-		// Ну а пока что просто возвращаем туда же, где и был. 
-		@map = GetMap(cr.Stat[ST_LAST_MAP_ID]);
-	}
+	
 	if (valid(map))
 	{
 		cr.TransitToMap( map.Id, ENTIRE_REPLICATION);

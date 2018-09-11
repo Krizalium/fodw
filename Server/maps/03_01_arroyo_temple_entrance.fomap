@@ -2,8 +2,8 @@
 Version              5
 MaxHexX              150
 MaxHexY              150
-WorkHexX             114
-WorkHexY             67
+WorkHexX             112
+WorkHexY             70
 ScriptModule         -
 ScriptFunc           -
 NoLogOut             0
@@ -8265,43 +8265,23 @@ ContainerUID         1
 Item_ItemSlot        1
 
 MapObjType           2
-ProtoId              4022
+ProtoId              4020
 MapX                 126
-MapY                 72
-
-MapObjType           2
-ProtoId              4020
-MapX                 128
-MapY                 73
-
-MapObjType           2
-ProtoId              4020
-MapX                 128
 MapY                 75
 
 MapObjType           2
 ProtoId              4020
-MapX                 132
-MapY                 73
-
-MapObjType           2
-ProtoId              4020
-MapX                 132
+MapX                 130
 MapY                 75
 
 MapObjType           2
-ProtoId              4022
-MapX                 136
-MapY                 72
+ProtoId              4020
+MapX                 138
+MapY                 75
 
 MapObjType           2
 ProtoId              4020
-MapX                 138
-MapY                 73
-
-MapObjType           2
-ProtoId              4020
-MapX                 138
+MapX                 134
 MapY                 75
 
 MapObjType           2
@@ -8317,17 +8297,7 @@ MapY                 75
 MapObjType           2
 ProtoId              4020
 MapX                 118
-MapY                 73
-
-MapObjType           2
-ProtoId              4020
-MapX                 118
 MapY                 75
-
-MapObjType           2
-ProtoId              4020
-MapX                 122
-MapY                 73
 
 MapObjType           2
 ProtoId              4020
@@ -8479,8 +8449,1534 @@ FuncName             t_StartTemple
 
 MapObjType           2
 ProtoId              3852
+MapX                 119
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 120
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 121
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
 MapX                 122
-MapY                 72
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 121
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 119
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 123
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 123
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 124
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 125
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 125
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 126
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 130
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 131
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 131
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 132
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 133
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 133
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 134
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 135
+MapY                 73
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 135
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 136
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 134
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 132
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 130
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 126
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 124
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 123
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 122
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 120
+MapY                 74
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 135
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 134
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 133
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 132
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 131
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 130
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 126
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 125
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 124
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 123
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 122
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 121
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 123
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 124
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 125
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 126
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 130
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 131
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 132
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 133
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 134
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 135
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 136
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 137
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 123
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 124
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 125
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 126
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 130
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 131
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 132
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 133
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 134
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 135
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 136
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 137
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 123
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 124
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 125
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 126
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 130
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 131
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 132
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 133
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 134
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 135
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 136
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 137
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 123
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 124
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 125
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 126
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 130
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 131
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 132
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 133
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 134
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 135
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 136
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 137
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 123
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 124
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 125
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 126
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 130
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 131
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 132
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 133
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 134
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 135
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 136
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 137
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 120
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 120
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 121
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 122
+MapY                 76
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 121
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 122
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 122
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 122
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 136
+MapY                 75
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 138
+MapY                 77
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 138
+MapY                 78
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 139
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 138
+MapY                 79
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 140
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 139
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 140
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 139
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 138
+MapY                 80
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 137
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 135
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 133
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 131
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 125
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 126
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 130
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 131
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 132
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 133
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 134
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 135
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 136
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 137
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 124
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 124
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 124
+MapY                 83
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 125
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 125
+MapY                 83
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 125
+MapY                 84
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 125
+MapY                 85
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 125
+MapY                 86
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 126
+MapY                 86
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 87
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 87
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 126
+MapY                 85
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 86
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 86
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 126
+MapY                 84
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 85
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 85
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 126
+MapY                 83
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 84
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 84
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 126
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 127
+MapY                 83
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 83
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 128
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 83
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 130
+MapY                 83
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 84
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 130
+MapY                 84
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 131
+MapY                 85
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 85
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 130
+MapY                 85
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 131
+MapY                 86
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 130
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 131
+MapY                 83
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 132
+MapY                 83
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 131
+MapY                 84
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 132
+MapY                 84
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 133
+MapY                 85
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 132
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 133
+MapY                 83
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 134
+MapY                 83
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 134
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 135
+MapY                 83
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 136
+MapY                 83
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 86
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 132
+MapY                 85
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 129
+MapY                 87
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 130
+MapY                 86
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 133
+MapY                 84
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 134
+MapY                 84
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 135
+MapY                 84
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 136
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 137
+MapY                 83
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 138
+MapY                 82
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 138
+MapY                 81
+ScriptName           arroyo_trial
+FuncName             t_EndTrial
+
+MapObjType           2
+ProtoId              3852
+MapX                 139
+MapY                 82
 ScriptName           arroyo_trial
 FuncName             t_EndTrial
 

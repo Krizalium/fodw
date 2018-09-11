@@ -26,7 +26,7 @@
 #define AI_CHEM_PRIM_DESIRE_1    # (ai) AIData_[ ( ( ( ai ) < AIPACKET_COUNT ? ( ai ) : 0 ) * 22 + 20 ) ]
 #define AI_CHEM_PRIM_DESIRE_2    # (ai) AIData_[ ( ( ( ai ) < AIPACKET_COUNT ? ( ai ) : 0 ) * 22 + 21 ) ]
 
-#define	MESSAGE_RANDOM		(100)
+#define	MESSAGE_RANDOM		(10)
 
 void AI_TrySayCombatText( Critter& npc, int textType )
 {

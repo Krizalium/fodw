@@ -57,7 +57,8 @@ void t_EndTrial( Critter& cr, Scenery& trigger, bool entered, uint8 dir )
 						int crType = ( cr.Stat[ ST_GENDER ] == GENDER_MALE ? CRTYPE_VAULT_M : CRTYPE_VAULT_F );
 						cr.ChangeCrType( crType );
 						cr.StatBase[ ST_BASE_CRTYPE ] = crType;
-						
+						cr.StatBase[ST_LAST_MAP_ID] = map.Id;
+						arroyoTrialState = 2;
 						// Logger:
 						string[] params = {""+cr.Id};
 						AddLog(LOG_TYPE_TRIAL, params);

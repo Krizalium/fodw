@@ -189,6 +189,7 @@ bool npc_plane_run( Critter& npc, NpcPlane& plane, int reason, uint& r0, uint& r
     {
         // Special weapons
         uint16 npcPid = npc.GetProtoId();
+		/* /// Kriz
         if( npcPid == NPC_PID_FireGecko || npcPid == NPC_PID_ToughFireGecko )
         {
             Item@ weap = npc.GetItem( PID_FIRE_GECKO_FLAME_WEAPON, -1 );
@@ -212,7 +213,7 @@ bool npc_plane_run( Critter& npc, NpcPlane& plane, int reason, uint& r0, uint& r
                     return true;
                 }
             }
-        }
+        }*/
 
         // Default weapons
         r0 = 0;       // Use unarmed by default

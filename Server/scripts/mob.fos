@@ -63,24 +63,7 @@ import uint EraseAttackPlane( Critter& npc, Critter& target ) from "npc_planes";
 
 const uint16[] Pids_BestialMobs =
 {
-    383,   // Ant
-    7,     // SmToughDeathclaw
-    8,     // ToughDeathclaw
-    116,   // Rat
-    118,   // PigRat
-    NPC_PID_SmallSilverGecko, NPC_PID_ToughSilverGecko, NPC_PID_GoldenGecko, NPC_PID_ToughGoldenGecko, NPC_PID_FireGecko, NPC_PID_ToughFireGecko,
-    NPC_PID_SmallRadscorpion, NPC_PID_LargeRadscorpion,
-    NPC_PID_RegularRat, NPC_PID_RegularPigRat, NPC_PID_ToughPigRat,
-    NPC_PID_Molerat, NPC_PID_GreaterMolerat, NPC_PID_MutatedMolerat,
-    NPC_PID_Ant,
-    // NPC_PID_SporePlant, // - Отключил. У них нет ножек, нужен другой 'алгоритм'.
-    NPC_PID_WildBrahmin,
-    NPC_PID_Mantis, NPC_PID_MediumMantis,
-    NPC_PID_WildDog,
-    NPC_PID_Alien, NPC_PID_ToughAlien,
-    NPC_PID_SmToughDeathclaw, NPC_PID_ToughDeathclaw,
-    NPC_PID_Centaur, NPC_PID_MeanCentaur,
-    NPC_PID_Floater, NPC_PID_NastyFloater
+	
 };
 
 void _MobsMapInit( Map& map, bool firstTime )
