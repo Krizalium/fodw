@@ -1,0 +1,76 @@
+// Каждые T происходит проверка, есть ли живая группа криттеров.
+// Если мертвая -- рождается пара.
+// Если группа достигла лимита -- не рождаем.
+// Если парочка рождает нового (детеныша), она становится сильнее. 
+// Если группа большая, она может совершать набеги (путешествовать). 
+
+// Муравьи // Макс: 10 // Время проверки: 1 час // Если достигло 10, то 5 отправляются в путешествие // 
+
+MobSystem ms;
+
+class MobSystem
+{
+	MobFamily@[] MobFamilies;
+	
+	MobFamily @ GetMobFamilyById (uint mobId)
+	{
+		if (!valid (MobFamilies)) return null;
+		if (MobFamilies.length() == 0) return null;
+		
+		for (uint i = 0, len = MobFamilies.length(); i < len; i++)
+		{
+			if (MobFamilies[i].Id == mobId)
+			{
+				return MobFamilies[i];
+			}
+		}
+		return null;
+	}
+	
+	void AddFamilies (uint16 entire, uint16[] mobPids, uint16 mapPid, uint16 startCount, uint16 maxCount, uint16 travelCount, uint refreshTimeM)
+	{
+		MobFamily@ mb = 
+	}	
+	
+	ms.AddFamilies (ENTIRE_MOB_PLANT_1, Pids_Plants, MAP_03_02_arroyo_village, 4, 10, 5, 60);
+}
+
+class MobFamily
+{
+	uint16 Id;
+	uint16 EntireNumber;
+	uint16[] MobPids;
+	Critter@[] Mobs;
+	uint16 RefreshTime;
+	//uint16 Type;
+	
+	MobFamily()
+	{
+		
+	}
+	
+	Critter @ GetMobById (uint mobId)
+	{
+		if (!valid (Mobs)) return null;
+		if (Mobs.length() == 0) return null;
+		
+		for (uint i = 0, len = Mobs.length(); i < len; i++)
+		{
+			if (Mobs[i].Id == mobId)
+			{
+				return Mobs[i];
+			}
+		}
+		return null;
+	}
+	void AddMobToFamily()
+	{
+		map.AddNpc(прототип, x, y, Random (0, 5), params, null, null);
+		Critter@ cr = 
+	}
+}
+
+void MobSystemInit()
+{
+	ms.AddFamilies (ENTIRE_MOB_PLANT_1, Pids_Plants, MAP_03_02_arroyo_village, 4, 10, 5, 60);
+}

@@ -237,6 +237,7 @@ void Attack( Critter& player, int npcRole )
  */
 void AttackStop( Critter& player, int npcRole )
 {
+Log ("AttackStop");
     if( not player.IsPlayer() )
         return;
     Map@ map = player.GetMap();

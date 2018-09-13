@@ -51,6 +51,7 @@ import bool ProtoItem_Weapon_IsHtHAttack( ProtoItem& proto, uint8 mode ) from "p
 
 import void GenerationInit() from "generation";
 import void SaveGenerationResources() from "generation";
+import void MobSystemInit() from "mob_system";
 
 // //////////////////////////////////////////////////////////////////////////////////////////////////
 // Called before world generation.

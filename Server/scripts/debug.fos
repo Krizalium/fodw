@@ -171,7 +171,6 @@ void poly( Critter& player, int param0, int param1, int param2 )
 {
 	Map@ map = GetMapByPid (MAP_polygon, 0);
 	player.TransitToMap(map.Id, 0 );
-	Log ("map = "+map.Id);
 	if (param0 != 0)
 	{
 		uint16 x = 0, y = 0;

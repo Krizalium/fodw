@@ -253,6 +253,7 @@ void InitializeTabs()
     pids.insertLast( 2344 );   // Block Hex Auto Inviso
     pids.insertLast( 3852 );   // Trigger
     pids.insertLast( 3853 );   // Entire
+    pids.insertLast( 3854 );   // Entire
     pids.insertLast( 4012 );   // Scroll block
     pids.insertLast( 4592 );   // Light stopper
     pids.insertLast( 5621 );   // Wall blocker with light

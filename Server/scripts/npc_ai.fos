@@ -26,13 +26,15 @@
 #define AI_CHEM_PRIM_DESIRE_1    # (ai) AIData_[ ( ( ( ai ) < AIPACKET_COUNT ? ( ai ) : 0 ) * 22 + 20 ) ]
 #define AI_CHEM_PRIM_DESIRE_2    # (ai) AIData_[ ( ( ( ai ) < AIPACKET_COUNT ? ( ai ) : 0 ) * 22 + 21 ) ]
 
-#define	MESSAGE_RANDOM		(10)
+#define	MESSAGE_RANDOM		(2)
 
 void AI_TrySayCombatText( Critter& npc, int textType )
 {
+	//Log ("textType = "+textType);
     if( not npc.IsLife() )
         return;
     uint ai = npc.Stat[ ST_AI_ID ];
+	//Log ("AI_MESS_CHANCE( ai ) = "+AI_MESS_CHANCE( ai ));
     if( AI_MESS_CHANCE( ai ) < Random( 1, MESSAGE_RANDOM ) )
         return;
 
@@ -41,12 +43,14 @@ void AI_TrySayCombatText( Critter& npc, int textType )
     {
         start = AIGeneralMsg_[ AI_GENERAL_TYPE( ai ) * 8 + textType * 2 ];
         end = AIGeneralMsg_[ AI_GENERAL_TYPE( ai ) * 8 + textType * 2 + 1 ];
+		//Log ("1start = "+start+", end = "+end);
     }
     if( textType >= COMBAT_TEXT_HIT_HEAD && textType <= COMBAT_TEXT_HIT_GROIN )
     {
         textType -= 10;
         start = AIBodyMsg_[ AI_BODY_TYPE( ai ) * 16 + textType * 2 ];
         end = AIBodyMsg_[ AI_BODY_TYPE( ai ) * 16 + textType * 2 + 1 ];
+		//Log ("2start = "+start+", end = "+end);
     }
     else
         return;

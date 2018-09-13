@@ -2,8 +2,8 @@
 Version              5
 MaxHexX              400
 MaxHexY              400
-WorkHexX             98
-WorkHexY             87
+WorkHexX             91
+WorkHexY             69
 ScriptModule         -
 ScriptFunc           -
 NoLogOut             0
@@ -5141,7 +5141,7 @@ Critter_Cond         1
 Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
-Critter_ParamValue   3
+Critter_ParamValue   6
 Critter_ParamIndex   ST_TEAM_ID
 Critter_ParamValue   2
 
@@ -5219,7 +5219,7 @@ Critter_Cond         1
 Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
-Critter_ParamValue   3
+Critter_ParamValue   6
 Critter_ParamIndex   ST_TEAM_ID
 Critter_ParamValue   2
 
@@ -5477,7 +5477,7 @@ Critter_Cond         1
 Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
-Critter_ParamValue   3
+Critter_ParamValue   6
 Critter_ParamIndex   ST_TEAM_ID
 Critter_ParamValue   2
 
@@ -5605,7 +5605,7 @@ Critter_Cond         1
 Critter_Anim1        0
 Critter_Anim2        0
 Critter_ParamIndex   ST_AI_ID
-Critter_ParamValue   3
+Critter_ParamValue   6
 Critter_ParamIndex   ST_TEAM_ID
 Critter_ParamValue   2
 
@@ -12138,17 +12138,6 @@ MapX                 112
 MapY                 106
 
 MapObjType           0
-ProtoId              9
-MapX                 88
-MapY                 79
-Critter_Dir          3
-Critter_Cond         1
-Critter_Anim1        0
-Critter_Anim2        0
-Critter_ParamIndex   ST_TEAM_ID
-Critter_ParamValue   2
-
-MapObjType           0
 ProtoId              3
 MapX                 107
 MapY                 138
@@ -12157,6 +12146,8 @@ Critter_Dir          3
 Critter_Cond         1
 Critter_Anim1        0
 Critter_Anim2        0
+Critter_ParamIndex   ST_AI_ID
+Critter_ParamValue   1
 Critter_ParamIndex   ST_TEAM_ID
 Critter_ParamValue   2
 
@@ -16026,5 +16017,22 @@ Critter_ParamIndex   ST_AI_ID
 Critter_ParamValue   1
 Critter_ParamIndex   ST_TEAM_ID
 Critter_ParamValue   2
+
+MapObjType           0
+ProtoId              17
+MapX                 88
+MapY                 79
+Critter_Dir          3
+Critter_Cond         1
+Critter_Anim1        0
+Critter_Anim2        0
+Critter_ParamIndex   ST_TEAM_ID
+Critter_ParamValue   2
+
+MapObjType           2
+ProtoId              3854
+MapX                 97
+MapY                 64
+Scenery_ToEntire     500
 
 

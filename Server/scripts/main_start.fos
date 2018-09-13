@@ -2,6 +2,7 @@ void main_start()
 {
 
 	GenerationInit();
+	MobSystemInit();
 
 // Send info about others critters
     // Remember:

@@ -20,16 +20,17 @@ import int  RawToHit( Critter& cr, Critter& target, ProtoItem@ weapon, uint8 wea
 // REASON_RUN_AWAY
 bool npc_plane_begin( Critter& npc, NpcPlane& plane, int reason, Critter@ someCr, Item@ someItem )
 {
+    //Log("npc_plane_begin "+reason);
 	// Kriz
-	if (npc.GetProtoId() == 13)
-	{
-		Log ("plane.Identifier = "+plane.Identifier
+	//if (npc.GetProtoId() == 13)
+	//{
+		/*Log ("plane.Identifier = "+plane.Identifier
 		+", plane.IdentifierExt = "+plane.IdentifierExt
 		+", plane.Type = "+plane.Type
 		+", plane.Priority = "+plane.Priority
 		+", plane.Run = "+plane.Run
-		+", reason = "+reason);
-	}
+		+", reason = "+reason);*/
+	//}
     //Log("npc_plane_begin "+reason);
     return true;
 }
@@ -53,11 +54,6 @@ bool npc_plane_begin( Critter& npc, NpcPlane& plane, int reason, Critter@ someCr
 // REASON_NO_UNARMED
 bool npc_plane_end( Critter& npc, NpcPlane& plane, int reason, Critter@ someCr, Item@ someItem )
 {
-	if (npc.GetProtoId() == 13)
-	{
-		Log("npc_plane_end "+reason + "npcId" + npc.Id);
-	}
-    //
     if( reason == REASON_CANT_WALK && npc.IsNoPlanes() )
         npc.Wait( Random( 1000, 2000 ) );
     else if( reason == REASON_HEX_BUSY || reason == REASON_HEX_BUSY_RING || reason == REASON_POSITION_NOT_FOUND )
@@ -122,6 +118,8 @@ bool npc_plane_end( Critter& npc, NpcPlane& plane, int reason, Critter@ someCr, 
     }
     else if( reason == REASON_RUN_AWAY && npc.IsCanWalk() )
     {
+		
+		/*
         Map@     map = npc.GetMap();
         Critter@ cr = GetCritter( plane.Attack_TargId );
         if( valid( map ) && valid( cr ) )
@@ -150,7 +148,7 @@ bool npc_plane_end( Critter& npc, NpcPlane& plane, int reason, Critter@ someCr, 
 
         int npcTimeout = BATTLE_TIMEOUT( npc );
         if( npc.Timeout[ TO_BATTLE ] < npcTimeout - __FullSecond )
-            npc.TimeoutBase[ TO_BATTLE ] = npcTimeout;
+            npc.TimeoutBase[ TO_BATTLE ] = npcTimeout;*/
     }
     else if( reason == REASON_NO_UNARMED )
     {
@@ -183,7 +181,17 @@ bool npc_plane_end( Critter& npc, NpcPlane& plane, int reason, Critter@ someCr, 
 //  In: r0 target id, r1 0, r2 0
 //  Out: r0 use, r1 aim, r2 disable attack and wait this time (in ms)
 bool npc_plane_run( Critter& npc, NpcPlane& plane, int reason, uint& r0, uint& r1, uint& r2 )
-{
+{/*
+		Log ("plane.Identifier = "+plane.Identifier
+		+", plane.IdentifierExt = "+plane.IdentifierExt
+		+", plane.Type = "+plane.Type
+		+", plane.Priority = "+plane.Priority
+		+", plane.Run = "+plane.Run
+		+", reason = "+reason
+		+", r0 = "+r0
+		+", r1 = "+r1
+		+", r2 = "+r2);*/
+		
     //Log("npc_plane_run "+reason);
     if( reason == REASON_ATTACK_WEAPON )
     {
@@ -384,13 +392,14 @@ bool npc_plane_run( Critter& npc, NpcPlane& plane, int reason, uint& r0, uint& r
                 if( npc.Trait[ TRAIT_ONE_HANDER ] != 0 )
                     base += ( FLAG( weapon.Flags, ITEM_TWO_HANDS ) ? -40 : 20 );
             }
+			/*
             int ai_min = AI_MIN_TO_HIT( npc.Stat[ ST_AI_ID ] );
             if( base < ai_min )
             {
                 r0 = 0;
                 r1 = 0;
                 r2 = 0;
-            }
+            }*/
             else
             {
                 r0 = 1 + multihex;
@@ -456,7 +465,7 @@ bool npc_plane_run( Critter& npc, NpcPlane& plane, int reason, uint& r0, uint& r
             int mod = ( weapon.Weapon_Perk == WEAPON_PERK_SCOPE_RANGE ? 5 : ( weapon.Weapon_Perk == WEAPON_PERK_LONG_RANGE ? 4 : 2 ) );
 
             if( base + 8 * perception + sharpshooter < 95 )
-            {
+            {/*
                 if( base + 8 * perception + sharpshooter < ai_min )
                 {
                     r1 = 0;
@@ -464,7 +473,7 @@ bool npc_plane_run( Critter& npc, NpcPlane& plane, int reason, uint& r0, uint& r
                     r2 = 0;
                     return true;
                 }
-                else
+                else*/
                     r0 = ( mod - 2 ) * perception;
             }
             else

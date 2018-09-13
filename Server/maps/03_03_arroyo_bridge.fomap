@@ -2,8 +2,8 @@
 Version              5
 MaxHexX              150
 MaxHexY              150
-WorkHexX             65
-WorkHexY             59
+WorkHexX             58
+WorkHexY             57
 ScriptModule         -
 ScriptFunc           -
 NoLogOut             0
@@ -6396,5 +6396,27 @@ MapX                 70
 MapY                 26
 Scenery_ToMapPid     3
 Scenery_ToEntire     2
+
+MapObjType           0
+ProtoId              7
+MapX                 62
+MapY                 51
+ScriptName           mob_system
+FuncName             _MobInit
+Critter_Dir          3
+Critter_Cond         1
+Critter_Anim1        0
+Critter_Anim2        0
+
+MapObjType           0
+ProtoId              7
+MapX                 60
+MapY                 51
+ScriptName           mob_system
+FuncName             _MobInit
+Critter_Dir          3
+Critter_Cond         1
+Critter_Anim1        0
+Critter_Anim2        0
 
 
