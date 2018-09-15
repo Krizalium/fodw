@@ -1,5 +1,6 @@
 // Author: heX, cvet, Tab10id
 #include "_macros.fos"
+#include "entire.fos"
 
 import void FlushScreen( Critter& cr, bool fadeOut, uint timeMs ) from "effects";
 import bool AddAttackPlane( Critter& npc, uint priority, Critter& target ) from "npc_planes";
@@ -338,4 +339,41 @@ void SkillUp( Critter& player, int skill )
         value = 5;
     player.SkillBase[ skill ] += value;
     player.SayMsg( SAY_NETMSG, TEXTMSG_TEXT, STR_SKILL_UP, "$skill @msg GAME " + ( ( 10000 + skill ) * 10 + 1 ) + "@" + "$value" + value );
+}
+
+
+////////////// Kriz:
+
+
+uint16[] GetAllMapPids()
+{
+	uint16[] mapPids;
+		// Kriz: Поменять 189
+	for (uint16 i = MAP_03_02_arroyo_village, end = 189; i < end; i++)
+	{
+		Map@ map = GetMapByPid(i, 0);
+		if (valid (map))
+		{
+			mapPids.insertLast(map.GetProtoId());
+			//Log ("карта "+map.GetProtoId()+" добавлена");
+		}
+	}
+	return mapPids;
+}
+
+bool HaveEntireOnMap(uint16 mapPid, uint16 entire)
+{
+	Map@ map = GetMapByPid(mapPid, 0);
+	if (valid(map))
+	{
+		if (map.CountEntire (entire) > 0)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+uint16 GetRandomMapPidFromArray(uint16[] mapPids)
+{
+	return Random (mapPids[0], mapPids[mapPids.length-1]);
 }

@@ -1,52 +1,74 @@
+// By Krizalis
 // Каждые T происходит проверка, есть ли живая группа криттеров.
 // Если мертвая -- рождается пара.
 // Если группа достигла лимита -- не рождаем.
 // Если парочка рождает нового (детеныша), она становится сильнее. 
 // Если группа большая, она может совершать набеги (путешествовать). 
 
+// todo: не рожать криттеров, если они в бою.
+
 // Муравьи // Макс: 10 // Время проверки: 1 час // Если достигло 10, то 5 отправляются в путешествие // 
+#include "_macros.fos"
+#include "_msgstr.fos"
+#include "_npc_pids.fos"
+#include "entire.fos"
+#include "utils_for_array.fos"
+#include "serializator.fos"
+#include "mob_system_h.fos"
+
+
+#define	TIME_TO_FIRST_BREEDING 		(1)
+
+#define	CHANCE_LVL2					(50) // 50% от 100%  = 50%
+#define	CHANCE_LVL3					(50) // 50% от 50%	= 25%
+#define	CHANCE_LVL4					(40) // 40% от 25%	= 10%
+#define	CHANCE_LVL5					(20) // 20% от 10%	= 2%
 
 MobSystem ms;
+Serializator load;
 
-class MobSystem
-{
-	MobFamily@[] MobFamilies;
-	
-	MobFamily @ GetMobFamilyById (uint mobId)
-	{
-		if (!valid (MobFamilies)) return null;
-		if (MobFamilies.length() == 0) return null;
-		
-		for (uint i = 0, len = MobFamilies.length(); i < len; i++)
-		{
-			if (MobFamilies[i].Id == mobId)
-			{
-				return MobFamilies[i];
-			}
-		}
-		return null;
-	}
-	
-	void AddFamilies (uint16 entire, uint16[] mobPids, uint16 mapPid, uint16 startCount, uint16 maxCount, uint16 travelCount, uint refreshTimeM)
-	{
-		MobFamily@ mb = 
-	}	
-	
-	ms.AddFamilies (ENTIRE_MOB_PLANT_1, Pids_Plants, MAP_03_02_arroyo_village, 4, 10, 5, 60);
-}
+// EXPORT
+void SaveMobSystem(){ms.Save();}
 
 class MobFamily
 {
 	uint16 Id;
 	uint16 EntireNumber;
 	uint16[] MobPids;
+	uint16 MapPid;
+	uint16 StartCount;
+	uint16 MaxCount;
+	uint16 TravelCount;
+	uint RefreshTime;
+	uint8 Dispersal;
+	
+	uint16 EventNum;
 	Critter@[] Mobs;
-	uint16 RefreshTime;
+	Entire@ BirthEntire;
+	//Цель нападения
 	//uint16 Type;
 	
-	MobFamily()
+	MobFamily(uint16 entire, uint16[] mobPids, uint16 mapPid, uint16 startCount, uint16 maxCount, uint16 travelCount, uint refreshTimeM, uint8 dispersal)
 	{
+		this.EntireNumber = entire;
+		this.MobPids = mobPids;
+		this.MapPid = mapPid;//
+		this.StartCount = startCount;
+		this.MaxCount = maxCount;
+		this.TravelCount = travelCount;
+		this.RefreshTime = refreshTimeM;
+		this.Dispersal = dispersal;
 		
+		this.SetBirthPlace();	// Определяемся с энтайром (роддомом); 
+		//this.AddStartMobs();	// Генерируем стартовых родителей семьи. 
+		//this.StartLife();		// Запускаем процесс рождения детей. 
+	}
+	void ToString()
+	{
+		Log( this.Id
+		+": MobPids = "+this.MobPids[0]
+		+", EntireNumber = "+this.EntireNumber
+		+", Count = "+this.Mobs.length()+"/"+this.MaxCount);
 	}
 	
 	Critter @ GetMobById (uint mobId)
@@ -63,14 +85,109 @@ class MobFamily
 		}
 		return null;
 	}
-	void AddMobToFamily()
+	
+	void SetBirthPlace()
 	{
-		map.AddNpc(прототип, x, y, Random (0, 5), params, null, null);
-		Critter@ cr = 
+		// todo
+		Map @ map = GetMapByPid(this.MapPid, 0); 
+		uint16 countEntires = map.CountEntire(this.EntireNumber);
+		Entire@ entire = GetEntire (map, this.EntireNumber, Random (0, countEntires - 1));
+		if (valid(entire))
+		{
+			@this.BirthEntire = entire;
+		}
+		else Log ("Ошибка SetBirthPlace");
 	}
+	
+	void AddStartMobs()
+	{
+		for (uint i = 0; i < this.StartCount; i++)
+		{
+			this.AddMobToFamily();
+		}
+	}
+	
+	void AddMobToFamily(uint pidIndex = 0)
+	{
+		Map @ map = GetMapByPid(this.MapPid, 0);
+		uint16 resX = this.BirthEntire.HexX + Random (-this.Dispersal, this.Dispersal);
+		uint16 resY = this.BirthEntire.HexY + Random (-this.Dispersal, this.Dispersal);
+		if (map.IsHexPassed(resX, resY))
+		{
+			Critter@ mob = map.AddNpc(this.MobPids[pidIndex], resX, resY, Random (0, 5), null, null, "mob@_MobInit");
+			Mobs.insertLast(mob);
+			mob.SetEvent( CRITTER_EVENT_DEAD, "_Death" );
+			//Log ("Я родился! Мой ID: "+mob.Id);
+		}
+		//else Log ("Не могу создать члена family  "+resX+":"+resY+" на карте "+this.MobMap.Id);
+	}
+	void StartLife()
+	{
+		// Если есть кем рожать детей, то надо рожать. Если совсем 0, то нужно генерировать семью заново.
+		if (this.Mobs.length() == 0)
+		{
+			this.AddStartMobs();
+		}
+		uint[] values = {this.Id};
+		this.EventNum = CreateTimeEvent( __FullSecond + REAL_SECOND(TIME_TO_FIRST_BREEDING), "e_TimeEventBreeding", values, false );
+	}
+}
+
+uint e_TimeEventBreeding(uint[] @ values)
+{
+	MobFamily@ mf = ms.GetMobFamilyById(values[0]);
+	
+	if (mf.Mobs.length() < mf.MaxCount && mf.Mobs.length() > 1) // Если остался 1, то что ж... Не с кем размножаться. :( 
+	{
+		// Рожаем нового члена семьи.
+		// todo не рожаем, например, в бою.
+		
+		// Спауним 
+		
+		if (uint(Random(0, 100)) < CHANCE_LVL2)
+		{
+			if (uint(Random(0, 100)) < CHANCE_LVL3)
+			{
+				if (uint(Random(0, 100)) < CHANCE_LVL4)
+				{
+					if (uint(Random(0, 100)) < CHANCE_LVL5)
+					{
+						mf.AddMobToFamily(4);
+					}
+					else mf.AddMobToFamily(3);
+				}
+				else mf.AddMobToFamily(2);
+			}
+			else mf.AddMobToFamily(1);
+		}
+		else mf.AddMobToFamily();
+	}
+    return REAL_SECOND( mf.RefreshTime );
 }
 
 void MobSystemInit()
 {
-	ms.AddFamilies (ENTIRE_MOB_PLANT_1, Pids_Plants, MAP_03_02_arroyo_village, 4, 10, 5, 60);
+    if (load.Load(KEY))
+	{
+		ms.Load();
+	}
+	else
+	{
+		//ms.AddFamily (Номер энтайра, Массив номеров прототипов криттеров, Пид карты, Старт, Макс, Кол-во до нападений, Рефрештайм, Рассредоточенность при спауне);
+		ms.AddFamily (ENTIRE_MOB_PLANT, Pids_Plants, MAP_03_02_arroyo_village, 2, 5, 0, 3, 3);
+		ms.AddFamily (ENTIRE_MOB_PLANT, Pids_Plants, MAP_03_02_arroyo_village, 2, 5, 0, 3, 3);
+		ms.AddFamily (ENTIRE_MOB_ANT, Pids_Ants, MAP_03_03_arroyo_bridge, 2, 5, 0, 3, 3);
+	}
+	ms.Start();
+}
+
+// CRITTER_EVENT_DEAD
+void _Death( Critter& npc, Critter@ killer )
+{
+	MobFamily@ mf = ms.GetMobFamilyByCritterId (npc.Id);
+	if (valid(mf))
+	{
+		uint index = FindCritterInCrittersArray(mf.Mobs, npc);
+		mf.Mobs.removeAt(index);
+	}
 }

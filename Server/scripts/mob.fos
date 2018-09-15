@@ -73,10 +73,10 @@ void _MobsMapInit( Map& map, bool firstTime )
 
 void _MobInit( Critter& npc, bool firstTime )
 {
-    npc.ModeBase[ MODE_NO_HOME ] = 1;
+    //npc.ModeBase[ MODE_NO_HOME ] = 1;
 
     uint16 locPid = npc.GetMap().GetLocation().GetProtoId();
-    if( !LOCATION_IS_CITY( locPid ) )
+    //if( !LOCATION_IS_CITY( locPid ) )
         npc.StatBase[ ST_REPLICATION_TIME ] = -1;      // Newer
 
     ResetVars( npc );
@@ -94,7 +94,7 @@ void _MobInit( Critter& npc, bool firstTime )
     npc.SetEvent( CRITTER_EVENT_MESSAGE,     "_OnMessage" );
     npc.SetEvent( CRITTER_EVENT_PLANE_BEGIN, "_PlaneBegin" );
     npc.SetEvent( CRITTER_EVENT_SMTH_DEAD,   "_Death" );
-    npc.SetEvent( CRITTER_EVENT_DEAD,        "_MyDeath" );
+    //npc.SetEvent( CRITTER_EVENT_DEAD,        "_MyDeath" );
     npc.SetEvent( CRITTER_EVENT_RESPAWN,     "_Respawn" );
     npc.SetEvent( CRITTER_EVENT_ATTACKED,    "_Attacked" );
 }
@@ -107,7 +107,7 @@ void ActivateMobScript( Map& map ) // Export
 
     for( uint i = 0, j = critters.length(); i < j; i++ )
     {
-        if( critters[ i ].GetScriptId() == 0 && ( critters[ i ].Stat[ ST_TEAM_ID ] == 0 || ( critters[ i ].Stat[ ST_TEAM_ID ] >= 24 && critters[ i ].Stat[ ST_TEAM_ID ] <= 33 ) ) )
+        if( critters[ i ].GetScriptId() == 0 && ( critters[ i ].Stat[ ST_TEAM_ID ] == 0 || ( critters[ i ].Stat[ ST_TEAM_ID ] >= 100 && critters[ i ].Stat[ ST_TEAM_ID ] <= 200 ) ) )
             critters[ i ].SetScript( "_MobInit" );
     }
 }

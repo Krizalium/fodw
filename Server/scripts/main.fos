@@ -49,9 +49,11 @@ import bool BarterAllowed( int crId, Item@[]& buyItems,  Item@[]& saleItems ) fr
 import uint CheckPlayerName( const string& name ) from "parameters";
 import bool ProtoItem_Weapon_IsHtHAttack( ProtoItem& proto, uint8 mode ) from "parameters";
 
+// Kriz
 import void GenerationInit() from "generation";
 import void SaveGenerationResources() from "generation";
 import void MobSystemInit() from "mob_system";
+import void SaveMobSystem() from "mob_system";
 
 // //////////////////////////////////////////////////////////////////////////////////////////////////
 // Called before world generation.
@@ -623,6 +625,7 @@ void world_save( uint currentIndex, uint[]& deleteIndexes )
     }
 	
 	SaveGenerationResources();
+	SaveMobSystem();
 }
 
 // Call on player try register

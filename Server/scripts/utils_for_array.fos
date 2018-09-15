@@ -146,4 +146,21 @@ void MergeArrays( int[]& arrayTo, int[]& arrayFrom )
         arrayTo.insertLast( arrayFrom[ i ] );
     }
 }
+
+// Kriz:
+
+int FindCritterInCrittersArray (Critter@[]@ critters, Critter@ cr)
+{
+    uint count = critters.length();
+	
+    for (uint i = 0; i < count; i++)
+    {
+        if (critters[i].Id == cr.Id)
+		{
+			return i;
+		}
+    }
+    return -1;
+}
+
 #endif // __UTILS_FOR_ARRAY__

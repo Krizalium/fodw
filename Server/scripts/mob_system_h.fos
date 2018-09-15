@@ -1,0 +1,215 @@
+// By Krizalis
+
+#define KEY	("MOBSYS")
+class MobSystem
+{
+	MobFamily@[] MobFamilies;
+	
+	MobFamily @ GetMobFamilyById (uint mobId)
+	{
+		if (!valid (MobFamilies)) return null;
+		if (MobFamilies.length() == 0) return null;
+		
+		for (uint i = 0, len = MobFamilies.length(); i < len; i++)
+		{
+			if (MobFamilies[i].Id == mobId)
+			{
+				return MobFamilies[i];
+			}
+		}
+		return null;
+	}
+	
+	MobFamily@ GetMobFamilyByCritterId(uint crId)
+	{
+		if (!valid (MobFamilies)) return null;
+		if (MobFamilies.length() == 0) return null;
+		
+		for (uint i = 0, lenI = MobFamilies.length(); i < lenI; i++)
+		{
+			for (uint j = 0, lenJ = MobFamilies[i].Mobs.length(); j < lenJ; j++)
+			{
+				if (MobFamilies[i].Mobs[j].Id == crId)
+				{
+					return MobFamilies[i];
+				}
+			}
+		}
+		return null;
+	}
+	
+	MobFamily@ AddFamily (uint16 entire, uint16[] mobPids, uint16 mapPid, uint16 startCount, uint16 maxCount, uint16 travelCount, uint refreshTimeM, uint8 dispersal)
+	{
+		MobFamily@ mb = MobFamily (entire, mobPids, mapPid, startCount, maxCount, travelCount, refreshTimeM, dispersal);
+		MobFamilies.insertLast(mb);
+		mb.Id = MobFamilies.length();
+		return mb;
+	}
+	
+	void Start()
+	{
+		for (uint16 i = 0, len = MobFamilies.length; i < len; i++)
+		{
+			if (MobFamilies[i].EventNum == 0)
+			{
+				MobFamilies[i].StartLife();
+			}
+		}
+	}
+	/*
+	uint16 Id;
+	uint16 EntireNumber;
+	uint16[] MobPids;
+	uint16 MapPid;
+	uint16 StartCount;
+	uint16 MaxCount;
+	uint16 TravelCount;
+	uint RefreshTime;
+	uint8 Dispersal;
+	
+	Critter@[] Mobs;
+	Entire@ BirthEntire;*/
+	
+	
+	void Save()
+	{
+		uint16[] ents;
+		string[] pids;
+		uint16[] maps;
+		uint16[] startCounts;
+		uint16[] maxCounts;
+		uint16[] travelCounts;
+		uint16[] refreshTimes;
+		uint8[] dispersals;
+		
+		string[] mobs;
+		string[] birthEntires;
+		
+		if(IsAnyData(KEY)) EraseAnyData( KEY );
+		uint mSize = this.MobFamilies.length();
+		
+		for (uint i = 0; i < mSize; i++)
+		{
+			//MobPids:
+			string tmpMobPids = "";
+			string tmpMobs = "";
+			string tmpBirthEntires = this.MobFamilies[i].BirthEntire.HexX+";"+this.MobFamilies[i].BirthEntire.HexY;
+			
+			for (uint j = 0; j < this.MobFamilies[i].MobPids.length(); j++)
+			{
+				tmpMobPids+= this.MobFamilies[i].MobPids[j]+";";
+			}
+			//Log ("tmpMobPids = "+tmpMobPids);
+			
+			for (uint j = 0; j < this.MobFamilies[i].Mobs.length(); j++)
+			{
+				tmpMobs+= this.MobFamilies[i].Mobs[j].Id+";";
+			}
+			//Log ("tmpMobs = "+tmpMobs);
+			
+			//Log ("tmpBirthEntires = "+tmpBirthEntires);
+			
+			ents.insertLast( this.MobFamilies[i].EntireNumber);
+			pids.insertLast( tmpMobPids); // string with separator ;
+			maps.insertLast( this.MobFamilies[i].MapPid);	// Id, а не карта.
+			startCounts.insertLast( this.MobFamilies[i].StartCount);
+			maxCounts.insertLast( this.MobFamilies[i].MaxCount);
+			travelCounts.insertLast( this.MobFamilies[i].TravelCount);
+			refreshTimes.insertLast( this.MobFamilies[i].RefreshTime);
+			dispersals.insertLast( this.MobFamilies[i].Dispersal);
+			mobs.insertLast( tmpMobs);
+			birthEntires.insertLast( tmpBirthEntires);
+		}
+		
+        Serializator save;
+		save.Set (mSize);
+		save.Set (ents);
+        save.Set( pids );
+        save.Set( maps );
+        save.Set( startCounts );
+        save.Set( maxCounts );
+        save.Set( travelCounts );
+        save.Set( refreshTimes );
+        save.Set( dispersals );
+        save.Set( mobs );
+        save.Set( birthEntires );
+        save.Save( KEY );
+	}
+	
+	void Load()
+	{
+		if (!load.Load(KEY)) return;
+		uint16[] ents;
+		string[] pids;
+		uint16[] maps;
+		uint16[] startCounts;
+		uint16[] maxCounts;
+		uint16[] travelCounts;
+		uint16[] refreshTimes;
+		uint8[] dispersals;
+		string[] mobs;
+		string[] birthEntires;
+		uint mSize = 0;
+		
+		uint genSize = 0;
+        load.Get( mSize );
+        load.Get( ents );
+        load.Get( pids );
+        load.Get( maps );
+        load.Get( startCounts );
+        load.Get( maxCounts );
+        load.Get( travelCounts );
+        load.Get( refreshTimes );
+        load.Get( dispersals );
+        load.Get( mobs );
+        load.Get( birthEntires );
+        this.MobFamilies.resize( 0 );
+		
+        for( uint i = 0; i < mSize; i++ )
+        {
+			/***** Треш для пидов мобов ****/
+			string@[]@ pidsArray = splitEx(pids[i], ";");
+			uint16[] mobPids;
+			for (uint p = 0, lenP = pidsArray.length(); p < lenP; p++)
+			{
+				int tmp = 0;
+				StrToInt (pidsArray[p], tmp);
+				mobPids.insertLast(uint16(tmp));
+			}
+			
+			/***** Треш для самих мобов ****/
+			string@[]@ mobsStrArray = splitEx(mobs[i], ";");
+			Critter@[] mobsArray;
+			for (uint c = 0, lenC = mobsStrArray.length(); c < lenC; c++)
+			{
+				int tmp = 0;
+				StrToInt (mobsStrArray[c], tmp);
+				Critter@ cr = GetCritter(uint(tmp));
+				if (valid (cr))
+				{
+					mobsArray.insertLast(cr);
+				}
+			}
+			
+			/***** Треш для энтайра рождения мобов ****/
+			Map@ map = GetMapByPid (maps[i], 0);
+			string@[]@ birthEntiresArray = splitEx(birthEntires[i], ";");
+			
+			int tempBEX = 0;
+			int tempBEY = 0;
+			StrToInt (birthEntiresArray[0], tempBEX);
+			StrToInt (birthEntiresArray[1], tempBEY);
+			
+			if (valid (map))
+			{
+				MobFamily@ mf = this.AddFamily (ents[i], mobPids, maps[i], startCounts[i], maxCounts[i], travelCounts[i], refreshTimes[i], dispersals[i]);
+				mf.BirthEntire = GetEntire(map, ents[i], uint16(tempBEX), uint16(tempBEY));
+				mf.Mobs = mobsArray; // Найти по айдишникам.
+				//mf.ToString();
+			}
+			
+			//AddFamily (uint16 entire, uint16[] mobPids, uint16 mapPid, uint16 startCount, uint16 maxCount, uint16 travelCount, uint refreshTimeM, uint8 dispersal)
+			
+        }
+	}
+}

@@ -2,8 +2,8 @@
 Version              5
 MaxHexX              400
 MaxHexY              400
-WorkHexX             91
-WorkHexY             69
+WorkHexX             97
+WorkHexY             78
 ScriptModule         -
 ScriptFunc           -
 NoLogOut             0
@@ -15999,12 +15999,6 @@ MapX                 95
 MapY                 64
 Scenery_ToEntire     101
 
-MapObjType           2
-ProtoId              3853
-MapX                 99
-MapY                 64
-Scenery_ToEntire     500
-
 MapObjType           0
 ProtoId              207
 MapX                 101
@@ -16030,9 +16024,71 @@ Critter_ParamIndex   ST_TEAM_ID
 Critter_ParamValue   2
 
 MapObjType           2
+ProtoId              3853
+MapX                 99
+MapY                 56
+Scenery_ToEntire     500
+
+MapObjType           2
+ProtoId              3853
+MapX                 99
+MapY                 58
+Scenery_ToEntire     500
+
+MapObjType           2
+ProtoId              3853
+MapX                 99
+MapY                 60
+Scenery_ToEntire     500
+
+MapObjType           2
+ProtoId              3853
+MapX                 99
+MapY                 62
+Scenery_ToEntire     500
+
+MapObjType           2
+ProtoId              3853
+MapX                 97
+MapY                 62
+Scenery_ToEntire     500
+
+MapObjType           2
+ProtoId              3853
+MapX                 97
+MapY                 60
+Scenery_ToEntire     500
+
+MapObjType           2
+ProtoId              3853
+MapX                 97
+MapY                 58
+Scenery_ToEntire     500
+
+MapObjType           2
+ProtoId              3853
+MapX                 97
+MapY                 56
+Scenery_ToEntire     500
+
+MapObjType           2
+ProtoId              3854
+MapX                 99
+MapY                 53
+
+MapObjType           2
 ProtoId              3854
 MapX                 97
-MapY                 64
-Scenery_ToEntire     500
+MapY                 53
+
+MapObjType           2
+ProtoId              3854
+MapX                 97
+MapY                 66
+
+MapObjType           2
+ProtoId              3854
+MapX                 99
+MapY                 66
 
 

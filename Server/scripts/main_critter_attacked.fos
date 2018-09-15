@@ -38,11 +38,11 @@ void main_critter_attacked(Critter& victim, Critter& attacker)
 		Critter@ nearbyCr = nearbyCritters[i];
 		if (!valid(nearbyCr)) continue;
 		
-		uint8 relToVictim = GetRelationshipForNearbyCritter (nearbyCr, victim); // Как относится к жертве?
-		uint8 relToAttacker = GetRelationshipForNearbyCritter (nearbyCr, attacker);
+		uint8 relToVictim = 0;//GetRelationshipForNearbyCritter (nearbyCr, victim); // Как относится к жертве?
+		uint8 relToAttacker = 0;//GetRelationshipForNearbyCritter (nearbyCr, attacker);
 		
 		
-		if (attackerTeamId == TEAM_Player /* Или мобы */)
+		if (attackerTeamId == TEAM_Player || attackerTeamId < 100 || attackerTeamId < 100		/* Или мобы */)
 		{
 			
 			/* hate victim */

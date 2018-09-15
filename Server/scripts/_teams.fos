@@ -6,4 +6,13 @@
 
 #define TEAM_Arroyo					( 2 ) 
 
+// Mobs:
+
+#define	TEAM_Ants					(100)
+#define	TEAM_Scorpions				(101)
+#define	TEAM_Dogs					(102)
+#define	TEAM_Rats					(103)
+#define	TEAM_Plants					(104)
+#define	TEAM_Geckos					(105)
+
 #endif // __TEAMS__

@@ -8,6 +8,9 @@
 #define KEY	("GENRES")
 import bool AddLog(uint type, string[] params) from "logger";
 import void IncreasePeaceSkill (Critter& cr, uint8 skillNum, bool success, uint points) from "increase_skill";
+import uint16[] GetAllMapPids() from "stdlib";
+import bool HaveEntireOnMap(uint16 mapPid, uint16 entire) from "stdlib";
+import uint16 GetRandomMapPidFromArray(uint16[] mapPids) from "stdlib";
 
 Generation gen;
 Serializator load;
@@ -219,7 +222,7 @@ uint e_TimeEventGenerate(uint[] @ values)
 		return REAL_SECOND( r.TimeGen ) * 5;
 	}
 	
-	uint16 mapPid = GetRandomMapPidForGeneration(r.MapPidsHaveEntire);
+	uint16 mapPid = GetRandomMapPidFromArray(r.MapPidsHaveEntire);
 	Map@ map = GetMap(mapPid);
 	if (valid(map))
 	{
@@ -262,10 +265,6 @@ uint e_TimeEventGenerate(uint[] @ values)
     return REAL_SECOND( r.TimeGen );
 }
 
-uint16 GetRandomMapPidForGeneration(uint16[] mapPids)
-{
-	return Random (mapPids[0], mapPids[mapPids.length-1]);
-}
 
 void GenerationInit()
 {
@@ -310,35 +309,6 @@ void DecCount(int varId)
 {
 	GameVar@ gvar = GetGlobalVar (varId);
 	if (valid (gvar)) gvar-=1;
-}
-
-bool HaveEntireOnMap(uint16 mapPid, uint16 entire)
-{
-	Map@ map = GetMapByPid(mapPid, 0);
-	if (valid(map))
-	{
-		if (map.CountEntire (entire) > 0)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-uint16[] GetAllMapPids()
-{
-	uint16[] mapPids;
-		// Kriz: Поменять 189
-	for (uint16 i = MAP_03_02_arroyo_village, end = 189; i < end; i++)
-	{
-		Map@ map = GetMapByPid(i, 0);
-		if (valid (map))
-		{
-			mapPids.insertLast(map.GetProtoId());
-			//Log ("карта "+map.GetProtoId()+" добавлена");
-		}
-	}
-	return mapPids;
 }
 
 void _GenResInit ( Item& plant, bool firstTime )

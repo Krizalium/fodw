@@ -19,7 +19,8 @@
 
 #define ENTIRE_GEN_ORE_IRON			(150)
 
-#define ENTIRE_MOB_PLANT_1		(500)
+#define ENTIRE_MOB_PLANT			(500)
+#define ENTIRE_MOB_ANT				(501)
 
 class Entire
 {
@@ -35,6 +36,20 @@ Entire@ GetEntire( Map& map, int entireNum, int skip )
         return null;
     ent.Number = entireNum;
     return ent;
+}
+
+// Kriz:
+Entire@ GetEntire (Map& map, uint16 entireNum, uint16 x, uint16 y)
+{
+	Entire ent;
+	if( map.GetEntireCoords (entireNum, 0, ent.HexX, ent.HexY))
+	{
+		ent.HexX = x;
+		ent.HexY = y;
+		ent.Number = entireNum;
+		return ent;
+	}
+	return null;
 }
 
 uint ParseEntires( Map& map, Entire[]& entires, int number )
