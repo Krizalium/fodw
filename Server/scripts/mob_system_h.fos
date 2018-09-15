@@ -50,6 +50,7 @@ class MobSystem
 	{
 		for (uint16 i = 0, len = MobFamilies.length; i < len; i++)
 		{
+			Log ("da "+MobFamilies[i].EventNum);
 			if (MobFamilies[i].EventNum == 0)
 			{
 				MobFamilies[i].StartLife();
@@ -187,6 +188,8 @@ class MobSystem
 				Critter@ cr = GetCritter(uint(tmp));
 				if (valid (cr))
 				{
+					cr.SetEvent( CRITTER_EVENT_DEAD, "_Death" );
+					cr.SetScript("mob@_MobInit");
 					mobsArray.insertLast(cr);
 				}
 			}
@@ -204,7 +207,8 @@ class MobSystem
 			{
 				MobFamily@ mf = this.AddFamily (ents[i], mobPids, maps[i], startCounts[i], maxCounts[i], travelCounts[i], refreshTimes[i], dispersals[i]);
 				mf.BirthEntire = GetEntire(map, ents[i], uint16(tempBEX), uint16(tempBEY));
-				mf.Mobs = mobsArray; // Найти по айдишникам.
+				mf.Mobs = mobsArray; // Найти по айдишникам..
+				
 				//mf.ToString();
 			}
 			

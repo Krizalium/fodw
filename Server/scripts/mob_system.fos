@@ -137,6 +137,7 @@ uint e_TimeEventBreeding(uint[] @ values)
 {
 	MobFamily@ mf = ms.GetMobFamilyById(values[0]);
 	
+	Log ("mf.Mobs.length = "+mf.Mobs.length());
 	if (mf.Mobs.length() < mf.MaxCount && mf.Mobs.length() > 1) // Если остался 1, то что ж... Не с кем размножаться. :( 
 	{
 		// Рожаем нового члена семьи.
@@ -162,6 +163,10 @@ uint e_TimeEventBreeding(uint[] @ values)
 		}
 		else mf.AddMobToFamily();
 	}
+	if (mf.Mobs.length() == 0)
+	{
+		mf.AddStartMobs();
+	}
     return REAL_SECOND( mf.RefreshTime );
 }
 
@@ -174,9 +179,9 @@ void MobSystemInit()
 	else
 	{
 		//ms.AddFamily (Номер энтайра, Массив номеров прототипов криттеров, Пид карты, Старт, Макс, Кол-во до нападений, Рефрештайм, Рассредоточенность при спауне);
-		ms.AddFamily (ENTIRE_MOB_PLANT, Pids_Plants, MAP_03_02_arroyo_village, 2, 5, 0, 3, 3);
-		ms.AddFamily (ENTIRE_MOB_PLANT, Pids_Plants, MAP_03_02_arroyo_village, 2, 5, 0, 3, 3);
-		ms.AddFamily (ENTIRE_MOB_ANT, Pids_Ants, MAP_03_03_arroyo_bridge, 2, 5, 0, 3, 3);
+		ms.AddFamily (ENTIRE_MOB_PLANT, Pids_Plants, MAP_03_02_arroyo_village, 2, 2, 0, 3, 3);
+		ms.AddFamily (ENTIRE_MOB_PLANT, Pids_Plants, MAP_03_02_arroyo_village, 2, 2, 0, 3, 3);
+		ms.AddFamily (ENTIRE_MOB_ANT, Pids_Ants, MAP_03_03_arroyo_bridge, 2, 4, 0, 10, 3);
 	}
 	ms.Start();
 }
